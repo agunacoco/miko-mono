@@ -44,6 +44,7 @@ const DateInputWrapper: FC<{
   return (
     <Box>
       <Popover placement="bottom" variant="responsive">
+        {/* @ts-ignore */}
         <PopoverTrigger>
           <Text>{viewingDate}</Text>
         </PopoverTrigger>

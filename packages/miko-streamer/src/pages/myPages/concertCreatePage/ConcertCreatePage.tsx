@@ -109,6 +109,7 @@ const ConcertCreatePage = () => {
           </Button>
         </form>
       </Box>
+      {/* @ts-ignore */}
       <ModalWrapper
         useDisclosureReturn={useDisclosureReturn}
         text={{
@@ -118,7 +119,7 @@ const ConcertCreatePage = () => {
         }}
         href="/my/concerts"
       >
-        {createdConcert && <>성공</>}
+        {createdConcert ? <>성공</> : <></>}
       </ModalWrapper>
     </Box>
   );

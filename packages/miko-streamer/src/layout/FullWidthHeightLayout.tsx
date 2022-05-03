@@ -9,7 +9,7 @@ const FullWidthHeightLayout = () => {
     <Box width="100vw" height="100vh">
       {/* @ts-ignore */}
       <ErrorBoundary>
-        <Suspense fallback={() => <Box>loading</Box>}>
+        <Suspense fallback={<Box>loading</Box>}>
           <Outlet />
           <LoginStatus />
         </Suspense>

@@ -1,6 +1,6 @@
 import { UseDisclosureReturn } from '@chakra-ui/hooks';
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 type P = {
   useDisclosureReturn: UseDisclosureReturn;
@@ -12,6 +12,7 @@ type P = {
   href?: string;
   viewBtn?: boolean;
   onConfirm?: (...args: any[]) => void;
+  children: ReactElement | ReactElement[];
 };
 
 const ModalWrapper: FC<P> = ({ useDisclosureReturn, text, href, viewBtn = true, onConfirm, children }) => {

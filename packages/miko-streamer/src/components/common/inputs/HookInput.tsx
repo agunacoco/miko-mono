@@ -23,6 +23,7 @@ type BasicP = {
   error: FieldError | undefined;
   data: necessary;
   isNotRequired?: boolean;
+  children?: React.ReactNode;
 };
 
 type InputP = BasicP & { inputP?: InputProps };
@@ -44,6 +45,8 @@ const BasicWrapper: FC<BasicP> = memo(({ registerReturn, error, data: [label, pl
   );
 });
 
+BasicWrapper.displayName = 'BasicWrapper';
+
 const InputWrapper: FC<InputP> = memo(({ registerReturn, error, data, isNotRequired = false, inputP, children }) => {
   const name = registerReturn.name;
   const [label, placeholder] = data;
@@ -55,6 +58,8 @@ const InputWrapper: FC<InputP> = memo(({ registerReturn, error, data, isNotRequi
     </BasicWrapper>
   );
 });
+
+InputWrapper.displayName = 'InputWrapper';
 
 const SelectWrapper: FC<SelectP> = memo(({ registerReturn, error, data, selectList: dataList, isNotRequired = false, children }) => {
   const name = registerReturn.name;
@@ -74,6 +79,8 @@ const SelectWrapper: FC<SelectP> = memo(({ registerReturn, error, data, selectLi
   );
 });
 
+SelectWrapper.displayName = 'SelectWrapper';
+
 const NumberInputWrapper: FC<NumberP> = memo(({ registerReturn, error, data, isNotRequired = false, defaultValue, min, max, children }) => {
   const name = registerReturn.name;
   const [label, placeholder] = data;
@@ -89,5 +96,7 @@ const NumberInputWrapper: FC<NumberP> = memo(({ registerReturn, error, data, isN
     </BasicWrapper>
   );
 });
+
+NumberInputWrapper.displayName = 'NumberInputWrapper';
 
 export { InputWrapper, NumberInputWrapper, SelectWrapper };

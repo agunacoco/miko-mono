@@ -29,7 +29,7 @@ import { selectedWindowState } from '@src/state/recoil/selectedWindowState';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from '@src/types/share/TimeMetadataFormat';
 import produce from 'immer';
-import { FC, useCallback, useMemo } from 'react';
+import { Children, FC, ReactElement, useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -46,7 +46,7 @@ const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
   );
 };
 
-const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
+const MetadataQuizPreview: FC<{ data: QuizMainMetadata; children?: ReactElement | undefined }> = ({ data }) => {
   const { choices, dataType, durationTime, mainText } = data;
   return (
     <Box width="full" h="full" padding="2">
@@ -62,7 +62,11 @@ const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
   );
 };
 
-const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: string, metadata: any) => Promise<void> }> = ({ children, data, pushMetaData }) => {
+const MetadataPreviewContainer: FC<{ data: MetaData; children: ReactElement; pushMetaData: (channelArn: string, metadata: any) => Promise<void> }> = ({
+  children,
+  data,
+  pushMetaData,
+}) => {
   const { isOpen: editIsOpen, onOpen: editOnOpen, onClose: editOnClose } = useDisclosure();
   const { isOpen: staticIsOpen, onOpen: staticOnOpen, onClose: staticOnClose } = useDisclosure();
   const setSelectedWindow = useSetRecoilState(selectedWindowState);
@@ -238,7 +242,9 @@ const MetadataListContainer = () => {
       <VStack h="full">
         {filteredMetadata.map((data, idx) => {
           return (
+            // @ts-ignore
             <MetadataPreviewContainer key={data.createdAt} data={data} pushMetaData={handlePushMetaData}>
+              {/*  @ts-ignore */}
               {metadataDrawSwitch(data, idx)}
             </MetadataPreviewContainer>
           );

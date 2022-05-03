@@ -1,9 +1,9 @@
 import useSocket from '@src/state/hooks/useSocket';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { FC, useEffect } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const AddSocketEventLayer: FC = ({ children }) => {
+const AddSocketEventLayer: FC<{ children?: ReactElement | ReactElement[] }> = ({ children }) => {
   const socket = useSocket();
   const { ticketId } = useParams();
 

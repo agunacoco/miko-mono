@@ -19,7 +19,7 @@ declare module 'slate' {
 
 export const MarkDownView: FC<{ mdString: string }> = ({ mdString }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
-  const renderElement = useCallback(props => <RenderElements {...props} />, []);
+  const renderElement = useCallback((props: any) => <RenderElements {...props} />, []);
   const [, setValue] = useState<Descendant[]>([]);
 
   let descendants;

@@ -61,7 +61,7 @@ const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handel
       {data && <PaginationBtn setPage={handelPageChange} data={data.meta}></PaginationBtn>}
     </Box>
   );
-}, Loading);
+}, Loading());
 
 const SellHistory: FC = () => {
   const { ticketId, concertId } = useParams<{ ticketId: string; concertId: string }>();
