@@ -8,7 +8,6 @@ import '@src/style/css/fonts.css';
 import '@src/style/css/global.css';
 import theme from '@src/style/theme';
 import type * as ivs from 'amazon-ivs-player';
-import type { registerIVSQualityPlugin, registerIVSTech } from 'amazon-ivs-player';
 import axios from 'axios';
 import { NextPage } from 'next';
 import { AppProps, NextWebVitalsMetric } from 'next/app';
@@ -34,8 +33,8 @@ declare global {
     socket?: Socket;
     myPeer?: Peer;
     IVSPlayer: typeof ivs;
-    registerIVSQualityPlugin: typeof registerIVSQualityPlugin;
-    registerIVSTech: typeof registerIVSTech;
+    registerIVSQualityPlugin: typeof ivs.registerIVSQualityPlugin;
+    registerIVSTech: typeof ivs.registerIVSTech;
     // workbox: typeof Workbox;
   }
 }
