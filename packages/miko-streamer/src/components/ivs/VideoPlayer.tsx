@@ -64,6 +64,7 @@ const MiniPlayer: FC = () => {
 
       switch (playerState) {
         case READY:
+          // eslint-disable-next-line no-case-declarations
           const qualities = player.current.getQualities();
           setSelectableQuality(qualities);
           player.current.setQuality(qualities[0], true); // 왜 이거 안해주면 버퍼링 오래 걸리지

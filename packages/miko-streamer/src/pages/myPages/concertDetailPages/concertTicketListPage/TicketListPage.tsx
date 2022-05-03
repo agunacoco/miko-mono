@@ -64,7 +64,7 @@ const TicketCardList: FC = () => {
 
   return (
     <Flex flexWrap="wrap" w="full" flexDirection="row" alignItems="center" justifyContent="center" gap="20px">
-      {tickets.map((ticket) => (
+      {tickets.map(ticket => (
         <TicketBox key={ticket.id} data={ticket} />
       ))}
     </Flex>

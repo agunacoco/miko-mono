@@ -59,7 +59,7 @@ const SearchFilter = () => {
   return (
     <Input
       value={search}
-      onChange={(e) => {
+      onChange={e => {
         setSearch(e.target.value);
       }}
     />
@@ -70,7 +70,7 @@ const TagFilter = () => {
   const tagList = useRecoilValue(metadataTagListState);
   const [tag, setTag] = useRecoilState(metadataListFilterTagState);
 
-  const handleTagSelect: ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handleTagSelect: ChangeEventHandler<HTMLSelectElement> = e => {
     setTag(e.target.value);
   };
 
@@ -79,7 +79,7 @@ const TagFilter = () => {
       <option key={' '} value={' '}>
         タグ
       </option>
-      {tagList.map((tag) => (
+      {tagList.map(tag => (
         <option key={tag} value={tag}>
           {tag}
         </option>

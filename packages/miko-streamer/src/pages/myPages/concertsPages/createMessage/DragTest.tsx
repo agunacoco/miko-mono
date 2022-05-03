@@ -22,7 +22,7 @@ const DragTest = () => {
     e.preventDefault();
     e.stopPropagation();
   };
-  const handleDragStart: React.DragEventHandler<HTMLDivElement> = (e) => {
+  const handleDragStart: React.DragEventHandler<HTMLDivElement> = e => {
     console.log('DragStart', e);
     // e.preventDefault();
     e.stopPropagation();
@@ -37,12 +37,12 @@ const DragTest = () => {
         height="100px"
         bgColor="red"
         draggable
-        onDragEnter={(e) => handleDragEnter(e)}
-        onDragLeave={(e) => handleDragLeave(e)}
-        onDragStart={(e) => handleDragStart(e)}
+        onDragEnter={e => handleDragEnter(e)}
+        onDragLeave={e => handleDragLeave(e)}
+        onDragStart={e => handleDragStart(e)}
       ></Box>
 
-      <Box width="100px" height="100px" bgColor="blue" onDrop={(e) => handleDrop(e)} onDragOver={(e) => handleDragOver(e)}></Box>
+      <Box width="100px" height="100px" bgColor="blue" onDrop={e => handleDrop(e)} onDragOver={e => handleDragOver(e)}></Box>
     </HStack>
   );
 };

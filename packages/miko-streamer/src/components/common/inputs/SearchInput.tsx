@@ -17,9 +17,9 @@ const SearchInput: FC<ISearchInput> = ({ setQuery }) => {
     }, 0);
   };
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => setValue(event.target.value);
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => setValue(event.target.value);
 
-  const handleEnter: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+  const handleEnter: React.KeyboardEventHandler<HTMLInputElement> = event => {
     if (event.key === 'Enter') {
       console.log('enter');
       handleUpdate();

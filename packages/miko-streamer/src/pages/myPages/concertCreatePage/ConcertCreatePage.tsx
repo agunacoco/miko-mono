@@ -44,7 +44,7 @@ const ConcertCreatePage = () => {
     },
   ]);
 
-  const onSubmit: SubmitHandler<CreateConcertData> = async (inputData) => {
+  const onSubmit: SubmitHandler<CreateConcertData> = async inputData => {
     const formData = new FormData();
     Object.entries(inputData).forEach(([key, value]) => {
       if (key === 'categoryId') value = categoryArray.indexOf(value as string) + 1;

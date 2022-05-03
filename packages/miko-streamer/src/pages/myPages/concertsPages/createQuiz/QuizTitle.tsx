@@ -7,7 +7,7 @@ const QuizTitle: FC = () => {
   const [title, setTitle] = useRecoilState(draftQuizMainTitleState);
   const fontSize = 12;
   const hiddenTextRef = useRef<HTMLDivElement>(null);
-  const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     setTitle(e.target.value);
   };
 

@@ -68,15 +68,15 @@ const RankingPage: FC = () => {
           {start + 1} ~ {start + PER_PAGE}{' '}
         </Heading>
         <HStack gap="2">
-          <Button disabled={start === 0} onClick={() => setStart((prev) => prev - PER_PAGE)}>
+          <Button disabled={start === 0} onClick={() => setStart(prev => prev - PER_PAGE)}>
             Before {PER_PAGE}
           </Button>
-          <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart((prev) => prev + PER_PAGE)}>
+          <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart(prev => prev + PER_PAGE)}>
             Next {PER_PAGE}
           </Button>
           <Button
             onClick={() => {
-              setRanks((prev) => shuffle(prev));
+              setRanks(prev => shuffle(prev));
             }}
           >
             test - shuffle

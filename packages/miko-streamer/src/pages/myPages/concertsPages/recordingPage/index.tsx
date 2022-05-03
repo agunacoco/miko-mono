@@ -60,7 +60,7 @@ const RecordingBox: FC<{ recording: Recording }> = ({ recording }) => {
         min={0}
         max={lastThumbIdx}
         colorScheme="teal"
-        onChange={(v) => setSliderValue(v)}
+        onChange={v => setSliderValue(v)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
@@ -87,7 +87,7 @@ const RecordingList = () => {
 
   return (
     <Flex flexWrap="wrap">
-      {data.data.map((recording) => (
+      {data.data.map(recording => (
         <RecordingBox key={recording.id} recording={recording} />
       ))}
     </Flex>

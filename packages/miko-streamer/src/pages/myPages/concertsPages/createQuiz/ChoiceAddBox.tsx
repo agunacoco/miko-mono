@@ -7,8 +7,8 @@ import { useSetRecoilState } from 'recoil';
 const ChoiceAddBox: FC = () => {
   const setDraftQuizChoices = useSetRecoilState(draftQuizChoicesState);
   const handleInitializeNewChoice = () => {
-    setDraftQuizChoices((prev) =>
-      produce(prev, (draft) => {
+    setDraftQuizChoices(prev =>
+      produce(prev, draft => {
         draft.push('');
         return draft;
       }),

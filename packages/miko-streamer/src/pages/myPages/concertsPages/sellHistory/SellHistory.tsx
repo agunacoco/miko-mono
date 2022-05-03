@@ -80,12 +80,12 @@ const SellHistory: FC = () => {
     page: page,
   });
 
-  const handlePerPageChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handlePerPageChange: ChangeEventHandler<HTMLSelectElement> = e => {
     const newPerPage = +e.target.value;
     setPage(1);
     setPerPage(newPerPage);
     setQueryData(
-      produce((draft) => {
+      produce(draft => {
         draft.perPage = newPerPage;
         draft.page = 1;
       }),
@@ -95,7 +95,7 @@ const SellHistory: FC = () => {
   const handelPageChange = (newPage: number) => {
     setPage(newPage);
     setQueryData(
-      produce((draft) => {
+      produce(draft => {
         draft.page = newPage;
       }),
     );
@@ -106,12 +106,12 @@ const SellHistory: FC = () => {
       <Heading size="md">販売履歴</Heading>
       <Heading> coin : {coinData?.data || 'NO COIN'}</Heading>
       <HStack aria-label="Filter controller">
-        {[ALL, chTicketSoldIdx, chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx].map((typeNum) => {
+        {[ALL, chTicketSoldIdx, chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx].map(typeNum => {
           const handlerSetType = () => {
             setType(typeNum);
             setPage(1);
             setQueryData(
-              produce((draft) => {
+              produce(draft => {
                 // @ts-ignore
                 draft.filter[1][1] = typeNum;
                 draft.page = 1;

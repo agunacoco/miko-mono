@@ -52,7 +52,7 @@ export const EditorValue = forwardRef(
     ref: Ref<OrNull<null>>,
   ) => {
     const textLines = value.document.nodes
-      .map((node) => node.text)
+      .map(node => node.text)
       .toArray()
       .join('\n');
     return (

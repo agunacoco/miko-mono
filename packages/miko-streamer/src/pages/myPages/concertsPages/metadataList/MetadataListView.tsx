@@ -73,9 +73,9 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {
-    setMetadata((prev) =>
-      produce(prev, (draft) => {
-        const idx = draft.findIndex((d) => d.createdAt === data.createdAt);
+    setMetadata(prev =>
+      produce(prev, draft => {
+        const idx = draft.findIndex(d => d.createdAt === data.createdAt);
         draft.splice(idx, 1);
         return draft;
       }),
@@ -100,7 +100,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
       <Box>
         {children}
         <HStack>
-          {data.tags.map((tag) => (
+          {data.tags.map(tag => (
             <Tag key={tag} colorScheme="teal">
               {tag}
             </Tag>
@@ -188,9 +188,9 @@ const MetadataListContainer = () => {
       if (result) {
         if (result.data.result.$metadata.httpStatusCode) {
           console.log('성공');
-          setMetaData((prev) =>
-            produce(prev, (draft) => {
-              const idx = draft.findIndex((data) => (data.createdAt = metadata.createdAt));
+          setMetaData(prev =>
+            produce(prev, draft => {
+              const idx = draft.findIndex(data => (data.createdAt = metadata.createdAt));
               if (idx !== -1) {
                 draft[idx].used = true;
               }

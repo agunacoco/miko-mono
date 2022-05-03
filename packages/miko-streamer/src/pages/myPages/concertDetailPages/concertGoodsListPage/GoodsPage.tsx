@@ -22,7 +22,7 @@ const GoodsPage = () => {
   return (
     <Box style={{ padding: '1rem 0' }} bgColor="white" width="full" height="full">
       <Text>登録されているグッズ</Text>
-      {products.map((ticket) => (
+      {products.map(ticket => (
         <ProductBox key={ticket.id} data={ticket} />
       ))}
     </Box>

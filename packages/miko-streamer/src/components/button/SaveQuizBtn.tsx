@@ -13,13 +13,13 @@ const SaveMetaDataBtn: FC<{ savedMetaData: MetaData }> = ({ savedMetaData }) => 
   const handleSaveQuiz = () => {
     const isNewMetaData = savedMetaData.createdAt === -1;
 
-    setMetadata((prev) =>
-      produce(prev, (draft) => {
+    setMetadata(prev =>
+      produce(prev, draft => {
         if (isNewMetaData) {
           draft.push({ ...savedMetaData, createdAt: Date.now() });
         } else {
           // Edit으로 불러온 데이터
-          const idx = draft.findIndex((v) => v.createdAt === savedMetaData.createdAt);
+          const idx = draft.findIndex(v => v.createdAt === savedMetaData.createdAt);
           draft[idx] = savedMetaData;
         }
       }),

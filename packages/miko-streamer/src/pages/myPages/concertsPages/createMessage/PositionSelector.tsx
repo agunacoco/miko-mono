@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 export const PositionSelector = () => {
   const [draftMsgPosition, setDraftMsgPosition] = useRecoilState(draftMsgPositionState);
 
-  const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = e => {
     if (e.target instanceof HTMLDivElement) {
       const idx = parseInt(e.target.dataset['idx'] as string) as PositionNumberRange;
       if (idx) setDraftMsgPosition(idx);

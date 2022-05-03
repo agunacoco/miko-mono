@@ -12,24 +12,24 @@ const MsgTextDataEditor: FC<{
   const [msgTextData, setMsgTextData] = useRecoilState(atom);
   const { text, size, bold, font, hexColor } = msgTextData;
 
-  const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setMsgTextData((prev) => ({ ...prev, text: e.target.value }));
+  const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = e => {
+    setMsgTextData(prev => ({ ...prev, text: e.target.value }));
   };
 
   const handleChangeSize = (value: number) => {
-    setMsgTextData((prev) => ({ ...prev, size: value }));
+    setMsgTextData(prev => ({ ...prev, size: value }));
   };
 
   const handleChangeBold = (value: number) => {
-    setMsgTextData((prev) => ({ ...prev, bold: value }));
+    setMsgTextData(prev => ({ ...prev, bold: value }));
   };
 
-  const handleChangeFont: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setMsgTextData((prev) => ({ ...prev, font: e.target.value }));
+  const handleChangeFont: React.ChangeEventHandler<HTMLSelectElement> = e => {
+    setMsgTextData(prev => ({ ...prev, font: e.target.value }));
   };
 
   const handleChangeColor = (color: string) => {
-    setMsgTextData((prev) => ({ ...prev, hexColor: color }));
+    setMsgTextData(prev => ({ ...prev, hexColor: color }));
   };
 
   return (

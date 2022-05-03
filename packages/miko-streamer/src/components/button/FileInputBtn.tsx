@@ -7,13 +7,13 @@ const FileInputBtn = () => {
   const setImageUrl = useSetRecoilState(screenImageState);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = event => {
     if (hiddenFileInput.current) {
       hiddenFileInput.current.click();
     }
   };
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
     if (event.target.files) {
       const fileUploaded = event.target.files[0];
       const objectUrl = URL.createObjectURL(fileUploaded);

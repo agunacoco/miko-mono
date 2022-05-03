@@ -6,9 +6,9 @@ import { useSetRecoilState } from 'recoil';
 
 const ChoiceEdit: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const setDraftQuizChoices = useSetRecoilState(draftQuizChoicesState);
-  const handleOnChoiceTextChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDraftQuizChoices((prev) =>
-      produce(prev, (draft) => {
+  const handleOnChoiceTextChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    setDraftQuizChoices(prev =>
+      produce(prev, draft => {
         draft[idx] = e.target.value;
       }),
     );
@@ -16,7 +16,7 @@ const ChoiceEdit: FC<{ text: string; idx: number }> = ({ text, idx }) => {
 
   return (
     <Box>
-      <Input value={text} onChange={(e) => handleOnChoiceTextChange(e)}></Input>
+      <Input value={text} onChange={e => handleOnChoiceTextChange(e)}></Input>
     </Box>
   );
 };
@@ -24,8 +24,8 @@ const ChoiceBox: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const setDraftQuizChoices = useSetRecoilState(draftQuizChoicesState);
 
   const handleDeleteChoice = () => {
-    setDraftQuizChoices((prev) =>
-      produce(prev, (draft) => {
+    setDraftQuizChoices(prev =>
+      produce(prev, draft => {
         draft.splice(idx, 1);
         return draft;
       }),

@@ -2,7 +2,7 @@ import { Badge, Box, Button, Flex, Heading, Input, Tag, TagCloseButton, TagLabel
 import { IoMdAdd } from '@react-icons/all-files/io/IoMdAdd';
 import convertDate from '@src/helper/convertDate';
 import produce from 'immer';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { SetterOrUpdater } from 'recoil';
 
 interface Props {
@@ -16,26 +16,26 @@ const EditCommonTimeMetaData: FC<Props> = ({ useTag, useTitle, createdAt }) => {
   const [tags, setTags] = useTag;
   const [title, setTitle] = useTitle;
   const [newTag, setNewTag] = useState('');
-  const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = e => {
     setTitle(e.target.value);
   };
 
   const handleTagRemove = (idx: number) => {
-    setTags((prev) =>
-      produce(prev, (draft) => {
+    setTags(prev =>
+      produce(prev, draft => {
         draft.splice(idx, 1);
       }),
     );
   };
 
-  const handleChangeNewTag: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangeNewTag: React.ChangeEventHandler<HTMLInputElement> = e => {
     setNewTag(e.target.value);
   };
 
   const handleAddTag = () => {
     if (newTag !== '') {
       setNewTag('');
-      setTags((prev) => [...prev, newTag]);
+      setTags(prev => [...prev, newTag]);
     }
   };
 

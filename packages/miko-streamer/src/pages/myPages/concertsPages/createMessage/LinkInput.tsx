@@ -8,7 +8,7 @@ const LinkInput = () => {
   return (
     <HStack>
       <Heading size="md">リンク</Heading>
-      <Input placeholder="Url" width="auto" value={draftMsgUrl} onChange={(e) => setDraftMsgUrl(e.target.value)} />
+      <Input placeholder="Url" width="auto" value={draftMsgUrl} onChange={e => setDraftMsgUrl(e.target.value)} />
     </HStack>
   );
 };

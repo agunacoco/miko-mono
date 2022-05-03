@@ -18,7 +18,7 @@ const LoginStatus = () => {
       <Button
         width="1"
         onClick={() => {
-          setIsShow((prev) => !prev);
+          setIsShow(prev => !prev);
         }}
       ></Button>
     </HStack>

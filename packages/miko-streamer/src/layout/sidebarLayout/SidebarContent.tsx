@@ -55,7 +55,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             Logo
           </Text>
         </Flex>
-        {LinkItems.map((link) => (
+        {LinkItems.map(link => (
           <SidebarNavItem key={link.url} icon={link.icon} url={link.url}>
             {link.name as string}
           </SidebarNavItem>
@@ -70,7 +70,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         borderBottomRightRadius="3xl"
         justifyContent="center"
       >
-        {ConcertLinkItems.map((link) => (
+        {ConcertLinkItems.map(link => (
           <SidebarNavItem fontSize="2xl" key={link.url} icon={link.icon} url={`/my/concerts/${concertId}` + link.url}></SidebarNavItem>
         ))}
       </VStack>
