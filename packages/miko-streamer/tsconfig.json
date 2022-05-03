@@ -17,11 +17,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@src/*": ["./*"]
+      "@src/*": ["./*"],
+      "@miko/share-types/*": ["../shareTypes/*"]
     },
     "noEmitOnError": true,
     "composite": true
   },
   "include": ["src/**/*", "env.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "extends": "../../tsconfig.json"
 }
