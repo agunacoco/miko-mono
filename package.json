@@ -6,8 +6,8 @@
     "prepare": "husky install",
     "commit": "commit"
   },
-    "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx}": [
       "prettier  --loglevel warn --write",
       "eslint  --cache --fix --ignore-path ./.gitignore"
     ]
