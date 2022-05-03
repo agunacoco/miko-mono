@@ -10,19 +10,22 @@ import TopNav from './topNav/TopNav';
 export default function SidebarWithHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <AnimateSharedLayout>
-      <AnimatePresence>
-        <Flex w="100vw" bg={useColorModeValue('gray.100', 'gray.900')}>
-          <SidebarContent onClose={() => onClose} />
-          <VStack flexGrow={1} maxH="100vh" overflowX="scroll">
-            <MobileNav onOpen={onOpen} />
-            <Box width="full" height="full">
-              <Outlet />
-            </Box>
-          </VStack>
-        </Flex>
-      </AnimatePresence>
-    </AnimateSharedLayout>
+    <>
+      {/* @ts-ignore */}
+      <AnimateSharedLayout>
+        <AnimatePresence>
+          <Flex w="100vw" bg={useColorModeValue('gray.100', 'gray.900')}>
+            <SidebarContent onClose={() => onClose} />
+            <VStack flexGrow={1} maxH="100vh" overflowX="scroll">
+              <MobileNav onOpen={onOpen} />
+              <Box width="full" height="full">
+                <Outlet />
+              </Box>
+            </VStack>
+          </Flex>
+        </AnimatePresence>
+      </AnimateSharedLayout>
+    </>
   );
 }
 

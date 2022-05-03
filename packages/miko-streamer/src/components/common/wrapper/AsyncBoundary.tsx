@@ -31,9 +31,12 @@ interface Props extends Pick<ErrorBoundaryProps, 'children' | 'onReset' | 'onErr
 
 function AsyncBoundary({ pendingFallback = <DefaultLoading />, rejectedFallback = DefaultErrorFallback, children, ...errorBoundaryProps }: Props) {
   return (
-    <ErrorBoundary FallbackComponent={rejectedFallback} {...errorBoundaryProps}>
-      <SSRSuspense fallback={pendingFallback}>{children}</SSRSuspense>
-    </ErrorBoundary>
+    <>
+      {/* @ts-ignore */}
+      <ErrorBoundary FallbackComponent={rejectedFallback} {...errorBoundaryProps}>
+        <SSRSuspense fallback={pendingFallback}>{children}</SSRSuspense>
+      </ErrorBoundary>
+    </>
   );
 }
 

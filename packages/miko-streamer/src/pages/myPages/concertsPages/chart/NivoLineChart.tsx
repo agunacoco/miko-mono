@@ -86,6 +86,7 @@ const NivoLineChart: FC<{ start: string; end: string; type: string; colors?: str
       ) : (
         <Box position="relative" w="full" h="full">
           {/* <Box position="absolute" left={left + "px"} w="1px" h="full" bgColor="black" pointerEvents="none"></Box> */}
+          {/* @ts-ignore */}
           <ResponsiveLineCanvas
             // -- SVG --
             // animate={false}

@@ -6,15 +6,16 @@ import { useRecoilState } from 'recoil';
 
 const ColorPickerPopoverContent: FC<{
   color: string;
-  onChnage: (newValue: string) => void;
-}> = ({ color, onChnage }) => {
+  onChange: (newValue: string) => void;
+}> = ({ color, onChange }) => {
   return (
     <PopoverContent width="fit-content">
       <PopoverArrow />
       <PopoverBody p="0">
+        {/* @ts-ignore */}
         <ChromePicker
           color={color}
-          onChangeComplete={(color) => onChnage(color.hex)}
+          onChangeComplete={newColor => onChange(newColor.hex)}
           // disableAlpha
         />
       </PopoverBody>
@@ -39,7 +40,7 @@ const TextColorPicker: FC<{
             <Text>{color} </Text>
           </HStack>
         </PopoverTrigger>
-        <ColorPickerPopoverContent color={color} onChnage={onChnage} />
+        <ColorPickerPopoverContent color={color} onChange={onChnage} />
       </Popover>
     </HStack>
   );

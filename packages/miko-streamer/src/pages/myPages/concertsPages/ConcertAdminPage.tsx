@@ -76,11 +76,14 @@ const ConcertAdminPageNoData = () => {
 
   return (
     <AddSocketEventLayer>
+      {/* @ts-ignore */}
       <Helmet>
         <script src="https://player.live-video.net/1.8.0/amazon-ivs-player.min.js" onLoad={() => setIsIvsScriptLoadedState(true)}></script>
       </Helmet>
       <MiniPlayer />
+      {/* @ts-ignore */}
       <SplitPane defaultSize="99%" split="horizontal" style={{ height: '100vh' }}>
+        {/* @ts-ignore */}
         <SplitPane defaultSize="3%" split="vertical">
           <div className="full_wh" style={{ border: '2px', borderBlockColor: 'white' }}>
             <SideBar></SideBar>
@@ -88,6 +91,7 @@ const ConcertAdminPageNoData = () => {
             aaaaaaaaaafsdfdssdf
           </VStack> */}
           </div>
+          {/* @ts-ignore */}
           <SplitPane defaultSize="80%" split="vertical">
             <div className="full_wh">{mainWindow()}</div>
             <div className="full_wh ">

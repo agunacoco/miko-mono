@@ -14,6 +14,7 @@ export function withSuspense<P extends string | number | object>(WrappedComponen
   function ComponentWithSuspense(props: P) {
     return (
       <Suspense fallback={fallback}>
+        {/* @ts-ignore */}
         <WrappedComponent {...props} />
       </Suspense>
     );

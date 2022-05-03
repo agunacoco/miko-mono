@@ -15,17 +15,22 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const ImageUpload = forwardRef<FilePond>(({}, ref) => {
   const [files, setFiles] = useState<any[]>([]);
   return (
-    <FilePond
-      ref={ref}
-      files={files}
-      onupdatefiles={setFiles}
-      allowMultiple={false}
-      maxFiles={1}
-      //   server="/api"
-      name="files"
-      labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-    />
+    <>
+      {/* @ts-ignore */}
+      <FilePond
+        ref={ref}
+        files={files}
+        onupdatefiles={setFiles}
+        allowMultiple={false}
+        maxFiles={1}
+        //   server="/api"
+        name="files"
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+      />
+    </>
   );
 });
+
+ImageUpload.displayName = 'ImageUpload';
 
 export default ImageUpload;

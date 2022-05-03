@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom';
 const FullWidthHeightLayout = () => {
   return (
     <Box width="100vw" height="100vh">
+      {/* @ts-ignore */}
       <ErrorBoundary>
         <Suspense fallback={() => <Box>loading</Box>}>
           <Outlet />
