@@ -1,6 +1,8 @@
-node_modules
-.DS_Store
 dist
+node_modules
+.next
+build
+.DS_Store
 dist-ssr
 *.local
 node_modules/*

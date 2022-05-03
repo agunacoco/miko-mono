@@ -5,4 +5,8 @@ module.exports = {
   printWidth: 180,
   tabWidth: 2,
   endOfLine: 'auto',
+  arrowParens: 'avoid',
+  proseWrap: 'always',
+  bracketSpacing: true,
+  jsxSingleQuote: false,
 };

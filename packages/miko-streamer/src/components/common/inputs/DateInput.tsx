@@ -69,7 +69,7 @@ const DateInputWrapper: FC<{
               <NumberInput
                 defaultValue={0}
                 value={hours}
-                onChange={(value) => {
+                onChange={value => {
                   setHours(parseInt(value));
                 }}
                 min={0}
@@ -85,7 +85,7 @@ const DateInputWrapper: FC<{
               <NumberInput
                 defaultValue={0}
                 value={minutes}
-                onChange={(value) => {
+                onChange={value => {
                   setMinutes(parseInt(value));
                 }}
                 min={0}
