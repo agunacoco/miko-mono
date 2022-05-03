@@ -1,10 +1,10 @@
 import { Box, Button, Center, Divider, Flex, Heading, Tag, Text, Tooltip, useClipboard, useToast, VStack } from '@chakra-ui/react';
+import { Concert } from '@miko/share-types';
 import { BiCopyAlt } from '@react-icons/all-files/bi/BiCopyAlt';
 import { categoryArray, NEST_URL } from '@src/const';
 import convertDate from '@src/helper/convertDate';
 import { axiosI } from '@src/state/swr/fetcher';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { Concert } from '@src/types/share/Concert';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import { useUser } from '@src/state/swr';
-import { Ticket } from '@src/types/share';
+import { Ticket } from '@miko/share-types';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 import TicketPayment from './TicketPaymeny';

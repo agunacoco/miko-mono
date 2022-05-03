@@ -16,6 +16,7 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
+import { MessageMainMetadata, MetaData, QuizMainMetadata } from '@miko/share-types';
 import { FcDoughnutChart } from '@react-icons/all-files/fc/FcDoughnutChart';
 import { FiDelete } from '@react-icons/all-files/fi/FiDelete';
 import { FiEdit } from '@react-icons/all-files/fi/FiEdit';
@@ -27,7 +28,6 @@ import { draftQuizState } from '@src/state/recoil/draftQuizState';
 import { metadataListFilterState, metadataState } from '@src/state/recoil/metadataState';
 import { selectedWindowState } from '@src/state/recoil/selectedWindowState';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { MessageMainMetadata, MetaData, QuizMainMetadata } from '@src/types/share/TimeMetadataFormat';
 import produce from 'immer';
 import { Children, FC, ReactElement, useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';

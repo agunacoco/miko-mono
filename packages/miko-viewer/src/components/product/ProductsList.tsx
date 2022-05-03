@@ -1,6 +1,6 @@
 import { Box, Flex, Image, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
 import { IMAGE_DOMAIN } from '@src/const';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';

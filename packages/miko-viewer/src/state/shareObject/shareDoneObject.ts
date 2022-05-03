@@ -1,3 +1,3 @@
-import { DoneSendInterface } from '@src/types/share';
+import { DoneSendInterface } from '@miko/share-types';
 
 export const waitingDone = [] as DoneSendInterface[];

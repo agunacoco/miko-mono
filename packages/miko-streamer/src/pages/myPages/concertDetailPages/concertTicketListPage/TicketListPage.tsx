@@ -1,10 +1,10 @@
 import { Box, Circle, Flex, Heading, HStack, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Ticket } from '@miko/share-types';
 import { AiOutlineFieldTime } from '@react-icons/all-files/ai/AiOutlineFieldTime';
 import { FaExpandArrowsAlt } from '@react-icons/all-files/fa/FaExpandArrowsAlt';
 import AsLink from '@src/components/common/wrapChakra/AsLink';
 import convertDate from '@src/helper/convertDate';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { Ticket } from '@src/types/share/Ticket';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 

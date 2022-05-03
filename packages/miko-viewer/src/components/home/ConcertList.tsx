@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react';
 import { IMAGE_DOMAIN } from '@src/const';
 import { convertDate } from '@src/helper';
-import { Concert } from '@src/types/share';
+import { Concert } from '@miko/share-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';

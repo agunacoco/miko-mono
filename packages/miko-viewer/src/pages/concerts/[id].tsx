@@ -4,7 +4,7 @@ import ConcertTab from '@src/components/concert/ConcertTab';
 import { IMAGE_DOMAIN } from '@src/const';
 import { convertDate, getPageLaravelData, getSingleLaravelData } from '@src/helper';
 import BasicLayout from '@src/layout/BasicLayout';
-import { Concert, Ticket } from '@src/types/share';
+import { Concert, Ticket } from '@miko/share-types';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';

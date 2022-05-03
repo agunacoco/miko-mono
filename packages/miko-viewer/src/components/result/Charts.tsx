@@ -1,4 +1,4 @@
-import { Doughnut, Bar, Pie, Line } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { Box } from '@chakra-ui/react';
 // import Chart from 'chart.js/auto';
 import { Chart, ArcElement, Legend, Tooltip, Title } from 'chart.js';

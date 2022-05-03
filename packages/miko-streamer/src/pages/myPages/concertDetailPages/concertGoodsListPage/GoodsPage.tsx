@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
+import { Product } from '@miko/share-types';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { Product } from '@src/types/share/Product';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import { Button, Center, Flex } from '@chakra-ui/react';
-import { Meta } from '@src/types/share/common';
+import { Meta } from '@miko/share-types';
 import { NextRouter, useRouter } from 'next/router';
 import { ComponentProps, FC } from 'react';
 

@@ -7,7 +7,7 @@ import { IoPlay } from '@react-icons/all-files/io5/IoPlay';
 import { dayIsBetween, toastLog } from '@src/helper';
 import { useIvsPlayer } from '@src/hooks/dynamicHooks';
 import { enterTicketDataState, isOnVideoAmbianceState, msgMetaDataState, quizMetaDataState, quizResultMetaDataState } from '@src/state/recoil';
-import { AllMetaData } from '@src/types/share';
+import { AllMetaData } from '@miko/share-types';
 import type * as ivs from 'amazon-ivs-player';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';

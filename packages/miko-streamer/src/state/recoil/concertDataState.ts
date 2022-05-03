@@ -1,4 +1,4 @@
-import { Concert } from '@src/types/share/Concert';
+import { Concert } from '@miko/share-types';
 import { atom } from 'recoil';
 
 const concertDataState = atom<Concert | undefined>({

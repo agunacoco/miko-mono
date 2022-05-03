@@ -1,10 +1,10 @@
 import { Box, Button, Text } from '@chakra-ui/react';
+import { QuizMainMetadata, QuizMetaData } from '@miko/share-types';
 import { ResponsivePie } from '@nivo/pie';
 import { pushMetaData } from '@src/helper/pushMetaData';
 import { nodeFetcher } from '@src/state/swr/fetcher';
 import laggy from '@src/state/swr/middleware/laggy';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { QuizMainMetadata, QuizMetaData } from '@src/types/share/TimeMetadataFormat';
 import { FC, memo, PropsWithChildren, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import useSWR from 'swr';

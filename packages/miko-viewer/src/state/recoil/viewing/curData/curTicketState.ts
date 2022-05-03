@@ -1,4 +1,4 @@
-import { UserTicket } from '@src/types/share';
+import { UserTicket } from '@miko/share-types';
 import { atom, selector } from 'recoil';
 import { localStorageEffect } from '../../effects/localStorageEffect ';
 

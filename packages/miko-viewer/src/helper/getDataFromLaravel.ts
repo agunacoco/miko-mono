@@ -1,7 +1,6 @@
 import { axiosI } from '@src/state/fetcher';
 import { createFSWQueryString } from '@src/state/swr/helper/createQueryStringKey';
-import { CommonDataResponse, CommonFSW, Pagination } from '@src/types/share/common';
-import { UrlToTypeDict } from '@src/types/share/UrlToTypeDict';
+import { CommonDataResponse, CommonFSW, Pagination, UrlToTypeDict } from '@miko/share-types';
 import { AxiosError } from 'axios';
 
 export async function getPageLaravelData<K extends keyof UrlToTypeDict, T = UrlToTypeDict[K], RT = Pagination<T>>(url: K, query?: CommonFSW, id?: number): Promise<RT> {

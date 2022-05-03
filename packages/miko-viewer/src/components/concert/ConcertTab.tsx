@@ -1,6 +1,6 @@
 import { Box, Center, Stack, StackDivider, Tab, TabList, TabPanel, TabPanels, Tabs, Text, useColorModeValue } from '@chakra-ui/react';
 import TicketBox from '@src/components/concert/TicketBox';
-import { Ticket } from '@src/types/share';
+import { Ticket } from '@miko/share-types';
 import React, { FC, useMemo, useState } from 'react';
 
 type Data = {

@@ -2,7 +2,7 @@ import { Center, Heading, HStack, Text } from '@chakra-ui/react';
 import { generateIvsM3U8, generateIvsThumbUrl } from '@src/helper/dynamic/ivsHelper';
 import { useIvsPlayer } from '@src/hooks/dynamicHooks';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { Recording } from '@src/types/share/Recording';
+import { Recording } from '@miko/share-types';
 // import '@videojs/themes/dist/city/index.css';
 import type { VideoJSEvents, VideoJSIVSTech, VideoJSQualityPlugin } from 'amazon-ivs-player';
 import { useRouter } from 'next/router';

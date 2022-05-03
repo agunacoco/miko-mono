@@ -1,6 +1,6 @@
 import { Flex, Select, Text } from '@chakra-ui/react';
 import ProductsList from '@src/components/product/ProductsList';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import { useRouter } from 'next/router';
 import { ChangeEventHandler, FC, useMemo, useState } from 'react';
 

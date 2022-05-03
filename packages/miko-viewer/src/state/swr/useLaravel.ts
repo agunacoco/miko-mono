@@ -1,6 +1,5 @@
 import { fetcher } from '@src/state/fetcher';
-import { CommonDataResponse, CommonFindId, CommonFSW, Pagination } from '@src/types/share/common';
-import { UrlToTypeDict } from '@src/types/share/UrlToTypeDict';
+import { CommonDataResponse, CommonFindId, CommonFSW, Pagination, UrlToTypeDict } from '@miko/share-types';
 import useSWR, { SWRConfiguration } from 'swr';
 import { createFSWQueryString } from './helper/createQueryStringKey';
 import laggy from './middleware/laggy';

@@ -1,4 +1,4 @@
-import { CommonFSW, Pagination } from '@src/types/share/common';
+import { CommonFSW, Pagination } from '@miko/share-types';
 import useSWR from 'swr';
 
 import { fetcher } from './fetcher';

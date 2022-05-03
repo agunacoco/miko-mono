@@ -3,7 +3,7 @@ import { IMAGE_DOMAIN, NEST_URL, VapidServerKey } from '@src/const';
 import { convertDate } from '@src/helper';
 import { axiosI } from '@src/state/fetcher';
 import { curUserTicketState } from '@src/state/recoil';
-import { UserTicket } from '@src/types/share';
+import { UserTicket } from '@miko/share-types';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';

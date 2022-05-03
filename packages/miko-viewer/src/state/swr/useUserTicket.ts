@@ -1,4 +1,4 @@
-import { CommonDataResponse, CommonFSW, Pagination } from '@src/types/share/common';
+import { CommonDataResponse, CommonFSW, Pagination } from '@miko/share-types';
 import useSWR from 'swr';
 import { UserTicket } from '../../types/share/UserTicket';
 import { fetcher } from '../fetcher';

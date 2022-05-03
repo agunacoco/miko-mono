@@ -1,5 +1,5 @@
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import { FC, useState } from 'react';
 import Comment from './Comment';
 import Delivery from './Delivery';

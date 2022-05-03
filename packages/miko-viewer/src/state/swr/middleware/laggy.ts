@@ -28,10 +28,6 @@ export default function laggy(useSWRNext) {
     const isLagging = swr.data === undefined && laggyDataRef.current !== undefined;
 
     // `isLagging` 필드 또한 SWR에 추가합니다.
-    return Object.assign({}, swr, {
-      data: dataOrLaggyData,
-      isLagging,
-      resetLaggy,
-    });
+    return { ...swr, data: dataOrLaggyData, isLagging, resetLaggy };
   };
 }

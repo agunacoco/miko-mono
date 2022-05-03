@@ -24,7 +24,7 @@ import { IMAGE_DOMAIN, LARAVEL_URL } from '@src/const';
 import { convertDate } from '@src/helper';
 import { axiosI } from '@src/state/fetcher';
 import { useUser } from '@src/state/swr';
-import { Ticket } from '@src/types/share';
+import { Ticket } from '@miko/share-types';
 import { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';

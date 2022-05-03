@@ -7,8 +7,8 @@ import ConcertList from '@src/components/home/ConcertList';
 import { getPageLaravelData } from '@src/helper';
 import BasicLayout from '@src/layout/BasicLayout';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { Concert } from '@src/types/share';
-import { CommonFSW, Pagination } from '@src/types/share/common';
+import { Concert, CommonFSW, Pagination } from '@miko/share-types';
+
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';

@@ -1,5 +1,5 @@
 import { Button, Center, Flex, Heading } from '@chakra-ui/react';
-import { Meta } from '@src/types/share/common';
+import { Meta } from '@miko/share-types';
 import { ComponentProps, FC } from 'react';
 
 type Props = {

@@ -16,7 +16,6 @@ import {
 } from '@chakra-ui/react';
 import { NEXT_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
-import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { useRouter } from 'next/router';
 
 const Paydone = () => {

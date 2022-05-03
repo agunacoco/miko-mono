@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
 import { Box, Button, Flex, Image, SimpleGrid, Text } from '@chakra-ui/react';
 import { IMAGE_DOMAIN, NEXT_URL } from '@src/const';
-import { Product } from '@src/types/share';
-import { Pagination } from '@src/types/share/common';
+import { Product, Pagination } from '@miko/share-types';
+
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 

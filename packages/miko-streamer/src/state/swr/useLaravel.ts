@@ -1,6 +1,4 @@
-import { CoinHistory, Concert, Ticket, UserTicket } from '@src/types/share';
-import { CommonDataResponse, CommonFindId, CommonFSW, Pagination } from '@src/types/share/common';
-import { Recording } from '@src/types/share/Recording';
+import { CoinHistory, CommonDataResponse, CommonFindId, CommonFSW, Concert, Pagination, Recording, Ticket, UserTicket } from '@miko/share-types';
 import useSWR, { SWRConfiguration } from 'swr';
 
 import { Product } from './../../types/share/Product';

@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { IMAGE_DOMAIN } from '@src/const';
 import { useUser } from '@src/state/swr';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import { FC, useState } from 'react';
 import CartButton from './cart/CartButton';
 import OptionSelect from './OptionSelect';

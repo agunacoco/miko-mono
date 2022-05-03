@@ -1,6 +1,6 @@
 import { setCookie } from '@src/helper';
 import { axiosI } from '@src/state/fetcher';
-import { LoginData, User } from '@src/types/share';
+import { LoginData, User } from '@miko/share-types';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { mutate } from 'swr';

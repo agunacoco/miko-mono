@@ -1,5 +1,5 @@
 import { PeerDataInterface } from '@src/types/local/PeerData';
-import { User } from '@src/types/share';
+import { User } from '@miko/share-types';
 import { DataConnection } from 'peerjs';
 import { atom } from 'recoil';
 

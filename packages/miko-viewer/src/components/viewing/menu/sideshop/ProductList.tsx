@@ -24,7 +24,7 @@ import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { FaShoppingCart } from '@react-icons/all-files/fa/FaShoppingCart';
 import { IMAGE_DOMAIN, LARAVEL_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 import Options from './Options';

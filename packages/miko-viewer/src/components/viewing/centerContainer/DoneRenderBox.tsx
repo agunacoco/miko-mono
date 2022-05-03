@@ -3,7 +3,7 @@ import { doneItem } from '@src/const';
 import { useSocket } from '@src/hooks/dynamicHooks';
 import { addedScoreForSeconds } from '@src/state/shareObject';
 import { useUser } from '@src/state/swr';
-import { DoneSendInterface } from '@src/types/share';
+import { DoneSendInterface } from '@miko/share-types';
 import { useEffect, useState } from 'react';
 import DoneAnimationBox from './done/DoneAnimationBox';
 import { DoneIcon } from './done/DoneIcon';

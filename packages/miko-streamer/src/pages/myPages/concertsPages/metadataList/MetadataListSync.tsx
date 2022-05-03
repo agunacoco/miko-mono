@@ -1,8 +1,7 @@
 import { Button, Flex } from '@chakra-ui/react';
+import { CommonDataResponse, Ticket } from '@miko/share-types';
 import { metadataState } from '@src/state/recoil/metadataState';
 import { axiosI } from '@src/state/swr/fetcher';
-import { CommonDataResponse } from '@src/types/share/common';
-import { Ticket } from '@src/types/share/Ticket';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';

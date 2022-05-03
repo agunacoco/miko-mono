@@ -1,4 +1,4 @@
-import { CommonFSW } from '@src/types/share/common';
+import { CommonFSW } from '@miko/share-types';
 
 const isNull = (p: any) => {
   return !p && p !== 0;

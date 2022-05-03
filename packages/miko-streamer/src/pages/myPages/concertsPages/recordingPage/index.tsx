@@ -1,10 +1,10 @@
 import { AspectRatio, Box, Button, Flex, Heading, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Spinner, Text, Tooltip, useToast } from '@chakra-ui/react';
+import { Recording } from '@miko/share-types';
 import AsyncBoundary from '@src/components/common/wrapper/AsyncBoundary';
 import { calculateLastThumbnail, generateIvsM3U8, generateIvsThumbUrl } from '@src/helper';
 import convertDate, { getTimeOfThumb } from '@src/helper/convertDate';
 import { isOnMiniPlayerState, m3u8State } from '@src/state/recoil';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { Recording } from '@src/types/share/Recording';
 import { FC, memo, useLayoutEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';

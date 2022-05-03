@@ -1,6 +1,6 @@
 import { Box, Button, Container, HStack, Stack, Text } from '@chakra-ui/react';
 import { convertDate } from '@src/helper';
-import { Ticket } from '@src/types/share';
+import { Ticket } from '@miko/share-types';
 import React, { FC } from 'react';
 import TicketModal from './TicketModal';
 

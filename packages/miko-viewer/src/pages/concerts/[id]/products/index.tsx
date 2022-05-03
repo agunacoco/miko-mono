@@ -3,7 +3,7 @@ import { Flex, Select, Text } from '@chakra-ui/react';
 import ProductsList from '@src/components/product/ProductsList';
 import { getPageLaravelData } from '@src/helper';
 import BasicLayout from '@src/layout/BasicLayout';
-import { Product } from '@src/types/share';
+import { Product } from '@miko/share-types';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { ChangeEventHandler, ReactElement, useMemo, useState } from 'react';

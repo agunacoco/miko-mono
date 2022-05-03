@@ -1,5 +1,5 @@
 import { Heading, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, VStack } from '@chakra-ui/react';
-import { MsgTextData } from '@src/types/share/TimeMetadataFormat';
+import { MsgTextData } from '@miko/share-types';
 import React, { FC } from 'react';
 import { RecoilState, useRecoilState } from 'recoil';
 

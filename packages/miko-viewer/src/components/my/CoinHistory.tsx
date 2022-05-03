@@ -1,6 +1,6 @@
 import { Box, Circle, Flex, HStack, Spacer, Text } from '@chakra-ui/react';
 import { convertDate } from '@src/helper';
-import { Coin } from '@src/types/share';
+import { Coin } from '@miko/share-types';
 import { FC } from 'react';
 
 const history = ['コイン 充電', 'チケット 購入', 'スーパーチャット 購入', 'アイテム 使用', 'グッズ 購入', 'チケット 販売', 'グッズ 販売', 'スーパーチャット 受け', 'アイテム 受け'];

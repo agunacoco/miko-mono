@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { concertDataState } from '@src/state/recoil/concertDataState';
-import { Concert } from '@src/types/share/Concert';
+import { Concert } from '@miko/share-types';
 import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -27,8 +27,7 @@ const TimeLine = () => {
   console.log(aDayjs.toString());
   console.log(bDayjs.toString());
 
-  const lineCount =
-    Math.floor((allConcertEndDate - allConcertStartDate) / MINUTE) + 2;
+  const lineCount = Math.floor((allConcertEndDate - allConcertStartDate) / MINUTE) + 2;
 
   useEffect(() => {
     const canvas = document.getElementById(TIMELINE) as HTMLCanvasElement;
@@ -41,11 +40,7 @@ const TimeLine = () => {
           const iDayJs = dayjs(i);
 
           ctx.font = '14px serif';
-          ctx.fillText(
-            `${iDayJs.get('hour')}:${iDayJs.get('minute')}`,
-            14 + count * TL_WIDTH,
-            16
-          );
+          ctx.fillText(`${iDayJs.get('hour')}:${iDayJs.get('minute')}`, 14 + count * TL_WIDTH, 16);
           ctx.lineWidth = 4;
           ctx.beginPath();
           ctx.moveTo(30 + count * TL_WIDTH, 20);

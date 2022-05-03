@@ -5,8 +5,8 @@ import Details from '@src/components/product/details/Details';
 import ProductDetail from '@src/components/product/ProductDetail';
 import { getPageLaravelData, getSingleLaravelData } from '@src/helper';
 import BasicLayout from '@src/layout/BasicLayout';
-import { Product } from '@src/types/share';
-import { Pagination } from '@src/types/share/common';
+import { Product, Pagination } from '@miko/share-types';
+
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ReactElement } from 'react';
 

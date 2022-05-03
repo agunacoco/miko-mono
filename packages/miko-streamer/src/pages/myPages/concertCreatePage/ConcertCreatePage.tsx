@@ -2,6 +2,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
 import { Button } from '@chakra-ui/button';
 import { Box, Heading, useDisclosure, VStack } from '@chakra-ui/react';
+import { Concert, CreateConcertData } from '@miko/share-types';
 import DateInputWrapper from '@src/components/common/inputs/DateInput';
 import { InputWrapper, SelectWrapper } from '@src/components/common/inputs/HookInput';
 import ImageUpload from '@src/components/common/inputs/ImageUpload';
@@ -10,7 +11,6 @@ import { categoryArray } from '@src/const';
 import useColorStore from '@src/state/hooks/useColorStore';
 import { axiosI } from '@src/state/swr/fetcher';
 import { useUser } from '@src/state/swr/useUser';
-import { Concert, CreateConcertData } from '@src/types/share/Concert';
 import React, { useRef, useState } from 'react';
 import { FilePond } from 'react-filepond';
 import { SubmitHandler, useForm } from 'react-hook-form';

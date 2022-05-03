@@ -1,11 +1,11 @@
 import { Box, Button, Center, Heading, HStack, Select, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import { CommonFSW } from '@miko/share-types';
 import PaginationBtn from '@src/components/button/PaginationBtn';
 import { chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx, chTicketSoldIdx, chType } from '@src/const';
 import convertDate from '@src/helper/convertDate';
 import { withSuspense } from '@src/layout/withSuspenseHOC';
 import { usePageLaravel, useSingleLaravel } from '@src/state/swr/useLaravel';
 import { useMyCoin } from '@src/state/swr/useUser';
-import { CommonFSW } from '@src/types/share/common';
 import produce from 'immer';
 import { ChangeEventHandler, FC, useState } from 'react';
 import { useParams } from 'react-router-dom';

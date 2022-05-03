@@ -5,8 +5,8 @@ import ConcertTicket from '@src/components/ConcertTicket';
 import BasicLayout from '@src/layout/BasicLayout';
 import { useUser } from '@src/state/swr';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { UserTicket } from '@src/types/share';
-import { CommonFSW } from '@src/types/share/common';
+import { UserTicket, CommonFSW } from '@miko/share-types';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { FC, ReactElement } from 'react';

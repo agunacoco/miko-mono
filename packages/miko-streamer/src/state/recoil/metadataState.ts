@@ -1,4 +1,4 @@
-import { MetaData, MetadataType } from '@src/types/share/TimeMetadataFormat';
+import { MetaData, MetadataType } from '@miko/share-types';
 import { atom, selector } from 'recoil';
 
 //  "" 일때 필터 작동 안함.
@@ -46,8 +46,8 @@ export const metadataTagListState = selector({
     const metadataList = get(metadataState);
     const tagSet = new Set<string>();
 
-    metadataList.forEach((metadata) => {
-      metadata.tags.forEach((tag) => {
+    metadataList.forEach(metadata => {
+      metadata.tags.forEach(tag => {
         console.log('tag', tag);
         tagSet.add(tag);
       });

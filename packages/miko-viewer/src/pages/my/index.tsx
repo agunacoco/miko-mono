@@ -2,7 +2,7 @@ import { Box, Button, Center, Flex, Heading, HStack, Image, Input, Link, Text } 
 import AsyncBoundary from '@src/components/common/wrapper/AsyncBoundary';
 import { IMAGE_DOMAIN } from '@src/const';
 import BasicLayout from '@src/layout/BasicLayout';
-import { User } from '@src/types/share';
+import { User } from '@miko/share-types';
 import Head from 'next/head';
 import { FC, ReactElement } from 'react';
 

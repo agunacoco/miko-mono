@@ -4,8 +4,8 @@ import { IMAGE_DOMAIN, LARAVEL_URL } from '@src/const';
 import { toastLog } from '@src/helper';
 import { axiosI } from '@src/state/fetcher';
 import { URL_USER, useUser } from '@src/state/swr';
-import { User } from '@src/types/share';
-import { CommonDataResponse } from '@src/types/share/common';
+import { User, CommonDataResponse } from '@miko/share-types';
+
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

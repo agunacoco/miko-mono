@@ -1,4 +1,4 @@
-import { QuizMetaData, QuizResultMetaData } from '@src/types/share';
+import { QuizMetaData, QuizResultMetaData } from '@miko/share-types';
 import { atom } from 'recoil';
 
 export const quizMetaDataState = atom<QuizMetaData | undefined>({

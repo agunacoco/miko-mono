@@ -19,7 +19,7 @@ import { doneItem, IMAGE_DOMAIN } from '@src/const';
 import { useColorStore } from '@src/hooks';
 import { useSocket } from '@src/hooks/dynamicHooks';
 import { useUser } from '@src/state/swr';
-import { DoneSendInterface } from '@src/types/share';
+import { DoneSendInterface } from '@miko/share-types';
 import { motion } from 'framer-motion';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 

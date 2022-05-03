@@ -6,7 +6,7 @@ import CoinHistory from '@src/components/my/CoinHistory';
 import BasicLayout from '@src/layout/BasicLayout';
 import { useUser } from '@src/state/swr';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
-import { CommonFSW } from '@src/types/share/common';
+import { CommonFSW } from '@miko/share-types';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';

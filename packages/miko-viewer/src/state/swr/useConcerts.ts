@@ -1,5 +1,4 @@
-import { Concert } from '@src/types/share';
-import { CommonDataResponse, CommonFSW, Pagination } from '@src/types/share/common';
+import { Concert, CommonDataResponse, CommonFSW, Pagination } from '@miko/share-types';
 import useSWR from 'swr';
 import { fetcher } from '../fetcher';
 import { createFSWQueryString } from './helper/createQueryStringKey';

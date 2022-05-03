@@ -1,5 +1,4 @@
-import { CommonDataResponse } from '@src/types/share/common';
-import { LoginData, User } from '@src/types/share/User';
+import { CommonDataResponse, LoginData, User } from '@miko/share-types';
 import { useEffect } from 'react';
 import useSWR, { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
@@ -26,8 +25,8 @@ export const useUser = () => {
     }
     return axiosI
       .get(url)
-      .then((res) => res.data)
-      .catch((err) => {
+      .then(res => res.data)
+      .catch(err => {
         setCookie('isLogin', '', 0.0001);
         return null;
       });
