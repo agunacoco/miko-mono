@@ -20,7 +20,7 @@ const Configuration: UserConfig = {
    * Any rules defined here will override rules from @commitlint/config-conventional
    */
   rules: {
-    'type-enum': [2, 'always', ['FEAT', 'MERGE', 'UPDATE', 'FIX', 'PU', 'DEPLOY', 'RF', 'DOCS', 'ETC', 'STYLE', 'REVERT']],
+    'type-enum': [2, 'always', ['FEAT', 'MERGE', 'UPDATE', 'FIX', 'PU', 'DEPLOY', 'RF', 'DOCS', 'ETC', 'STYLE', 'REVERT', 'REMOVE']],
     'type-case': [2, 'always', 'upper-case'],
     'scope-enum': [2, 'always', ['types', 'utils', 'view', 'stream', 'etc', 'root']],
     'scope-case': [2, 'always', 'lower-case'],

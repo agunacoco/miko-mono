@@ -1,8 +1,7 @@
+import { AllMetaData } from '@miko/share-types/src/share/TimeMetadataFormat';
 import { NEST_URL } from '@src/const';
 import { PushMetaDataResponse } from '@src/types/aws/ivs/pushMetaDataResponse';
 import axios from 'axios';
-
-import { AllMetaData } from '../types/share/TimeMetadataFormat';
 
 export const pushMetaData = (channelArn: string, metadata: AllMetaData) => {
   return axios
@@ -10,7 +9,7 @@ export const pushMetaData = (channelArn: string, metadata: AllMetaData) => {
       channelArn,
       metadata,
     })
-    .catch((e) => {
+    .catch(e => {
       console.log(e);
     });
 };

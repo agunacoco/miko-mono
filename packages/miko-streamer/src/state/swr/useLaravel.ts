@@ -1,7 +1,7 @@
 import { CoinHistory, CommonDataResponse, CommonFindId, CommonFSW, Concert, Pagination, Recording, Ticket, UserTicket } from '@miko/share-types';
+import { Product } from '@miko/share-types/src/share/Product';
 import useSWR, { SWRConfiguration } from 'swr';
 
-import { Product } from './../../types/share/Product';
 import { fetcher } from './fetcher';
 import { createFSWQueryString } from './helper/createQueryStringKey';
 import laggy from './middleware/laggy';
