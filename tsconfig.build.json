@@ -4,19 +4,19 @@
   },
   "exclude": ["**/node_modules"],
   "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "packages/miko-viewer"
-    },
-    {
-      "path": "packages/miko-streamer"
-    },
-    {
-      "path": "packages/utils"
-    },
-    {
-      "path": "packages/shareTypes"
-    }
-  ]
+  "include": []
+  // "references": [
+  //   {
+  //     "path": "packages/miko-viewer"
+  //   },
+  //   {
+  //     "path": "packages/miko-streamer"
+  //   },
+  //   {
+  //     "path": "packages/utils"
+  //   },
+  //   {
+  //     "path": "packages/shareTypes"
+  //   }
+  // ]
 }

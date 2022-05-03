@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@miko/share-types/*": ["../shareTypes/*"]
     },
     "typeRoots": ["./src/types"],
     "incremental": true,
@@ -26,13 +27,5 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
-  "extends": "../../tsconfig.json",
-  "references": [
-    {
-      "path": "../utils"
-    },
-    {
-      "path": "../shareTypes"
-    }
-  ]
+  "extends": "../../tsconfig.json"
 }
