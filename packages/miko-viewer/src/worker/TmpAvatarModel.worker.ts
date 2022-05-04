@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { NEXT_URL } from '@src/const';
-import { setBone } from '@src/helper/dynamic/setBoneAvatar';
+import { setBone } from '@src/helper/dynamic/setTmpBoneAvatar';
 import { AvatarBones, AvatarOriginalBones } from '@src/types/avatar/TmpModelType';
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-loaders';
@@ -136,6 +136,8 @@ const avatarResetPosition = (index: number) => {
 const addMesh = (functionScene: BABYLON.Scene, index: number) => {
   if (index === AVATAR_FILE_NAME.length) {
     avatarResetPosition(currentAvatar);
+    createLights(penlight[0][4], 2, 255, 255, 255, 255, functionScene);
+    createLights(penlight[1][4], 2, 255, 255, 255, 255, functionScene);
     functionScene.render();
     return;
   }
@@ -217,25 +219,25 @@ addEventListener('message', async ({ data }) => {
       break;
     case 'motionChange':
       const { thisUserMotion } = data;
-      // setBone({ bones: currentBones, originalBones: currentOriginalBones, scene, color: COLOR }, thisUserMotion.pose, thisUserMotion.face);
+      setBone({ bones: currentBones, originalBones: currentOriginalBones, scene, color: COLOR }, thisUserMotion.pose, thisUserMotion.face);
       scene.render();
       break;
-    case 'avatarTextureInit':
-      const res = await fetch(`${AVATAR_PATH}steve/tanjiro.png`);
-      const resBlob = await res.blob();
-      const imageBitmap = await createImageBitmap(resBlob);
-      const mat = new BABYLON.StandardMaterial('mat', scene);
+    // 현재 안먹힘 babylon이랑 blender랑 다른 부분을 찾아야 함...
+    // case 'avatarTextureInit':
+    //   const res = await fetch(`${AVATAR_PATH}steve/tanjiro.png`);
+    //   const resBlob = await res.blob();
+    //   const imageBitmap = await createImageBitmap(resBlob);
+    //   const mat = new BABYLON.StandardMaterial('mat', scene);
 
-      const myDynamicTexture = new BABYLON.DynamicTexture('fire', 64, scene, false);
-      mat.diffuseTexture = myDynamicTexture;
+    //   const myDynamicTexture = new BABYLON.DynamicTexture('fire', 64, scene, false);
+    //   mat.diffuseTexture = myDynamicTexture;
 
-      // Add image to dynamic texture
-      const ctx = myDynamicTexture.getContext();
-      // ctx.drawImage(img, 0, 0, 300, 300, 0, 0, 30, 6);
-      ctx.drawImage(imageBitmap, 0, 0, 64, 64);
-      myDynamicTexture.update();
-      avatarSkin[2][0][1].material = mat;
-      break;
+    //   // Add image to dynamic texture
+    //   const ctx = myDynamicTexture.getContext();
+    //   ctx.drawImage(imageBitmap, 0, 0, 64, 64);
+    //   myDynamicTexture.update();
+    //   avatarSkin[2][0][1].material = mat;
+    //   break;
     case 'lightColorChange':
       break;
     case 'avatarChange':

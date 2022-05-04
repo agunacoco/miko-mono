@@ -1,8 +1,11 @@
 // import { model } from '@src/state/recoil';
 import { toastLog } from '@src/helper';
 import { roomMemberMotions } from '@src/state/shareObject';
+import { currentAvatarState } from '@src/state/recoil';
 import 'babylonjs-loaders';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import produce from 'immer';
 
 export const AvatarModel: FC<{
   width: number;
@@ -13,15 +16,17 @@ export const AvatarModel: FC<{
   isMyAvatar?: boolean | undefined;
 }> = ({ height, path, peerId, width, onAntialias, isMyAvatar }) => {
   const tagId = 'avatar' + peerId;
+  const workerRef = useRef<Worker>();
+  const [currentAvatar, setCurrentAvatar] = useRecoilState(currentAvatarState);
 
   useEffect(() => {
     const worker = new Worker(new URL('@src/worker/AvatarModel.worker.ts', import.meta.url), { type: 'module' });
-
+    workerRef.current = worker;
     worker.onerror = e => {
       toastLog('error', 'avatar worker error', '', e.error);
     };
     worker.onmessageerror = e => {
-      toastLog('error', 'avatar worker mesage error', '');
+      toastLog('error', 'avatar worker message error', '');
       console.log('worker message error', e);
     };
 
@@ -47,6 +52,19 @@ export const AvatarModel: FC<{
       clearInterval(avatarSettingInterval);
     };
   }, []);
+
+  useEffect(() => {
+    setCurrentAvatar(
+      produce(draft => {
+        /* eslint-disable */
+        if (!workerRef.current) return;
+        const value = draft[peerId];
+        if (!value) return;
+        delete draft[peerId];
+        workerRef.current.postMessage({ type: 'avatarChange', avatarType: value });
+      }),
+    );
+  }, [currentAvatar]);
 
   return <canvas id={tagId} />;
 };
