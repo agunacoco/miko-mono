@@ -15,7 +15,7 @@
     "noEmitOnError": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "target": "ESNext",
     "types": ["vite/client", "node"],
     "paths": {

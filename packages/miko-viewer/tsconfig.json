@@ -18,7 +18,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "target": "ES6",
     "typeRoots": ["./src/types"],
     "types": ["offscreencanvas", "workbox-window", "w3c-generic-sensor", "node"],
