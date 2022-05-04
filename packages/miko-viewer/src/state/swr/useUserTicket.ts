@@ -1,6 +1,6 @@
-import { CommonDataResponse, CommonFSW, Pagination } from '@miko/share-types';
+import { CommonDataResponse, CommonFSW, Pagination, UserTicket } from '@miko/share-types';
 import useSWR from 'swr';
-import { UserTicket } from '../../types/share/UserTicket';
+
 import { fetcher } from '../fetcher';
 import { createFSWQueryString } from './helper/createQueryStringKey';
 import laggy from './middleware/laggy';

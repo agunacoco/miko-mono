@@ -1,4 +1,4 @@
-import { CommonProps } from '../share/common';
+import { CommonProps } from '@miko/share-types';
 
 export interface Cart extends CommonProps {
   map: any;

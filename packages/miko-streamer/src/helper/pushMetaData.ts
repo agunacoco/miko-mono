@@ -1,4 +1,4 @@
-import { AllMetaData } from '@miko/share-types/src/share/TimeMetadataFormat';
+import { AllMetaData } from '@miko/share-types/src';
 import { NEST_URL } from '@src/const';
 import { PushMetaDataResponse } from '@src/types/aws/ivs/pushMetaDataResponse';
 import axios from 'axios';

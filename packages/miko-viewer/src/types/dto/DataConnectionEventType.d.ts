@@ -1,5 +1,5 @@
+import { DoneInterface } from '@miko/share-types';
 import { ChatMotionInterface } from '../avatar/ChatMotionType';
-import { DoneInterface } from '../share/DoneTypes';
 import { ChatMessageInterface } from './ChatMessageType';
 
 interface ChatEvent {

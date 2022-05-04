@@ -1,4 +1,4 @@
-import { QuizMetaData } from '@miko/share-types/src/share/TimeMetadataFormat';
+import { QuizMetaData } from '@miko/share-types';
 import { atom, DefaultValue, selector } from 'recoil';
 
 const draftQuizDurationTimeState = atom<number>({

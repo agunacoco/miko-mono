@@ -1,10 +1,10 @@
 export interface TimeStamps {
-  updatedAt: Date;
-  createdAt: Date;
+  readonly updatedAt: Date;
+  readonly createdAt: Date;
 }
 
 export interface CommonProps extends TimeStamps {
-  id: number;
+  readonly id: number;
 }
 
 export interface CommonFSW {

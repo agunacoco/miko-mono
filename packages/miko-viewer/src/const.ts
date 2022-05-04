@@ -1,4 +1,4 @@
-import { DoneItem } from './types/share/DoneItem';
+import { DoneItem } from '@miko/share-types';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
