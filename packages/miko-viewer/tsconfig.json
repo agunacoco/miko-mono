@@ -1,4 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
@@ -9,23 +12,20 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5",
+    "target": "ES6",
     "typeRoots": ["./src/types"],
-    "types": ["offscreencanvas", "workbox-window", "w3c-generic-sensor"],
+    "types": ["offscreencanvas", "workbox-window", "w3c-generic-sensor", "node"],
     "paths": {
       "@src/*": ["src/*"],
       "@public/*": ["public/*"],
       "@miko/share-types/*": ["../shareTypes/*"]
     }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
-  "extends": "../../tsconfig.json"
+  }
 }

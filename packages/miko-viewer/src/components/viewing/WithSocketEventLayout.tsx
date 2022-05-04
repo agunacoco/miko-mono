@@ -2,23 +2,15 @@ import { showChatToRoom, toastLog, updateUserScore } from '@src/helper';
 import { setMotionToAvatar } from '@src/helper/dynamic/setMotionToAvatar';
 import { useBeforeunload } from '@src/hooks';
 import { useMyPeer, useSocket } from '@src/hooks/dynamicHooks';
-import {
-  curUserTicketState,
-  enterRoomIdAsyncState,
-  latestScoreState,
-  myStreamState,
-  mySyncDataConnectionState,
-  PeerDataInterface,
-  peerDataListState,
-  PickUserData,
-} from '@src/state/recoil';
+import { curUserTicketState, enterRoomIdAsyncState, latestScoreState, myStreamState, mySyncDataConnectionState, peerDataListState, PickUserData } from '@src/state/recoil';
 import { useUser } from '@src/state/swr';
 import { DataConnectionEvent } from '@src/types/dto/DataConnectionEventType';
 import produce from 'immer';
 import { useRouter } from 'next/router';
 import { DataConnection, MediaConnection } from 'peerjs';
-import { FC, ReactElement, useCallback, useEffect, useRef } from 'react';
+import { FC, ReactElement, useCallback, useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { PeerDataInterface } from '../../types/local';
 
 type PeerFatalErrorType = 'browser-incompatible' | 'invalid-id' | 'invalid-key' | 'ssl-unavailable' | 'server-error' | 'socket-error' | 'socket-closed';
 
@@ -30,7 +22,7 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
   const socket = useSocket();
   const myPeer = useMyPeer();
 
-  const syncDataConnectionRef = useRef<DataConnection>();
+  // const syncDataConnectionRef = useRef<DataConnection>();
   const setMySyncDataConnection = useSetRecoilState(mySyncDataConnectionState);
 
   const { data: userData } = useUser();
