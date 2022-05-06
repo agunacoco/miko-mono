@@ -7,7 +7,7 @@ import Paydone from '@src/components/product/pay/Paydone';
 import BasicLayout from '@src/layout/BasicLayout';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { useUser } from '@src/state/swr/useUser';
-// import { Cart } from '@src/types/local';
+// import { Cart } from '@miko/share-types';
 import { ReactElement, useState } from 'react';
 
 const Purchase = () => {

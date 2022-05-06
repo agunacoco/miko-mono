@@ -1,7 +1,7 @@
 import { CloseButton, Flex, Image, Tag, TagLabel, Text } from '@chakra-ui/react';
+import { Cart } from '@miko/share-types';
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { IMAGE_DOMAIN, LARAVEL_URL } from '@src/const';
-import { Cart } from '@src/types/local';
 import axios from 'axios';
 import { FC } from 'react';
 

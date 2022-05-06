@@ -1,5 +1,5 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
-import { Cart } from '@src/types/local';
+import { Cart } from '@miko/share-types';
 import { useRouter } from 'next/router';
 import CartItem from './CartItem';
 import OrderSummary from './OrderSummary';

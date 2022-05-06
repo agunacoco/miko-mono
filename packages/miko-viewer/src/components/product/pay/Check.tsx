@@ -4,7 +4,7 @@ import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import CommonDivider from '@src/components/common/divider/CommonDivider';
 import { IMAGE_DOMAIN } from '@src/const';
 import { useUser } from '@src/state/swr/useUser';
-import { Cart } from '@src/types/local';
+import { Cart } from '@miko/share-types';
 import PaymentModal from './PaymentModal';
 
 type CheckType = {

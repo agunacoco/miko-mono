@@ -1,7 +1,7 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight';
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
-import { Cart } from '@src/types/local';
+import { Cart } from '@miko/share-types';
 import { useRouter } from 'next/router';
 
 type OrderType = {
