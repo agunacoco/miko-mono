@@ -23,8 +23,8 @@
     "typeRoots": ["./src/types"],
     "types": ["vite/client", "node"],
     "paths": {
-      "@src/*": ["src/*"],
-      "@miko/share-types/*": ["../shareTypes/*"]
+      "@src/*": ["src/*"]
+      // "@miko/share-types/*": ["../shareTypes/*"]
     }
   }
 }
