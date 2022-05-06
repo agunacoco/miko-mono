@@ -65,7 +65,8 @@
     "workbox-range-requests": "^6.5.3",
     "workbox-routing": "^6.5.3",
     "workbox-strategies": "^6.5.3",
-    "workbox-streams": "^6.5.3"
+    "workbox-streams": "^6.5.3",
+    "@miko/share-types": "*"
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
@@ -74,7 +75,6 @@
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.3",
     "@types/react-helmet": "^6.1.5",
-    "@miko/share-types": "file:../share-types",
     "typescript": "^4.6.4",
     "vite": "^2.9.7",
     "vite-tsconfig-paths": "^3.4.1"

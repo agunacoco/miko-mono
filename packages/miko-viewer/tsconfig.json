@@ -24,8 +24,8 @@
     "types": ["offscreencanvas", "workbox-window", "w3c-generic-sensor", "node"],
     "paths": {
       "@src/*": ["src/*"],
-      "@public/*": ["public/*"],
-      "@miko/share-types/*": ["../shareTypes/*"]
+      "@public/*": ["public/*"]
+      // "@miko/share-types/*": ["../shareTypes/*"]
     }
   }
 }
