@@ -1,11 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  // "extends": "../../tsconfig.json",
   "include": ["src/**/*", "env.d.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "composite": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
@@ -19,11 +19,12 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
-    "target": "ESNext",
+    "target": "ES6",
+    "typeRoots": ["./src/types"],
     "types": ["vite/client", "node"],
     "paths": {
-      "@src/*": ["./*"],
-      "@miko/share-types/*": ["../../shareTypes/*"]
+      "@src/*": ["src/*"],
+      "@miko/share-types/*": ["../shareTypes/*"]
     }
   }
 }

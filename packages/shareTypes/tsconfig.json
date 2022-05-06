@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "files": ["index.d.ts"],
+  "files": ["index.d.ts", "src/*"],
   "compilerOptions": {
     "module": "commonjs",
     "lib": ["es6"],
@@ -14,9 +14,6 @@
     "types": [],
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve",
-    "paths": {
-      "@src/*": ["src/*"]
-    }
+    "jsx": "preserve"
   }
 }
