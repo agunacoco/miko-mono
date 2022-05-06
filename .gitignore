@@ -1,3 +1,4 @@
 **/node_modules
 packages/miko-streamer/tsconfig.tsbuildinfo
 **/.eslintcache
+**/.next
