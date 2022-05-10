@@ -3,6 +3,7 @@ import AsyncBoundary from '@src/components/common/wrapper/AsyncBoundary';
 import BasicLayout from '@src/layout/BasicLayout';
 import dynamic from 'next/dynamic';
 import React, { ReactElement } from 'react';
+import ChromeRecommend from '@src/components/common/ChromeRecommend';
 
 const DynamicEnterPage = dynamic(() => import('../../components/live/DynamicEnter'), {
   loading: () => <div> loading</div>,
@@ -16,6 +17,7 @@ const RoomEnterPage = () => {
       <AsyncBoundary>
         <DynamicEnterPage />
       </AsyncBoundary>
+      <ChromeRecommend />
     </Flex>
   );
 };
