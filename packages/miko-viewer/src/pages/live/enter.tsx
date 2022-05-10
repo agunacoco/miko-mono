@@ -4,7 +4,7 @@ import BasicLayout from '@src/layout/BasicLayout';
 import dynamic from 'next/dynamic';
 import React, { ReactElement } from 'react';
 
-const DynamicEnterPage = dynamic(() => import('../../components/live/DynamicEnter'), {
+const DynamicEnterPage = dynamic(() => import('@src/components/live/enter/DynamicEnterPage'), {
   loading: () => <div> loading</div>,
   ssr: false,
   suspense: true,
