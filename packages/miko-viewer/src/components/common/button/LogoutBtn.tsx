@@ -1,9 +1,8 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn';
 import { FiLogOut } from '@react-icons/all-files/fi/FiLogOut';
-import { axiosI } from '@src/state/fetcher';
 import { loginState } from '@src/state/recoil';
-import { useUser } from '@src/state/swr';
+import { tryLogOut, useUser } from '@src/state/swr';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
@@ -14,7 +13,7 @@ const LogoutBtn = () => {
   const setLoginState = useSetRecoilState(loginState);
 
   const logoutHandler = async () => {
-    const isLogoutSuccess = await axiosI.get<boolean>('/logout');
+    const isLogoutSuccess = await tryLogOut();
 
     if (isLogoutSuccess) {
       mutate(undefined, { revalidate: false });

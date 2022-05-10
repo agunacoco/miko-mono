@@ -1,10 +1,10 @@
-import { setCookie } from '@src/helper';
 import { axiosI } from '@src/state/fetcher';
 import { LoginData, User } from '@miko/share-types';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
+import Cookies from 'js-cookie';
 import { loginState } from '../recoil';
 import laggy from './middleware/laggy';
 
@@ -16,12 +16,12 @@ const URL_LOGOUT = '/logout';
 export const useUser = () => {
   const setIsLogin = useSetRecoilState(loginState);
 
-  const aFetcher = (url: string) => {
-    if (typeof window === 'undefined') return Promise.resolve(undefined);
+  const loginFetcher = (url: string) => {
+    // NOTE  useSWR는 undefined일 경우 suspense가 안 끝남.
+    if (typeof window === 'undefined') return Promise.resolve(null);
 
-    const isTokenExist = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
+    const isTokenExist = Cookies.get('isLogin');
     if (!isTokenExist) {
-      // NOTE  useSWR는 undefined일 경우 suspense가 안 끝남.
       return Promise.resolve(null);
     }
     //  TODO 쿠키 로직 문제
@@ -29,14 +29,14 @@ export const useUser = () => {
       .get(url)
       .then(res => res.data)
       .catch(err => {
-        setCookie('isLogin', '', 0.0001);
         setIsLogin(false);
+        Cookies.remove('isLogin');
         console.error(err);
         return null;
       });
   };
 
-  const userResult = useSWRImmutable<User>(URL_USER, aFetcher, {
+  const userResult = useSWRImmutable<User>(URL_USER, loginFetcher, {
     errorRetryCount: 2,
     use: [laggy],
     suspense: true,
@@ -64,6 +64,17 @@ export const tryLogin = async (loginData: LoginData) => {
     // setLoginStatus(true);
     return true;
   } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export const tryLogOut = async () => {
+  try {
+    await axiosI.get(`${URL_LOGOUT}`);
+    return true;
+  } catch (error) {
+    console.error(error);
     return false;
   }
 };
@@ -80,21 +91,16 @@ export const tryOAuthLogin = async (token: string) => {
   }
 };
 
-export const tryLogOut = async () => {
-  try {
-    await axiosI.get(`${URL_LOGOUT}`);
-    return undefined;
-  } catch (error) {
-    return undefined;
-  }
-};
-
 export const useCheckLogin = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
 
-  useEffect(() => {
-    const isTokenExist = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
-    if (isTokenExist?.[0]) setIsLogin(true);
+  useLayoutEffect(() => {
+    const isTokenExist = Cookies.get('isLogin');
+    if (isTokenExist) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
   }, []);
 
   return isLogin;

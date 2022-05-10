@@ -43,6 +43,8 @@ export default function LoginPage() {
       setTimeout(() => {
         router.push('/');
       }, 0);
+    } else {
+      setLoginState(false);
     }
   };
 
