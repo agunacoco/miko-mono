@@ -2,7 +2,7 @@ import { SOCKET_URL } from '@src/const';
 import { useRef } from 'react';
 import io, { Socket } from 'socket.io-client';
 
-class SingletonSocket {
+export class SingletonSocket {
   private static socket: Socket;
 
   private static addBaseEvent() {
@@ -29,6 +29,14 @@ class SingletonSocket {
     });
 
     return aSocket;
+  }
+
+  public static destroy() {
+    if (SingletonSocket.socket) {
+      SingletonSocket.socket.emit('fe-user-left');
+      SingletonSocket.socket.disconnect();
+      SingletonSocket.socket = null;
+    }
   }
 
   public static getSocket(): Socket {

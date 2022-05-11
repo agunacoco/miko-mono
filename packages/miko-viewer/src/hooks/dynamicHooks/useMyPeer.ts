@@ -4,18 +4,10 @@ import { useRef } from 'react';
 
 type ExtendPeer = InstanceType<typeof Peer> & { open: boolean };
 
-class SingletonPeer {
+export class SingletonPeer {
   private static peer?: ExtendPeer;
 
   private static peerId?: string;
-
-  private static destroyPeer() {
-    if (SingletonPeer.peer) {
-      SingletonPeer.peer.destroy();
-      SingletonPeer.peer = undefined;
-      SingletonPeer.peerId = undefined;
-    }
-  }
 
   private static generateNewPeer(peerId?: string) {
     const aPeer = new Peer(peerId, {
@@ -53,7 +45,7 @@ class SingletonPeer {
 
   public static getPeer(peerId?: string): ExtendPeer {
     if (SingletonPeer.peerId && SingletonPeer.peerId !== peerId) {
-      SingletonPeer.destroyPeer();
+      SingletonPeer.destroy();
     }
 
     if (!SingletonPeer.peer) {
@@ -61,6 +53,15 @@ class SingletonPeer {
       SingletonPeer.peerId = peerId;
     }
     return SingletonPeer.peer;
+  }
+
+  public static destroy() {
+    if (SingletonPeer.peer) {
+      SingletonPeer.peer.disconnect();
+      SingletonPeer.peer.destroy();
+      SingletonPeer.peer = undefined;
+      SingletonPeer.peerId = undefined;
+    }
   }
 }
 

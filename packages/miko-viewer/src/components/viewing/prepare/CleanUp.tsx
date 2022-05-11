@@ -1,12 +1,10 @@
 import { useBeforeunload } from '@src/hooks';
-import { useMyPeer, useSocket } from '@src/hooks/dynamicHooks';
+import { SingletonPeer, SingletonSocket } from '@src/hooks/dynamicHooks';
 import { ivsErrorState, mediapipeErrorState, myStreamState, peerErrorState, socketErrorState } from '@src/state/recoil';
 import { FC, MutableRefObject, useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 const CleanUp: FC<{ isExitedRef: MutableRefObject<boolean>; peerId?: string }> = ({ isExitedRef, peerId }) => {
-  const socket = useSocket();
-  const myPeer = useMyPeer(peerId);
   const setMediapipeError = useSetRecoilState(mediapipeErrorState);
   const setSocketError = useSetRecoilState(socketErrorState);
   const setPeerError = useSetRecoilState(peerErrorState);
@@ -16,6 +14,7 @@ const CleanUp: FC<{ isExitedRef: MutableRefObject<boolean>; peerId?: string }> =
 
   const handleCleanUp = () => {
     console.log('handleCleanUp');
+    // eslint-disable-next-line no-param-reassign
     isExitedRef.current = true;
 
     if (myStream) {
@@ -26,18 +25,8 @@ const CleanUp: FC<{ isExitedRef: MutableRefObject<boolean>; peerId?: string }> =
       resetMyStreamRecoil();
     }
 
-    if (socket) {
-      socket.emit('fe-user-left');
-      socket.disconnect();
-    }
-
-    if (myPeer) {
-      myPeer.disconnect();
-      myPeer.destroy();
-    }
-
-    window.socket = undefined;
-    window.myPeer = undefined;
+    SingletonSocket.destroy();
+    SingletonPeer.destroy();
 
     setMediapipeError(undefined);
     setSocketError(undefined);
@@ -45,14 +34,13 @@ const CleanUp: FC<{ isExitedRef: MutableRefObject<boolean>; peerId?: string }> =
     setIvsError(undefined);
   };
 
+  // 창이 닫힐때
   useBeforeunload(() => {
-    // 창이 닫힐때
     handleCleanUp();
-    console.log('windowBeforeUnloadEvent in Prepare');
   });
 
+  // 뒤로 갈때
   useEffect(() => {
-    // 뒤로 갈때
     return () => {
       handleCleanUp();
     };
