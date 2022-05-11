@@ -119,6 +119,7 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
             break;
           case 'avatarChange':
             // updateUserScore(id, event.data);
+            console.log('여기는 아바타 바꾸는 곳');
             setCurrentAvatar(
               produce(draft => {
                 /* eslint-disable */

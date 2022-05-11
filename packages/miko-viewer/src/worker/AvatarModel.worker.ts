@@ -28,7 +28,7 @@ const COLOR = {
 };
 
 const AVATAR_PATH = `${NEXT_URL}/resources/babylonjs/models/`;
-const AVATAR_FILE_NAME = ['proseka/proseka_tmp.glb', 'miku/MineCraftMikuNoSword.glb', 'steve/steve.glb', 'light/penlight.glb', 'light/penlight.glb'];
+const AVATAR_FILE_NAME = ['proseka/proseka_tmp.glb', 'miku/MineCraftMiku2.8.glb', 'steve/user2.8.glb', 'steve/tanjiro2.8.glb', 'light/penlight.glb', 'light/penlight.glb'];
 let currentAvatar = 0;
 /**
  * proseka = leftShoulder 22, Elbow 21, Wrist 20
@@ -43,6 +43,8 @@ let currentAvatar = 0;
  */
 const currentBones: AvatarBones = {} as AvatarBones;
 const currentOriginalBones: AvatarOriginalBones = {} as AvatarOriginalBones;
+
+let avatarStart: boolean = false;
 
 const createLights = (functionBones: BABYLON.TransformNode[], index: number, r: number, g: number, b: number, d: number, functionScene: BABYLON.Scene) => {
   const bone = functionBones[index]; // 15
@@ -85,6 +87,15 @@ const getJointNumber = (index: number): { [key in string]: number } => {
       rw = 8;
       h = 2;
       break;
+    case 3: // tanjiro
+      ls = 6;
+      le = 5;
+      lw = 4;
+      rs = 10;
+      re = 9;
+      rw = 8;
+      h = 2;
+      break;
     default:
       break;
   }
@@ -99,6 +110,7 @@ const avatarResetPosition = (index: number) => {
   penlight[1][4][0].setAbsolutePosition(new BABYLON.Vector3(0, 0, 0));
 
   avatarSkin[currentAvatar][0][0].setAbsolutePosition(new BABYLON.Vector3(100, 0, 0));
+  scene.render();
   avatarSkin[index][0][0].setAbsolutePosition(new BABYLON.Vector3(0, 0, 0));
   currentAvatar = index;
   scene.render(); // 이거 안하면 악세사리가 움직이질 않음...
@@ -134,14 +146,16 @@ const avatarResetPosition = (index: number) => {
 
 // 아바타 init시 avatar로드
 const addMesh = (functionScene: BABYLON.Scene, index: number) => {
-  if (index === AVATAR_FILE_NAME.length) {
+  console.log('load', index);
+  if (index >= AVATAR_FILE_NAME.length) {
+    console.log('setting', index);
     avatarResetPosition(currentAvatar);
     createLights(penlight[0][4], 2, 255, 255, 255, 255, functionScene);
     createLights(penlight[1][4], 2, 255, 255, 255, 255, functionScene);
     functionScene.render();
+    avatarStart = true;
     return;
   }
-
   BABYLON.SceneLoader.ImportMesh('', AVATAR_PATH + AVATAR_FILE_NAME[index], '', functionScene, (...args) => {
     const { rs, ls } = getJointNumber(index);
     if (index < AVATAR_FILE_NAME.length - 2) {
@@ -174,7 +188,7 @@ const onSceneReady = async (resultScene: BABYLON.Scene) => {
     camera.setPosition(new BABYLON.Vector3(0, 1.8, 4.7));
 
     // 카메라 컨트롤러, 모델뜨는 canvas 드래그로 조절 가능
-    camera.attachControl(true);
+    // camera.attachControl(true);
 
     const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 1), resultScene);
 
@@ -196,7 +210,7 @@ addEventListener('message', async ({ data }) => {
       const engine = new BABYLON.Engine(canvas);
 
       scene = new BABYLON.Scene(engine);
-      // scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+      scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
       onSceneReady(scene);
 
@@ -217,6 +231,7 @@ addEventListener('message', async ({ data }) => {
       break;
     case 'motionChange':
       const { thisUserMotion } = data;
+      if (!avatarStart) break;
       setBone({ bones: currentBones, originalBones: currentOriginalBones, scene, color: COLOR }, thisUserMotion.pose, thisUserMotion.face);
       scene.render();
       break;
@@ -239,10 +254,11 @@ addEventListener('message', async ({ data }) => {
     case 'lightColorChange':
       break;
     case 'avatarChange':
+      console.log('아바타 바꾸러 들어옴');
       const { avatarType } = data;
       let index = avatarType;
       if (typeof avatarType === 'string') index = parseInt(avatarType, 10);
-      if (index < 0 || index > 2 || index === currentAvatar) return;
+      if (index < 0 || index > AVATAR_FILE_NAME.length - 2 || index === currentAvatar) return;
 
       avatarResetPosition(index);
 

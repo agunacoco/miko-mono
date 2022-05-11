@@ -1,9 +1,7 @@
 // 안씀 지워야 함
 
 import { sendToAllPeers } from '@src/helper';
-import { setBone } from '@src/helper/dynamic/setBoneAvatar';
 import { latestMotionState, peerDataListState } from '@src/state/recoil';
-import { modelListObject } from '@src/state/shareObject';
 import { roomMemberMotions, sendMotionForFrames } from '@src/state/shareObject/shareMotionObject';
 import { useUser } from '@src/state/swr';
 import produce from 'immer';
@@ -43,9 +41,7 @@ export const WithIntervalMotionLayer: FC<{ children: ReactElement }> = ({ childr
           /* eslint-disable */
           for (const key in roomMemberMotions) {
             const newMotion = roomMemberMotions[key];
-            const userModel = modelListObject[key];
-            if (newMotion && userModel && key !== user!.uuid) {
-              setBone(userModel, key, newMotion.pose, newMotion.face);
+            if (newMotion && key !== user!.uuid) {
               draft[key] = newMotion;
               delete roomMemberMotions[key];
             }

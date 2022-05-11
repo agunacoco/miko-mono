@@ -54,6 +54,7 @@ export const AvatarModel: FC<{
   }, []);
 
   useEffect(() => {
+    console.log('아바타 바뀐다!!!!');
     setCurrentAvatar(
       produce(draft => {
         /* eslint-disable */

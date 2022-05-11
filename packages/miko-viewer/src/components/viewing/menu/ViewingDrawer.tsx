@@ -16,13 +16,14 @@ import {
   Switch,
   useDisclosure,
 } from '@chakra-ui/react';
-import { enterRoomIdAsyncState, isOnAvatarState, isOnVideoAmbianceState, peerDataListState } from '@src/state/recoil';
+import { enterRoomIdAsyncState, isOnAvatarState, isOnVideoAmbianceState, peerDataListState, currentAvatarState } from '@src/state/recoil';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useUser } from '@src/state/swr';
 import { sendToAllPeers } from '@src/helper';
+import produce from 'immer';
 
-const avatarTheme = ['Default', 'Miku', 'Zombie'];
+const avatarTheme = ['Default', 'Miku', 'Magician', 'tanjiro'];
 
 const ViewingSettingDrawer = forwardRef((_, ref) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +31,7 @@ const ViewingSettingDrawer = forwardRef((_, ref) => {
   const peers = useRecoilValue(peerDataListState);
   const [isOnModel, setIsOnModel] = useRecoilState(isOnAvatarState);
   const [isOnVideoAmbiance, setIsOnVideoAmbiance] = useRecoilState(isOnVideoAmbianceState);
+  const setCurrentAvatar = useSetRecoilState(currentAvatarState);
 
   const { data: user } = useUser();
   const avatarRef = useRef<HTMLSelectElement>(null);
@@ -40,7 +42,13 @@ const ViewingSettingDrawer = forwardRef((_, ref) => {
   }));
   const optionChangeHandler = () => {
     if (!(user && avatarRef.current)) return;
-    const value = parseInt(avatarRef.current.value);
+    const value = parseInt(avatarRef.current.value, 10);
+    setCurrentAvatar(
+      produce(draft => {
+        /* eslint-disable */
+        draft[user.uuid] = value;
+      }),
+    );
     sendToAllPeers(peers, { type: 'avatarChange', data: { sender: user.uuid, index: value } });
     onClose();
   };
@@ -78,6 +86,7 @@ const ViewingSettingDrawer = forwardRef((_, ref) => {
               </FormLabel>
               <Switch id="is-on-video-ambiance" defaultChecked={isOnVideoAmbiance} onChange={() => setIsOnVideoAmbiance(prev => !prev)} />
             </Flex>
+            <Divider my="6" />
             <FormControl display="flex" flexDir="column">
               <Flex justifyContent="space-between" direction="column">
                 <FormLabel htmlFor="avatar-color">Change Avatar</FormLabel>
@@ -90,7 +99,6 @@ const ViewingSettingDrawer = forwardRef((_, ref) => {
                 </Select>
               </Flex>
             </FormControl>
-            <Divider my="6" />
           </FormControl>
           <Divider my="6" />
         </DrawerBody>
