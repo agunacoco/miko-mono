@@ -180,7 +180,7 @@ const registerPushNotification = (userTicket: UserTicket) => {
 
 const ConcertTicket: FC<{ userTicket: UserTicket }> = ({ userTicket }) => {
   useEffect(() => {
-    registerPushNotification(userTicket);
+    // registerPushNotification(userTicket);
   }, []);
 
   return <TicketInfo userTicket={userTicket} />;

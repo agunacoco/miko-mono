@@ -5,13 +5,12 @@ import { curUserTicketState, enterRoomIdState, enterTicketDataState } from '@src
 import router from 'next/router';
 import { AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { convertDate, setCookie } from '@src/helper';
-import { USER_TICKET_COOKIE } from '../../../../const';
-import { MotionBox } from '../../../common/motion/MotionChakra';
+import { USER_TICKET_COOKIE } from '@src/const';
+import { MotionBox } from '@src/components/common/motion/MotionChakra';
 
-const MAX_TEAR_MOUNT = 100;
+const MAX_TEAR_MOUNT = 700;
 
 const TicketRightPart = () => {
-  // const [ticketMotion, setTicketMotion] = useState(false);
   const { concert } = useRecoilValue(curUserTicketState);
   const curTicket = useRecoilValue(enterTicketDataState);
   const startDate = convertDate(curTicket.concertStartDate, 'YMDHM'); // 티켓 시작날
@@ -32,7 +31,7 @@ const TicketRightPart = () => {
 
   const update = ({ x, y }: { x: number; y: number }) => {
     if (ticketRef.current) ticketRef.current.style.transform = `rotate(${rotate.get()}deg)`;
-    if (rotate.get() > 30) {
+    if (rotate.get() > 40) {
       setIsEnterStart(true);
     } else {
       tearMount.set(x + y);
@@ -40,64 +39,68 @@ const TicketRightPart = () => {
   };
 
   return (
-    <Box position="relative" width="500px" overflow="visible">
-      <AnimatePresence>
-        {isEnterStart ? (
-          <MotionBox
-            zIndex="9999"
-            key="enter"
-            position="absolute"
-            width="0"
-            height="0"
-            animate={{ width: [0, 10, 10], height: [0, 10, 10], scale: [0, 0, 300] }}
-            onAnimationComplete={() => enterHandler()}
-            backgroundColor="white"
-            borderRadius="full"
-            transition={{ duration: 1, delay: 0.5 }}
-          ></MotionBox>
-        ) : (
-          <MotionBox
-            exit={{
-              x: [0, 10, 10],
-              y: [0, 0, 1000],
-              opacity: [1, 1, 0],
-              transition: {
-                duration: 1,
-                type: 'spring',
-              },
-            }}
-          >
+    <>
+      <Box position="relative" cursor="pointer" w="20vw" h="full" overflow="visible">
+        <AnimatePresence>
+          {isEnterStart ? (
             <MotionBox
-              key="ticket"
-              ref={ticketRef}
-              style={{ transform: `rotate(${rotate.get()}deg)`, transformOrigin: '0 100%' }}
-              onPan={(e, info) => requestAnimationFrame(() => update(info.offset))}
+              zIndex="9999"
+              key="enter"
+              position="absolute"
+              width="0"
+              height="0"
+              animate={{ width: [0, 10, 10], height: [0, 10, 10], scale: [0, 0, 500] }}
+              onAnimationComplete={() => enterHandler()}
+              backgroundColor="white"
+              borderRadius="full"
+              transition={{ duration: 0.7, delay: 0.5 }}
+            />
+          ) : (
+            <MotionBox
+              exit={{
+                x: [0, 40, 20],
+                y: [0, -20, 1000],
+                opacity: [1, 1, 0],
+                transition: {
+                  duration: 1,
+                  type: 'spring',
+                },
+              }}
+              h="full"
             >
-              <Stack shadow="xl" color="white" flex="0.3" p={7} justify="center" align="start" bg="linear-gradient( to top, purple, pink )">
-                <Text color="cyan" fontSize="xl" fontWeight="semibold">
-                  {concert.artist}
-                </Text>
-                <Text lineHeight={10} fontSize="5xl" fontWeight="extrabold">
-                  {concert.title}
-                </Text>
-                <Text color="yellow" fontSize="2xl" fontWeight="extrabold">
-                  {startDate}
-                </Text>
-                <Box py={5}>
-                  <Text w="330px" color="cyan.300" fontSize="md">
-                    {roomId ? 'PRIVATE ROOM ID' : 'PUBLIC ROOM'}
+              <MotionBox
+                key="ticket"
+                w="full"
+                h="full"
+                ref={ticketRef}
+                style={{ transform: `rotate(${rotate.get()}deg)`, transformOrigin: '0 100%' }}
+                onPan={(e, info) => requestAnimationFrame(() => update(info.offset))}
+              >
+                <Stack shadow="xl" h="full" w="full" color="white" flex="0.3" p={7} justify="center" align="start" bg="linear-gradient( to top, purple, pink )">
+                  <Text color="cyan" fontSize="xl" fontWeight="semibold">
+                    {concert.artist}
                   </Text>
-                  <Text w="330px" fontSize="2xl" fontWeight="bold">
-                    {roomId}
+                  <Text lineHeight={10} fontSize="5xl" fontWeight="extrabold">
+                    {concert.title}
                   </Text>
-                </Box>
-                <Box className="barcode"></Box>
-              </Stack>
+                  <Text color="yellow" fontSize="2xl" fontWeight="extrabold">
+                    {startDate}
+                  </Text>
+                  <Box py={5}>
+                    <Text w="330px" color="cyan.300" fontSize="md">
+                      {roomId ? 'PRIVATE ROOM ID' : 'PUBLIC ROOM'}
+                    </Text>
+                    <Text w="330px" fontSize="2xl" fontWeight="bold">
+                      {roomId}
+                    </Text>
+                  </Box>
+                  <Box className="barcode" />
+                </Stack>
+              </MotionBox>
             </MotionBox>
-          </MotionBox>
-        )}
-      </AnimatePresence>
-
+          )}
+        </AnimatePresence>
+      </Box>
       <style>
         {`
         .word {
@@ -109,18 +112,6 @@ const TicketRightPart = () => {
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         }
-
-        .cardLeft {
-          border-right: .2em dashed #fff;
-          border-top-left-radius: 20px;
-          border-bottom-left-radius: 20px;
-        }
-
-        .cardRight {
-          border-left: .2em dashed #fff;
-          border-top-right-radius: 20px;
-          border-bottom-right-radius: 20px;
-        } 
 
         .barcode {
           height: 4em;
@@ -232,7 +223,7 @@ const TicketRightPart = () => {
         }
         `}
       </style>
-    </Box>
+    </>
   );
 };
 
