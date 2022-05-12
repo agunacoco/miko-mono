@@ -1,11 +1,5 @@
 import * as BABYLON from 'babylonjs';
 
-interface AvatarChangeInterface {
-  sender: string; // peerId
-  index: number; // avatar index
-  amount?: number;
-}
-
 declare type BodyParts = 'leftShoulder' | 'leftElbow' | 'leftWrist' | 'rightShoulder' | 'rightElbow' | 'rightWrist' | 'head';
 
 declare type AvatarBones = { [BoneBody in BodyParts]: BABYLON.TransformNode };
@@ -23,4 +17,4 @@ declare type Model = {
     light: number;
   };
 };
-export type { Model, BodyParts, AvatarBones, AvatarOriginalBones, AvatarChangeInterface };
+export type { Model, BodyParts, AvatarBones, AvatarOriginalBones };
