@@ -14,11 +14,11 @@ export default function SidebarWithHeader() {
       {/* @ts-ignore */}
       <AnimateSharedLayout>
         <AnimatePresence>
-          <Flex w="100vw" bg={useColorModeValue('gray.100', 'gray.900')}>
+          <Flex w="100vw">
             <SidebarContent onClose={() => onClose} />
-            <VStack flexGrow={1} maxH="100vh" overflowX="scroll">
+            <VStack flexGrow={1} maxH="100vh" overflowY="scroll" overflowX="scroll">
               <MobileNav onOpen={onOpen} />
-              <Box width="full" height="full">
+              <Box width="full" height="full" p={10}>
                 <Outlet />
               </Box>
             </VStack>

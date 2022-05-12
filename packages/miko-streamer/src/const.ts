@@ -13,7 +13,7 @@ export type WindowType = typeof Message | typeof Quiz | typeof Information | typ
 export const THUMBNAIL_INTERVAL_S = 60;
 
 //
-export const categoryArray = ['J-POP', 'K-POP', 'アニメ', 'ジャズ', 'バンド', 'バラード'];
+export const categoryArray = ['J-POP', 'K-POP', 'アニメ', 'ジャズ', 'バンド', 'バラード', '演劇', 'ロック'];
 export const chType = ['チャージ', 'チケット購入', 'SC送り', 'アイテム使用', 'グッズ購入', 'チケット販売', 'グッズ販売', 'SC受け', 'アイテム受け'];
 export const chChargeIdx = 0;
 export const chTicketBuyIdx = 1;

@@ -1,14 +1,17 @@
 import { Flex, FlexProps, Icon, Link } from '@chakra-ui/react';
 import { IconType } from '@react-icons/all-files/lib';
 import { ReactText } from 'react';
-import { Link as ReachLink } from 'react-router-dom';
+import { Link as ReachLink, useLocation } from 'react-router-dom';
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   url: string;
   children?: ReactText;
 }
+
 const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
+  const location = useLocation();
+
   return (
     <Link
       //   href="#"
@@ -30,10 +33,13 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
           bg: 'cyan.400',
           color: 'white',
         }}
+        color={location.pathname == url && 'cyan.500'}
         {...rest}
       >
         {icon && (
           <Icon
+            mr="4"
+            fontSize="16"
             _groupHover={{
               color: 'white',
             }}
