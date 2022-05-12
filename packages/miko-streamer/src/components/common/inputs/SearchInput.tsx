@@ -1,6 +1,7 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Input, InputRightElement } from '@chakra-ui/input';
+import { Input, InputLeftElement, InputRightElement } from '@chakra-ui/input';
 import { Button, InputGroup } from '@chakra-ui/react';
+import { FiSearch } from '@react-icons/all-files/fi/FiSearch';
 import { createSearchParams } from '@src/helper/createSearchParams';
 import React, { FC, useState } from 'react';
 
@@ -27,13 +28,16 @@ const SearchInput: FC<ISearchInput> = ({ setQuery }) => {
   };
 
   return (
-    <InputGroup>
+    <InputGroup w="96" alignSelf="end">
+      <InputLeftElement color="gray.500">
+        <FiSearch />
+      </InputLeftElement>
+      <Input value={value} onChange={handleChange} onKeyDown={handleEnter} placeholder="Search for articles..." />
       <InputRightElement pointerEvents="none" mr="4px">
-        <Button h="1.75rem" size="sm" onClick={handleUpdate}>
+        <Button size="sm" onClick={handleUpdate}>
           <SearchIcon color="gray.300" />
         </Button>
       </InputRightElement>
-      <Input value={value} onChange={handleChange} onKeyDown={handleEnter} placeholder="가게 검색" />
     </InputGroup>
   );
 };

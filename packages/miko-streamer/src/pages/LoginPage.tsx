@@ -33,7 +33,7 @@ const LoginPage: FC = () => {
       <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorStore('background')}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={8} px={2}>
           <Stack align={'center'}>
-            <Heading fontSize={'6xl'}>Miko</Heading>
+            <Heading fontSize={'6xl'}>Miko Streamer</Heading>
           </Stack>
           <Box rounded="lg" bg={useColorStore('surface')} boxShadow={'lg'} p={8}>
             <Stack spacing={4}>

@@ -12,9 +12,11 @@ const LoginUserInfo = () => {
 
   return (
     <HStack>
-      <Avatar size={'sm'} src={data.avatar} />
+      <Avatar size={'md'} src={data.avatar} />
       <VStack display="flex" alignItems="flex-start" spacing="1px" ml="2">
-        <Text fontSize="sm">{data.name}</Text>
+        <Text fontSize="md" fontWeight="550">
+          {data.name}
+        </Text>
         <Text fontSize="xs" color="gray.600">
           {data.email}
         </Text>

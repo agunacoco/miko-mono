@@ -1,4 +1,4 @@
-import { BoxProps, Flex, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { AiOutlineShopping } from '@react-icons/all-files/ai/AiOutlineShopping';
 import { FiCompass } from '@react-icons/all-files/fi/FiCompass';
 import { FiHome } from '@react-icons/all-files/fi/FiHome';
@@ -21,10 +21,10 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, url: '/my/' },
-  { name: '콘서트 생성', icon: FiTrendingUp, url: '/my/create' },
-  { name: '회원 정보 수정', icon: FiCompass, url: '/my/edit' },
-  { name: '콘서트 리스트', icon: FiStar, url: '/my/concerts' },
-  { name: 'Settings', icon: FiSettings, url: '/my/' },
+  { name: 'コンサート生成', icon: FiTrendingUp, url: '/my/create' },
+  { name: '会員情報の修正', icon: FiCompass, url: '/my/edit' },
+  { name: 'Concert List', icon: FiStar, url: '/my/concerts' },
+  { name: 'Settings', icon: FiSettings, url: '/my/setting' },
 ];
 
 const ConcertLinkItems: Array<LinkItemProps> = [
@@ -48,17 +48,19 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   }, [location.pathname, location]);
 
   return (
-    <Flex h="100vh" w="fit-content" marginInlineStart="0" pr="10px">
+    <Flex shadow="sm" h="100vh" w="fit-content" marginInlineStart="0" borderRight="1px" borderRightColor="gray.200">
       <VStack w="220px" m="0" bg={useColorModeValue('white', 'gray.900')} h="full" borderRightColor={useColorModeValue('gray.200', 'gray.700')}>
-        <Flex alignItems="center">
+        <Flex p={3} alignItems="center">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
             Logo
           </Text>
         </Flex>
         {LinkItems.map(link => (
-          <SidebarNavItem key={link.url} icon={link.icon} url={link.url}>
-            {link.name as string}
-          </SidebarNavItem>
+          <Box w="full" key={link.url}>
+            <SidebarNavItem icon={link.icon} url={link.url}>
+              {link.name as string}
+            </SidebarNavItem>
+          </Box>
         ))}
       </VStack>
       <VStack
