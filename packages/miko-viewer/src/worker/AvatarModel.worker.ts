@@ -93,7 +93,6 @@ addEventListener('message', async ({ data }) => {
 
       let count = 0;
       const firstRenderIntervalId = setInterval(() => {
-        console.log('aaaaaaaaa');
         if (count <= 20) {
           scene.render();
           count += 1;
@@ -105,7 +104,6 @@ addEventListener('message', async ({ data }) => {
       break;
     case 'motionChange':
       const { thisUserMotion } = data;
-      console.log(thisUserMotion);
       setBone({ bones, originalBones, scene, color: COLOR }, thisUserMotion.pose, thisUserMotion.face);
       scene.render();
       break;
