@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import React, { ReactElement } from 'react';
 import ChromeRecommend from '@src/components/common/ChromeRecommend';
 
-const DynamicEnterPage = dynamic(() => import('../../components/live/DynamicEnter'), {
+const DynamicEnterPage = dynamic(() => import('@src/components/live/enter/DynamicEnterPage'), {
   loading: () => <div> loading</div>,
   ssr: false,
   suspense: true,

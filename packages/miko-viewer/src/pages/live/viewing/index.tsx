@@ -1,4 +1,4 @@
-import { Center, Text } from '@chakra-ui/react';
+import { Center, Spinner, Text } from '@chakra-ui/react';
 import { Container } from '@src/components/Container';
 import { toastLog } from '@src/helper';
 import ViewingLayout from '@src/layout/ViewingLayout';
@@ -12,7 +12,7 @@ import { ReactElement, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const DynamicViewingPage = dynamic(() => import('@src/components/viewing/prepare/ViewingPrepareCSRPage'), {
-  loading: () => <div> loading</div>,
+  loading: () => <Spinner />,
   ssr: false,
   suspense: true,
 });
@@ -21,7 +21,7 @@ type Data = {};
 
 export const getServerSideProps: GetServerSideProps<Data> = async context => {
   const userTicketId = context.req.cookies.userTickId;
-  console.log(userTicketId);
+  // console.log(userTicketId);
   // const { data: data2 } = await axiosI.get('test');
   // console.log('laravel', data2);
 
