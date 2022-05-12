@@ -39,7 +39,10 @@ export const AvatarModel: FC<{
 
     const avatarSettingInterval = setInterval(() => {
       const newMotionData = roomMemberMotions[peerId];
-      if (newMotionData) worker?.postMessage({ type: 'motionChange', thisUserMotion: newMotionData });
+      if (newMotionData) {
+        roomMemberMotions[peerId] = undefined;
+        worker?.postMessage({ type: 'motionChange', thisUserMotion: newMotionData });
+      }
     }, 60);
 
     return () => {

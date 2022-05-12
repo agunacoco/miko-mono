@@ -77,18 +77,18 @@ const ViewingPrepareCSRPage = () => {
                   <Tag colorScheme={isReadyIvs ? 'green' : 'red'}>Script</Tag>
                   <Tag colorScheme={isMediapipeSetup ? 'green' : 'red'}>motion</Tag>
                 </HStack>
-                <HStack>
-                  <PrepareMediaStream setReady={setIsReadyStream} />
-                  <PrepareMediaPipeSetup setReady={setIsReadyMediapipeSetup} />
-                  <PrepareIVS setReady={setIsReadyIvs} />
-                  <PreparePeerConnectToServer setReady={setIsReadyPeer} isExitedRef={isExitedRef} />
-                  <PrepareSocketConnectToServer setReady={setIsReadySocket} />
-                </HStack>
               </Box>
             </VStack>
           </MotionBox>
         )}
       </AnimatePresence>
+      <>
+        <PrepareMediaStream setReady={setIsReadyStream} />
+        <PrepareMediaPipeSetup setReady={setIsReadyMediapipeSetup} />
+        <PrepareIVS setReady={setIsReadyIvs} />
+        <PreparePeerConnectToServer setReady={setIsReadyPeer} isExitedRef={isExitedRef} />
+        <PrepareSocketConnectToServer setReady={setIsReadySocket} />
+      </>
       <CleanUp isExitedRef={isExitedRef} />
     </>
   );
