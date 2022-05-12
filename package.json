@@ -2,16 +2,9 @@
   "name": "miko",
   "private": true,
   "scripts": {
-    "type-check": "tsc",
     "prepare": "husky install",
     "commit": "commit",
     "eslint": "eslint --quiet --fix packages/**/*  --ignore-path ./.gitignore"
-  },
-  "lint-staged": {
-    "packages/**/*.{js,jsx,ts,tsx}": [
-      "prettier  --loglevel warn --write",
-      "eslint  --cache --fix  --quiet --ignore-path ./.gitignore"
-    ]
   },
   "workspaces": [
     "packages/*"
