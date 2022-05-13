@@ -43,7 +43,6 @@ const MainRouter = () => {
               </Route>
             </Route>
             <Route path="concerts/:concertId/admin/:ticketId" element={<ConcertAdminPage />} />
-            {/* <Route path="concerts/:concertId" element={<ConcertAdminPage />} /> */}
           </Route>
           <Route path="*" element={<Page404 />} />
         </Route>

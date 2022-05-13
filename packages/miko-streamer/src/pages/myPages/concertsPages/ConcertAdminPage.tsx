@@ -86,10 +86,7 @@ const ConcertAdminPageNoData = () => {
         {/* @ts-ignore */}
         <SplitPane defaultSize="3%" split="vertical">
           <div className="full_wh" style={{ border: '2px', borderBlockColor: 'white' }}>
-            <SideBar></SideBar>
-            {/* <VStack width="full" height="full" bgColor="gray.100">
-            aaaaaaaaaafsdfdssdf
-          </VStack> */}
+            <SideBar />
           </div>
           {/* @ts-ignore */}
           <SplitPane defaultSize="80%" split="vertical">

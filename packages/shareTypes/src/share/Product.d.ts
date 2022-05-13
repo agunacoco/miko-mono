@@ -6,6 +6,7 @@ export interface Product extends CommonProps {
   name: string;
   detail?: string;
   image: string;
+  color?: string;
 }
 
 export type CreateProductData = Pick<Product, 'concertId' | 'price' | 'name' | 'detail' | 'image'>;
