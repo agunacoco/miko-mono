@@ -16,15 +16,21 @@ type ImportAvatarArgs = [
   BABYLON.Geometry[],
   BABYLON.Light[],
 ];
+let scene: BABYLON.Scene;
 
 const avatarSkin: ImportAvatarArgs[] = [];
 const avatarSkinOriginalBones: BABYLON.Quaternion[][] = [];
 const penlight: ImportAvatarArgs[] = [];
+const pointLight: BABYLON.PointLight[] = [];
 
-let scene: BABYLON.Scene;
-
-const COLOR = {
-  light: 0,
+const penMat: BABYLON.StandardMaterial[] = [];
+// penlight의 색상, rgbd는 16진법 2자릿수 d는 divide라는 뜻으로 d
+const lightColor = {
+  index: 0,
+  r: 255,
+  g: 255,
+  b: 255,
+  d: 255,
 };
 
 const AVATAR_PATH = `${NEXT_URL}/resources/babylonjs/models/`;
@@ -37,26 +43,67 @@ let currentAvatar = 0;
  * miku = leftShoulder 56 or 55, Elbow 53, Wrist 52
  *        rightShoulder 36 or 35, 33, 32
  *        head 14 or 15
- * zombie = leftShoulder 7 or 6, Elbow 5, Wrist 4
+ * magician = leftShoulder 7 or 6, Elbow 5, Wrist 4
  *          rightShoulder 11 or 10, 9, 8
  *          head 2
+ * tanjiro === magician // true
  */
 const currentBones: AvatarBones = {} as AvatarBones;
 const currentOriginalBones: AvatarOriginalBones = {} as AvatarOriginalBones;
 
 let avatarStart: boolean = false;
 
-const createLights = (functionBones: BABYLON.TransformNode[], index: number, r: number, g: number, b: number, d: number, functionScene: BABYLON.Scene) => {
+const createLights = (functionBones: BABYLON.TransformNode[], index: number, r: number, g: number, b: number, d: number, functionScene: BABYLON.Scene, direction: number) => {
   const bone = functionBones[index]; // 15
-
-  const light = new BABYLON.PointLight(`${index}_point_light`, new BABYLON.Vector3(0, 0, 0.5), functionScene);
+  const { x, y, z } = bone.absolutePosition;
+  const light = new BABYLON.PointLight(`${index}_point_light`, new BABYLON.Vector3(x + 0.65 * direction, y, z + 0.5), functionScene); // x를 0.몇씩 좌우로 이동해야 할 듯
+  // const light = new BABYLON.PointLight(`${index}_point_light`, bone.absolutePosition, functionScene); // x를 0.몇씩 좌우로 이동해야 할 듯
   light.parent = bone;
   light.intensity = 0.3;
   light.range = 5;
-  light.shadowMinZ = 0.2;
-  light.shadowMaxZ = 5;
+  // light.shadowMinZ = 0.2;
+  // light.shadowMaxZ = 5;
   light.diffuse = new BABYLON.Color3(r / d, g / d, b / d);
   light.specular = new BABYLON.Color3(r / d, g / d, b / d);
+  pointLight.push(light);
+};
+// ['57, 197, 187', '255, 204, 17', '255, 238, 17', '255, 187, 204', '221, 68, 68', '51, 102, 204'];
+
+const changeLights = (index: number) => {
+  switch (index) {
+    case 0:
+      lightColor.r = 57;
+      lightColor.g = 197;
+      lightColor.b = 187;
+      break;
+    case 1:
+      lightColor.r = 255;
+      lightColor.g = 204;
+      lightColor.b = 17;
+      break;
+    case 2:
+      lightColor.r = 255;
+      lightColor.g = 238;
+      lightColor.b = 17;
+      break;
+    case 3:
+      lightColor.r = 255;
+      lightColor.g = 187;
+      lightColor.b = 204;
+      break;
+    case 4:
+      lightColor.r = 221;
+      lightColor.g = 68;
+      lightColor.b = 68;
+      break;
+    case 5:
+      lightColor.r = 51;
+      lightColor.g = 102;
+      lightColor.b = 204;
+      break;
+    default:
+      break;
+  }
 };
 
 const getJointNumber = (index: number): { [key in string]: number } => {
@@ -78,7 +125,7 @@ const getJointNumber = (index: number): { [key in string]: number } => {
       rw = 32;
       h = 14;
       break;
-    case 2: // 좀비
+    case 2: // magician
       ls = 6;
       le = 5;
       lw = 4;
@@ -149,9 +196,19 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
   console.log('load', index);
   if (index >= AVATAR_FILE_NAME.length) {
     console.log('setting', index);
+    createLights(penlight[0][4], 2, lightColor.r, lightColor.g, lightColor.b, lightColor.d, functionScene, 1);
+    createLights(penlight[1][4], 2, lightColor.r, lightColor.g, lightColor.b, lightColor.d, functionScene, -1);
+    // 27, 30 라이트, 26, 29 손잡이
+    functionScene.render();
+    const [mat] = penMat;
+    // eslint-disable-next-line
+    functionScene.meshes[27].material = mat; // eslint-disable-line
+    functionScene.meshes[25].material = mat; // eslint-disable-line
+    functionScene.meshes[30].material = mat; // eslint-disable-line
+    functionScene.meshes[28].material = mat; // eslint-disable-line
+    functionScene.render();
+
     avatarResetPosition(currentAvatar);
-    createLights(penlight[0][4], 2, 255, 255, 255, 255, functionScene);
-    createLights(penlight[1][4], 2, 255, 255, 255, 255, functionScene);
     functionScene.render();
     avatarStart = true;
     return;
@@ -161,8 +218,13 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
     if (index < AVATAR_FILE_NAME.length - 2) {
       args[4][rs].rotate(new BABYLON.Vector3(0, 0, 1), (Math.PI * 7) / 36, 2);
       args[4][ls].rotate(new BABYLON.Vector3(0, 0, 1), -(Math.PI * 7) / 36, 2);
+      if (index > 1) {
+        args[4][rs].rotate(new BABYLON.Vector3(0, 0, 1), (Math.PI * 7) / 36, 2);
+        args[4][ls].rotate(new BABYLON.Vector3(0, 0, 1), -(Math.PI * 7) / 36, 2);
+      }
       avatarSkin.push(args);
       avatarSkinOriginalBones.push([]);
+      // eslint-disable-next-line
       for (let i = 0; i < args[4].length; i++) {
         const copyBone = args[4][i].rotationQuaternion?.clone();
         if (copyBone) avatarSkinOriginalBones[index].push(copyBone);
@@ -170,9 +232,15 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
       args[0][0].setAbsolutePosition(new BABYLON.Vector3(100, 0, 0));
     } else {
       // -2 왼손, -1 오른손
-      args[4][0].translate(new BABYLON.Vector3(0, 0, 1), 2);
-      args[4][0].rotate(new BABYLON.Vector3(1, 0, 0), Math.PI / 2);
       penlight.push(args);
+      const mat = new BABYLON.StandardMaterial(`${index}_hand_light`, functionScene);
+      mat.emissiveColor = new BABYLON.Color3(lightColor.r / lightColor.d, lightColor.g / lightColor.d, lightColor.b / lightColor.d);
+      penMat.push(mat);
+      // eslint-disable-next-line
+      // args[0][0].material = mat;
+      // console.log(functionScene.meshes);
+      // args[4][0].translate(new BABYLON.Vector3(0, 0, 1), 2);
+      // args[4][0].rotate(new BABYLON.Vector3(1, 0, 0), Math.PI / 2);
     }
 
     addMesh(functionScene, index + 1);
@@ -183,9 +251,11 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
 const onSceneReady = async (resultScene: BABYLON.Scene) => {
   if (BABYLON && BABYLON.SceneLoader) {
     const camera = new BABYLON.ArcRotateCamera('camera', Math.PI / 2, Math.PI / 2.5, 10, new BABYLON.Vector3(0, 0, 0), resultScene);
-
+    camera.minZ = 0;
+    // camera.setTarget(new BABYLON.Vector3(0, 0, 0));
+    // camera.setPosition(new BABYLON.Vector3(0, 4, 6));
     camera.setTarget(new BABYLON.Vector3(0, 2.5, 0));
-    camera.setPosition(new BABYLON.Vector3(0, 1.8, 4.7));
+    camera.setPosition(new BABYLON.Vector3(0, 1.8, 6));
 
     // 카메라 컨트롤러, 모델뜨는 canvas 드래그로 조절 가능
     // camera.attachControl(true);
@@ -201,6 +271,8 @@ const onSceneReady = async (resultScene: BABYLON.Scene) => {
   }
 };
 
+// eslint-disable-next-line no-restricted-globals
+addEventListener('error', e => console.log('avatar model에서 에러났습니다 확인 부탁드립니다, 이건 워커 안에서 작동하는 코드입니다', e));
 // eslint-disable-next-line no-restricted-globals
 addEventListener('message', async ({ data }) => {
   switch (data.type) {
@@ -232,7 +304,7 @@ addEventListener('message', async ({ data }) => {
     case 'motionChange':
       const { thisUserMotion } = data;
       if (!avatarStart) break;
-      setBone({ bones: currentBones, originalBones: currentOriginalBones, scene, color: COLOR }, thisUserMotion.pose, thisUserMotion.face);
+      setBone({ bones: currentBones, originalBones: currentOriginalBones, scene }, thisUserMotion.pose, thisUserMotion.face);
       scene.render();
       break;
     // 현재 안먹힘 babylon이랑 blender랑 다른 부분을 찾아야 함...
@@ -252,15 +324,22 @@ addEventListener('message', async ({ data }) => {
     //   avatarSkin[2][0][1].material = mat;
     //   break;
     case 'lightColorChange':
+      const { lightType } = data;
+      let lightIndex = lightType;
+      if (typeof lightType === 'string') lightIndex = parseInt(lightType, 10);
+      if (lightIndex < 0 || lightIndex > 5 || lightIndex === lightColor.index) break;
+      lightColor.index = lightIndex;
+      // pointLight 시발... 6개 있음
+      changeLights(lightIndex);
       break;
     case 'avatarChange':
       console.log('아바타 바꾸러 들어옴');
       const { avatarType } = data;
-      let index = avatarType;
-      if (typeof avatarType === 'string') index = parseInt(avatarType, 10);
-      if (index < 0 || index > AVATAR_FILE_NAME.length - 2 || index === currentAvatar) return;
+      let avatarIndex = avatarType;
+      if (typeof avatarType === 'string') avatarIndex = parseInt(avatarType, 10);
+      if (avatarIndex < 0 || avatarIndex > AVATAR_FILE_NAME.length - 2 || avatarIndex === currentAvatar) break;
 
-      avatarResetPosition(index);
+      avatarResetPosition(avatarIndex);
 
       break;
     default:

@@ -19,8 +19,5 @@ declare type Model = {
   bones: AvatarBones;
   originalBones: AvatarOriginalBones;
   scene: BABYLON.Scene;
-  color: {
-    light: number;
-  };
 };
 export type { Model, BodyParts, AvatarBones, AvatarOriginalBones, AvatarChangeInterface };

@@ -7,6 +7,7 @@ const boneReset = (bones: AvatarBones, originalBones: AvatarOriginalBones) => {
   // eslint-disable-next-line
   for (const keyString in bones) {
     const key = keyString as BodyParts;
+    // eslint-disable-next-line
     if (bones[key] && originalBones[key]) bones[key].rotationQuaternion = originalBones[key].clone();
   }
 };
