@@ -22,7 +22,7 @@ const FileInputBtn = () => {
   };
 
   return (
-    <Box position="absolute" right="0px" top="0px">
+    <Box>
       <Button onClick={handleClick} size="sm" colorScheme="blackAlpha" opacity="0.8">
         背景画像
       </Button>
