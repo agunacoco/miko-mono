@@ -2,7 +2,17 @@ import { showChatToRoom, toastLog, updateUserScore } from '@src/helper';
 import { setMotionToAvatar } from '@src/helper/dynamic/setMotionToAvatar';
 import { useBeforeunload } from '@src/hooks';
 import { useMyPeer, useSocket } from '@src/hooks/dynamicHooks';
-import { curUserTicketState, enterRoomIdAsyncState, latestScoreState, myStreamState, mySyncDataConnectionState, peerDataListState, PickUserData } from '@src/state/recoil';
+import {
+  currentAvatarState,
+  currentPenlightState,
+  curUserTicketState,
+  enterRoomIdAsyncState,
+  latestScoreState,
+  myStreamState,
+  mySyncDataConnectionState,
+  peerDataListState,
+  PickUserData,
+} from '@src/state/recoil';
 import { useUser } from '@src/state/swr';
 import { DataConnectionEvent } from '@src/types/dto/DataConnectionEventType';
 import produce from 'immer';
@@ -35,6 +45,8 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
 
   const setLatestScoreState = useSetRecoilState(latestScoreState);
   const setPeerDataList = useSetRecoilState(peerDataListState);
+  const setCurrentAvatar = useSetRecoilState(currentAvatarState);
+  const setPenlightAvatar = useSetRecoilState(currentPenlightState);
 
   const router = useRouter();
 
@@ -114,6 +126,20 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
             break;
           case 'scoreUpdate':
             updateUserScore(id, event.data);
+            break;
+          case 'avatarChange':
+            setCurrentAvatar(
+              produce(draft => {
+                draft[event.data.sender] = event.data.index;
+              }),
+            );
+            break;
+          case 'penlightChange':
+            setPenlightAvatar(
+              produce(draft => {
+                draft[event.data.sender] = event.data.color; // color === number, index
+              }),
+            );
             break;
           default:
             break;

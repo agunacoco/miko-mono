@@ -1,6 +1,12 @@
 import { Center, Image } from '@chakra-ui/react';
 import { MotionBox } from '@src/components/common/motion/MotionChakra';
 import { Variants } from 'framer-motion';
+import { sendToAllPeers } from '@src/helper';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { peerDataListState, currentPenlightState } from '@src/state/recoil';
+import { useUser } from '@src/state/swr';
+import { AVATAR_PENLIGHT_COLOR_THEME } from '@src/const';
+import produce from 'immer';
 
 const BoxSize = 50;
 
@@ -33,13 +39,23 @@ const iconMotion: Variants = {
   },
 };
 
-const colors = ['#39c5bb', '#ffcc11', '#ffee11', '#ffbbcc', '#dd4444', '#3366cc'];
-
 const ChangePenColor = () => {
+  const peers = useRecoilValue(peerDataListState);
+  const setPenlightAvatar = useSetRecoilState(currentPenlightState);
+  const { data: user } = useUser();
+  const colorChangeHandler = (idx: number) => {
+    console.log('penlight 바꾸긴 함');
+    setPenlightAvatar(
+      produce(draft => {
+        draft[user.uuid] = idx;
+      }),
+    );
+    sendToAllPeers(peers, { type: 'penlightChange', data: { sender: user.uuid, color: idx } });
+  };
   return (
     <MotionBox bottom="20vh" left="1" display="flex" zIndex="2" justifyContent="center" alignItems="center" whileHover="hover" animate="hidden" position="absolute">
-      {colors.map((child, idx) => (
-        <MotionBox key={child} variants={circleMotion} custom={[idx, colors.length]} position="absolute">
+      {AVATAR_PENLIGHT_COLOR_THEME.map((child, idx) => (
+        <MotionBox onClick={() => colorChangeHandler(idx)} key={child} variants={circleMotion} custom={[idx, AVATAR_PENLIGHT_COLOR_THEME.length]} position="absolute">
           <MotionBox variants={iconMotion} borderRadius="full" backgroundColor={child} _hover={{ borderColor: 'white', border: '2px', scale: 1.5 }}></MotionBox>
         </MotionBox>
       ))}

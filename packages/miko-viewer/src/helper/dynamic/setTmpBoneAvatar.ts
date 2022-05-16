@@ -1,5 +1,5 @@
 import { FaceDirection } from '@src/types/avatar/FaceDirectionType';
-import { AvatarBones, AvatarOriginalBones, BodyParts, Model } from '@src/types/avatar/ModelType';
+import { AvatarBones, AvatarOriginalBones, BodyParts, Model } from '@src/types/avatar/TmpModelType';
 import * as BABYLON from 'babylonjs';
 import * as Kalidokit from 'kalidokit';
 
@@ -7,7 +7,6 @@ const boneReset = (bones: AvatarBones, originalBones: AvatarOriginalBones) => {
   // eslint-disable-next-line
   for (const keyString in bones) {
     const key = keyString as BodyParts;
-    // eslint-disable-next-line
     if (bones[key] && originalBones[key]) bones[key].rotationQuaternion = originalBones[key].clone();
   }
 };
