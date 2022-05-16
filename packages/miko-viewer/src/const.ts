@@ -22,7 +22,8 @@ export const doneItem: DoneItem[] = [
   { name: 'キラキラ', price: 4000, id: 5 },
 ];
 
-export const AVATAR_THEME_NAME = ['ミク', 'キラリ', 'タンジロ', 'サトル', 'AGU'];
+export const AVATAR_THEME_NAME = ['デフォルト', 'ミク', 'マジシャン', 'タンジロ'];
+export const AVATAR_PENLIGHT_COLOR_THEME = ['#39c5bb', '#ffcc11', '#ffee11', '#ffbbcc', '#dd4444', '#3366cc'];
 
 export const chType = ['チャージ', 'チケット購入', 'SC送り', 'アイテム使用', 'グッズ購入', 'チケット販売', 'グッズ販売', 'SC受け', 'アイテム受け'];
 export const chChargeIdx = 0;

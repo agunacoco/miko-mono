@@ -1,7 +1,6 @@
 import { DoneInterface } from '@miko/share-types';
 import { ChatMotionInterface } from '../avatar/ChatMotionType';
-import { AvatarChangeInterface } from '../avatar/ModelType';
-import { DoneInterface } from '../share/DoneTypes';
+import { AvatarChangeInterface, PenlightChangeInterface } from '../avatar/ModelType';
 import { ChatMessageInterface } from './ChatMessageType';
 
 interface ChatEvent {
@@ -29,7 +28,12 @@ interface AvatarChangeEvent {
   data: AvatarChangeInterface;
 }
 
-export type DataConnectionEvent = ChatEvent | MotionEvent | UpdateScoreEvent | DoneEvent | AvatarChangeEvent;
+interface PenlightChangeEvent {
+  type: 'penlightChange';
+  data: PenlightChangeInterface;
+}
+
+export type DataConnectionEvent = ChatEvent | MotionEvent | UpdateScoreEvent | DoneEvent | AvatarChangeEvent | PenlightChangeEvent;
 
 interface SyncChatEvent {
   type: 'chat';

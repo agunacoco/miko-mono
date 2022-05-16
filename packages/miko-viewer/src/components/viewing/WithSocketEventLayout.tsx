@@ -2,15 +2,24 @@ import { showChatToRoom, toastLog, updateUserScore } from '@src/helper';
 import { setMotionToAvatar } from '@src/helper/dynamic/setMotionToAvatar';
 import { useBeforeunload } from '@src/hooks';
 import { useMyPeer, useSocket } from '@src/hooks/dynamicHooks';
-import { currentAvatarState } from '@src/state/recoil';
-import { curUserTicketState, enterRoomIdAsyncState, latestScoreState, myStreamState, mySyncDataConnectionState, peerDataListState, PickUserData } from '@src/state/recoil';
+import {
+  currentAvatarState,
+  currentPenlightState,
+  curUserTicketState,
+  enterRoomIdAsyncState,
+  latestScoreState,
+  myStreamState,
+  mySyncDataConnectionState,
+  peerDataListState,
+  PickUserData,
+} from '@src/state/recoil';
 import { useUser } from '@src/state/swr';
 import { DataConnectionEvent } from '@src/types/dto/DataConnectionEventType';
 import produce from 'immer';
 import { useRouter } from 'next/router';
 import { DataConnection, MediaConnection } from 'peerjs';
-import { FC, ReactElement, useCallback, useEffect, useRef } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { FC, ReactElement, useCallback, useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PeerDataInterface } from '../../types/local';
 
 type PeerFatalErrorType = 'browser-incompatible' | 'invalid-id' | 'invalid-key' | 'ssl-unavailable' | 'server-error' | 'socket-error' | 'socket-closed';
@@ -37,6 +46,7 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
   const setLatestScoreState = useSetRecoilState(latestScoreState);
   const setPeerDataList = useSetRecoilState(peerDataListState);
   const setCurrentAvatar = useSetRecoilState(currentAvatarState);
+  const setPenlightAvatar = useSetRecoilState(currentPenlightState);
 
   const router = useRouter();
 
@@ -118,12 +128,16 @@ const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => 
             updateUserScore(id, event.data);
             break;
           case 'avatarChange':
-            // updateUserScore(id, event.data);
-            console.log('여기는 아바타 바꾸는 곳');
             setCurrentAvatar(
               produce(draft => {
-                /* eslint-disable */
                 draft[event.data.sender] = event.data.index;
+              }),
+            );
+            break;
+          case 'penlightChange':
+            setPenlightAvatar(
+              produce(draft => {
+                draft[event.data.sender] = event.data.color; // color === number, index
               }),
             );
             break;

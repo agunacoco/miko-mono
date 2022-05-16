@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { NEXT_URL } from '@src/const';
+import { NEXT_URL, AVATAR_PENLIGHT_COLOR_THEME } from '@src/const';
 import { setBone } from '@src/helper/dynamic/setBoneAvatar';
 import { AvatarBones, AvatarOriginalBones } from '@src/types/avatar/ModelType';
 import * as BABYLON from 'babylonjs';
@@ -25,16 +25,17 @@ const pointLight: BABYLON.PointLight[] = [];
 
 const penMat: BABYLON.StandardMaterial[] = [];
 // penlight의 색상, rgbd는 16진법 2자릿수 d는 divide라는 뜻으로 d
-const lightColor = {
-  index: 0,
-  r: 255,
-  g: 255,
-  b: 255,
-  d: 255,
-};
+let lightColor: number = 0;
 
 const AVATAR_PATH = `${NEXT_URL}/resources/babylonjs/models/`;
-const AVATAR_FILE_NAME = ['proseka/proseka_tmp.glb', 'miku/MineCraftMiku2.8.glb', 'steve/user2.8.glb', 'steve/tanjiro2.8.glb', 'light/penlight.glb', 'light/penlight.glb'];
+const AVATAR_FILE_NAME = [
+  'proseka/proseka_tmp.glb',
+  'miku/MineCraftMiku2.8.glb',
+  'steve/user2.8.glb',
+  'steve/tanjiro2.8.glb',
+  'light/penlight_glory.glb',
+  'light/penlight_glory.glb',
+];
 let currentAvatar = 0;
 /**
  * proseka = leftShoulder 22, Elbow 21, Wrist 20
@@ -69,41 +70,26 @@ const createLights = (functionBones: BABYLON.TransformNode[], index: number, r: 
 };
 // ['57, 197, 187', '255, 204, 17', '255, 238, 17', '255, 187, 204', '221, 68, 68', '51, 102, 204'];
 
+const hexToRgb = (hex: string): number[] => {
+  return hex
+    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    .substring(1)
+    .match(/.{2}/g)
+    .map(x => parseInt(x, 16));
+};
+
+const changePointLight = (index: number, r: number, g: number, b: number, d: number) => {
+  pointLight[index].diffuse = new BABYLON.Color3(r / d, g / d, b / d);
+  pointLight[index].specular = new BABYLON.Color3(r / d, g / d, b / d);
+};
+
 const changeLights = (index: number) => {
-  switch (index) {
-    case 0:
-      lightColor.r = 57;
-      lightColor.g = 197;
-      lightColor.b = 187;
-      break;
-    case 1:
-      lightColor.r = 255;
-      lightColor.g = 204;
-      lightColor.b = 17;
-      break;
-    case 2:
-      lightColor.r = 255;
-      lightColor.g = 238;
-      lightColor.b = 17;
-      break;
-    case 3:
-      lightColor.r = 255;
-      lightColor.g = 187;
-      lightColor.b = 204;
-      break;
-    case 4:
-      lightColor.r = 221;
-      lightColor.g = 68;
-      lightColor.b = 68;
-      break;
-    case 5:
-      lightColor.r = 51;
-      lightColor.g = 102;
-      lightColor.b = 204;
-      break;
-    default:
-      break;
-  }
+  const [r, g, b] = hexToRgb(AVATAR_PENLIGHT_COLOR_THEME[index]);
+  const d = 255;
+  const [mat] = penMat;
+  mat.emissiveColor = new BABYLON.Color3(r / d, g / d, b / d);
+  changePointLight(0, r, g, b, d);
+  changePointLight(1, r, g, b, d);
 };
 
 const getJointNumber = (index: number): { [key in string]: number } => {
@@ -196,8 +182,8 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
   console.log('load', index);
   if (index >= AVATAR_FILE_NAME.length) {
     console.log('setting', index);
-    createLights(penlight[0][4], 2, lightColor.r, lightColor.g, lightColor.b, lightColor.d, functionScene, 1);
-    createLights(penlight[1][4], 2, lightColor.r, lightColor.g, lightColor.b, lightColor.d, functionScene, -1);
+    createLights(penlight[0][4], 2, 1, 1, 1, 1, functionScene, 1);
+    createLights(penlight[1][4], 2, 1, 1, 1, 1, functionScene, -1);
     // 27, 30 라이트, 26, 29 손잡이
     functionScene.render();
     const [mat] = penMat;
@@ -234,7 +220,7 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
       // -2 왼손, -1 오른손
       penlight.push(args);
       const mat = new BABYLON.StandardMaterial(`${index}_hand_light`, functionScene);
-      mat.emissiveColor = new BABYLON.Color3(lightColor.r / lightColor.d, lightColor.g / lightColor.d, lightColor.b / lightColor.d);
+      mat.emissiveColor = new BABYLON.Color3(1, 1, 1);
       penMat.push(mat);
       // eslint-disable-next-line
       // args[0][0].material = mat;
@@ -255,7 +241,7 @@ const onSceneReady = async (resultScene: BABYLON.Scene) => {
     // camera.setTarget(new BABYLON.Vector3(0, 0, 0));
     // camera.setPosition(new BABYLON.Vector3(0, 4, 6));
     camera.setTarget(new BABYLON.Vector3(0, 2.5, 0));
-    camera.setPosition(new BABYLON.Vector3(0, 1.8, 6));
+    camera.setPosition(new BABYLON.Vector3(0, 1.8, 5));
 
     // 카메라 컨트롤러, 모델뜨는 canvas 드래그로 조절 가능
     // camera.attachControl(true);
@@ -323,24 +309,21 @@ addEventListener('message', async ({ data }) => {
     //   myDynamicTexture.update();
     //   avatarSkin[2][0][1].material = mat;
     //   break;
-    case 'lightColorChange':
-      const { lightType } = data;
-      let lightIndex = lightType;
-      if (typeof lightType === 'string') lightIndex = parseInt(lightType, 10);
-      if (lightIndex < 0 || lightIndex > 5 || lightIndex === lightColor.index) break;
-      lightColor.index = lightIndex;
-      // pointLight 시발... 6개 있음
-      changeLights(lightIndex);
-      break;
     case 'avatarChange':
       console.log('아바타 바꾸러 들어옴');
       const { avatarType } = data;
       let avatarIndex = avatarType;
       if (typeof avatarType === 'string') avatarIndex = parseInt(avatarType, 10);
       if (avatarIndex < 0 || avatarIndex > AVATAR_FILE_NAME.length - 2 || avatarIndex === currentAvatar) break;
-
       avatarResetPosition(avatarIndex);
-
+      break;
+    case 'penlightChange':
+      const { colorType } = data;
+      let lightIndex = colorType;
+      if (typeof colorType === 'string') lightIndex = parseInt(colorType, 10);
+      if (lightIndex < 0 || lightIndex > 5 || lightIndex === lightColor) break;
+      lightColor = lightIndex;
+      changeLights(lightIndex);
       break;
     default:
       break;

@@ -6,6 +6,11 @@ interface AvatarChangeInterface {
   amount?: number;
 }
 
+interface PenlightChangeInterface {
+  sender: string;
+  color: number;
+}
+
 declare type BodyParts = 'leftShoulder' | 'leftElbow' | 'leftWrist' | 'rightShoulder' | 'rightElbow' | 'rightWrist' | 'head';
 
 declare type AvatarBones = { [BoneBody in BodyParts]: BABYLON.TransformNode };
@@ -20,4 +25,4 @@ declare type Model = {
   originalBones: AvatarOriginalBones;
   scene: BABYLON.Scene;
 };
-export type { Model, BodyParts, AvatarBones, AvatarOriginalBones, AvatarChangeInterface };
+export type { Model, BodyParts, AvatarBones, AvatarOriginalBones, AvatarChangeInterface, PenlightChangeInterface };

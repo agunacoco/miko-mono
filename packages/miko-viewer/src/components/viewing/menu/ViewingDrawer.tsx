@@ -22,8 +22,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useUser } from '@src/state/swr';
 import { sendToAllPeers } from '@src/helper';
 import produce from 'immer';
-
-const avatarTheme = ['Default', 'Miku', 'Magician', 'tanjiro'];
+import { AVATAR_THEME_NAME } from '@src/const';
 
 const ViewingSettingDrawer = forwardRef((_, ref) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -91,7 +90,7 @@ const ViewingSettingDrawer = forwardRef((_, ref) => {
               <Flex justifyContent="space-between" direction="column">
                 <FormLabel htmlFor="avatar-color">Change Avatar</FormLabel>
                 <Select id="avatar-color" ref={avatarRef} defaultValue={0}>
-                  {avatarTheme.map((charName, i) => (
+                  {AVATAR_THEME_NAME.map((charName, i) => (
                     <option value={i} key={i}>
                       {charName}
                     </option>

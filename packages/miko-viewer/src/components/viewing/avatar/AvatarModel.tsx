@@ -1,7 +1,7 @@
 // import { model } from '@src/state/recoil';
 import { toastLog } from '@src/helper';
 import { roomMemberMotions } from '@src/state/shareObject';
-import { currentAvatarState } from '@src/state/recoil';
+import { currentAvatarState, currentPenlightState } from '@src/state/recoil';
 import 'babylonjs-loaders';
 import { FC, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
@@ -14,10 +14,12 @@ export const AvatarModel: FC<{
   peerId: string;
   onAntialias?: boolean | undefined;
   isMyAvatar?: boolean | undefined;
+  // eslint-disable-next-line
 }> = ({ height, path, peerId, width, onAntialias, isMyAvatar }) => {
   const tagId = 'avatar' + peerId;
   const workerRef = useRef<Worker>();
   const [currentAvatar, setCurrentAvatar] = useRecoilState(currentAvatarState);
+  const [penlightAvatar, setPenlightAvatar] = useRecoilState(currentPenlightState);
 
   useEffect(() => {
     const worker = new Worker(new URL('@src/worker/AvatarModel.worker.ts', import.meta.url), { type: 'module' });
@@ -59,7 +61,6 @@ export const AvatarModel: FC<{
   useEffect(() => {
     setCurrentAvatar(
       produce(draft => {
-        /* eslint-disable */
         if (!workerRef.current) return;
         const value = draft[peerId];
         if (typeof value !== 'number') return;
@@ -68,6 +69,18 @@ export const AvatarModel: FC<{
       }),
     );
   }, [currentAvatar]);
+
+  useEffect(() => {
+    setPenlightAvatar(
+      produce(draft => {
+        if (!workerRef.current) return;
+        const value = draft[peerId];
+        if (typeof value !== 'number') return;
+        delete draft[peerId];
+        workerRef.current.postMessage({ type: 'penlightChange', colorType: value });
+      }),
+    );
+  }, [penlightAvatar]);
 
   return <canvas id={tagId} />;
 };
