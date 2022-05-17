@@ -76,7 +76,19 @@ const TicketRightPart = () => {
                 style={{ transform: `rotate(${rotate.get()}deg)`, transformOrigin: '0 100%' }}
                 onPan={(e, info) => requestAnimationFrame(() => update(info.offset))}
               >
-                <Stack shadow="xl" h="full" w="full" color="white" flex="0.3" p={7} justify="center" align="start" bg="linear-gradient( to top, purple, pink )">
+                <Stack
+                  borderRightRadius="2xl"
+                  borderLeft="dashed"
+                  shadow="xl"
+                  h="full"
+                  w="full"
+                  color="white"
+                  flex="0.3"
+                  p={7}
+                  justify="center"
+                  align="start"
+                  bg="linear-gradient( to top, purple, pink )"
+                >
                   <Text color="cyan" fontSize="xl" fontWeight="semibold">
                     {concert.artist}
                   </Text>
@@ -209,17 +221,7 @@ const TicketRightPart = () => {
           310px 0 0 1px #343434,
           311px 0 0 1px #343434,
           315px 0 0 1px #343434,
-          318px 0 0 1px #343434,
-          322px 0 0 1px #343434,
-          323px 0 0 1px #343434,
-          326px 0 0 1px #343434,
-          330px 0 0 1px #343434,
-          335px 0 0 1px #343434,
-          337px 0 0 1px #343434,
-          341px 0 0 1px #343434,
-          344px 0 0 1px #343434,
-          347px 0 0 1px #343434,
-          351px 0 0 1px #343434;
+          318px 0 0 1px #343434;
         }
         `}
       </style>
