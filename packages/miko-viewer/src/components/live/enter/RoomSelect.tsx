@@ -19,7 +19,7 @@ export const RoomSelect = () => {
   };
 
   return (
-    <Box>
+    <Box pt={3}>
       <RadioGroup value={radioValue} onChange={radioChangeHandler}>
         <Stack spacing={5} direction="row">
           <Radio colorScheme="orange" value="private">
