@@ -160,7 +160,7 @@ const registerPushNotification = (userTicket: UserTicket) => {
         alert('Notification 거부됨');
       } else if (navigator.serviceWorker) {
         navigator.serviceWorker
-          .register('/sw.js') // serviceworker 등록
+          .register('/sw/notification.worker.js') // serviceworker 등록
           .then(async function (registration) {
             const subscribeOptions = {
               userVisibleOnly: true,
@@ -180,7 +180,7 @@ const registerPushNotification = (userTicket: UserTicket) => {
 
 const ConcertTicket: FC<{ userTicket: UserTicket }> = ({ userTicket }) => {
   useEffect(() => {
-    // registerPushNotification(userTicket);
+    registerPushNotification(userTicket);
   }, []);
 
   return <TicketInfo userTicket={userTicket} />;
