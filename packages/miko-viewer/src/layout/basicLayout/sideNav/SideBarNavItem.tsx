@@ -23,13 +23,14 @@ export const SideBarNavItem = ({ link, ...rest }: NavItemProps) => {
     <Flex
       align="center"
       p="4"
-      mx="4"
-      borderRadius="lg"
+      borderRadius="base"
       role="group"
       cursor="pointer"
       _hover={{
         color: '#39c5bb',
       }}
+      bg={nowPath == url && 'cyan.50'}
+      color={nowPath == url && '#39c5bb'}
       userSelect="none"
       position="relative"
       onHover
@@ -47,7 +48,7 @@ export const SideBarNavItem = ({ link, ...rest }: NavItemProps) => {
         />
       )}
       {link.name}
-      {nowPath === url && <Box position="absolute" w="2" h="10" backgroundColor="#39c5bb" borderRadius="full" left="-18px" />}
+      {nowPath === url && <Box position="absolute" w="2" h="14" borderLeftRadius="base" backgroundColor="#39c5bb" left="0" />}
     </Flex>
   );
 

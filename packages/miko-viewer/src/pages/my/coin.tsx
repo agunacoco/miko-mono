@@ -36,7 +36,7 @@ const CoinHistoryListView = () => {
       </Box>
       {coinData.data.length === 0 && (
         <Center minH={'20vh'}>
-          <Text>チケットがありません。</Text>
+          <Text>コイン履歴がありません。</Text>
         </Center>
       )}
       <PaginationBtn data={coinData.meta} options={{ shallow: true }} />

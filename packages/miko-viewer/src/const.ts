@@ -12,7 +12,7 @@ export const MAX_MSGS = 500;
 export const LOGIN_COOKIE = 'isLogin';
 export const LARAVEL_SESSION = process.env.NEXT_PUBLIC_SESSION_KEY ?? 'mikolaravel_session';
 export const USER_TICKET_COOKIE = 'userTicket';
-export const categoryArray = ['J-POP', 'K-POP', '애니메이션', '재즈/소울', '밴드', '발라드'];
+export const categoryArray = ['J-POP', 'K-POP', 'アニメ', 'ジャズ', 'バンド', 'バラード', '演劇'];
 export const doneItem: DoneItem[] = [
   { name: 'ハート', price: 5000, id: 0 },
   { name: 'コンペート', price: 6000, id: 1 },

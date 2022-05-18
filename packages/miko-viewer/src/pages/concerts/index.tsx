@@ -1,5 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Box, Button, Center, HStack, Icon, Input, InputGroup, InputLeftElement, InputRightElement, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Heading, HStack, Icon, Input, InputGroup, InputLeftElement, InputRightElement, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
 import { FiFilter } from '@react-icons/all-files/fi/FiFilter';
 import PaginationBtn from '@src/components/common/button/PaginationBtn';
 import CategoryFilter from '@src/components/concert/CategoryFilter';
@@ -44,16 +44,11 @@ const SearchBox = () => {
     }
   };
   return (
-    <InputGroup size="lg">
+    <InputGroup w="350px">
       <InputLeftElement>
         <SearchIcon pointerEvents="none" color="gray.300" />
       </InputLeftElement>
       <Input pr="4.5rem" type="text" placeholder="Enter title" value={searchQuery} onKeyUp={enterKey} required onChange={onChangeSearch} />
-      <InputRightElement width="4.5rem" mr={2}>
-        <Button h="1.75rem" onClick={onClickSearch} type="submit">
-          Search
-        </Button>
-      </InputRightElement>
     </InputGroup>
   );
 };
@@ -151,14 +146,13 @@ export default function ConcertPage({ iniData, initialParam }: InferGetServerSid
       <Head>
         <title key="title">Miko - ConcertList</title>
       </Head>
-      <Box w="full">
-        <SearchBox />
-        <HStack py={4}>
-          <Icon boxSize={5} onClick={handleShowCategoryFilter} cursor="pointer" as={FiFilter} />
-          <Box visibility={isShowCategoryFilter ? 'visible' : 'hidden'}>
-            <CategoryFilter />
-          </Box>
+      <Box w="full" maxW="160vh">
+        <HStack pb={5}>
+          <Heading size="2xl">All Concerts</Heading>
+          <Spacer />
+          <SearchBox />
         </HStack>
+        <CategoryFilter />
         <ConcertListView iniData={iniData} query={query} />
       </Box>
     </>

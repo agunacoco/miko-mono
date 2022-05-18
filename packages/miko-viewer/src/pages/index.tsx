@@ -1,4 +1,4 @@
-import { Box, Button, CSSObject, Heading, HStack, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Badge, Box, Button, Center, Container, CSSObject, Flex, Heading, HStack, SimpleGrid, Spacer, Stack, Text, VStack } from '@chakra-ui/react';
 import ConcertList from '@src/components/home/ConcertList';
 import MainRanking from '@src/components/home/MainRanking';
 import { getPageLaravelData } from '@src/helper/getDataFromLaravel';
@@ -7,8 +7,9 @@ import { useCheckLogin } from '@src/state/swr';
 import { Concert } from '@miko/share-types';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { FC, ReactElement } from 'react';
+import RankingCard from '@src/components/home/MainRanking';
+import Link from 'next/link';
 
 type Data = {
   newData: Concert[];
@@ -24,47 +25,85 @@ interface SortItemProps {
 }
 
 const SortItems: Array<SortItemProps> = [
+  { title: 'Popularity', subtitle: '人気', url: '/concerts' },
   { title: 'New', subtitle: '新着', url: '/concerts' },
   { title: 'J-POP', subtitle: '', url: '/concerts?category_id=1&page=1' },
   { title: 'K-POP', subtitle: '', url: '/concerts?category_id=2&page=1' },
 ];
 
+const BuyTicketLeadBox = () => {
+  return (
+    <Center w="full" h="400px" position="relative">
+      <Container zIndex="1" maxW={'4xl'}>
+        <Stack as={Box} textAlign={'center'} spacing={{ base: 8, md: 14 }} py={{ base: 20, md: 36 }}>
+          <Text fontSize="4xl" color="white" fontWeight="bold">
+            Welcome to the MIKO
+          </Text>
+          <Text color="gray.200">
+            Welcome to the Miko website. Miko offers a variety of concerts, and you can watch and replay the concert in real time after purchasing. Go to the concert you want to
+            see, buy a ticket, and enjoy the online streaming concert at Miko. First, please watch various concerts.
+          </Text>
+          <Link href="/concerts">
+            <a>
+              <Button
+                height="44px"
+                fontSize="17px"
+                fontWeight="bold"
+                color="white"
+                bg={'teal.400'}
+                rounded={'full'}
+                border="none"
+                px={6}
+                _hover={{
+                  bg: 'teal.700',
+                }}
+              >
+                Watching the concert
+              </Button>
+            </a>
+          </Link>
+        </Stack>
+      </Container>
+      <Box
+        w="full"
+        h="full"
+        aria-describedby="background image"
+        backgroundImage="/image/concert.jpg"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        bgPosition="center"
+        backdropBrightness="0.5"
+        filter="brightness(0.3)"
+        position="absolute"
+        top="0"
+        right="0"
+      ></Box>
+    </Center>
+  );
+};
+
 const SortList: FC<{ data: Concert[]; sortData: SortItemProps }> = ({ data, sortData }) => {
   return (
     <Box w="full">
-      <HStack py={6} mt={3}>
-        <Heading as="h2" size="2xl">
+      <Flex py={4} mt={3} gap={3}>
+        <Text fontSize="4xl" fontWeight="extrabold">
           {sortData.title}
-        </Heading>
-        <Text pl={3} pt={5} fontSize="xl" fontWeight="bold">
+        </Text>
+        <Text pt={5} fontSize="xl" fontWeight="bold">
           {sortData.subtitle}
         </Text>
         <Spacer />
         <Link href={sortData.url}>
           <a>
-            <Button mt={3}>더보기</Button>
+            <Text pt={5} userSelect="none" color="teal.400" fontSize="xl" fontWeight="bold">
+              View all
+            </Text>
           </a>
         </Link>
-      </HStack>
+      </Flex>
       <SimpleGrid columns={[2, null, 4]} spacing="25px">
         <ConcertList data={data} />
       </SimpleGrid>
-    </Box>
-  );
-};
-
-const TopList: FC<{ data: Concert[] }> = ({ data: concerts }) => {
-  return (
-    <Box w="full" maxW={{ xl: '170vh' }}>
-      <HStack pl={20}>
-        <Heading as="h2" size="2xl" mb={3} pl={20} ml={20}>
-          PICK UP
-        </Heading>
-        <Text pl={3} pt={5} fontSize="xl" fontWeight="bold">
-          おすすめ
-        </Text>
-      </HStack>
-      <MainRanking data={concerts} />
     </Box>
   );
 };
@@ -76,7 +115,7 @@ export const getStaticProps: GetStaticProps<Data> = async () => {
 
   const topResultPromise = getPageLaravelData('/concerts', {
     sort: ['-sales_volume'],
-    perPage: 12,
+    perPage: 4,
   });
 
   const newResultPromise = getPageLaravelData('/concerts', {
@@ -106,49 +145,6 @@ export const getStaticProps: GetStaticProps<Data> = async () => {
   };
 };
 
-const outerBoxStyles: CSSObject = {
-  boxSize: 'full',
-  h: '400px',
-  p: '10',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundImage: '/logo/mainPageImage.jpg',
-  backgroundColor: 'black',
-  bgPosition: 'bottom',
-  objectFit: 'fill',
-  bgRepeat: 'no-repeat',
-};
-
-const innerBoxStyles: CSSObject = {
-  textAlign: 'center',
-  width: 'full',
-  color: 'white',
-  bg: '#00000000',
-  borderColor: '#FFA500',
-  textShadow: '0 0 20px gray',
-  fontWeight: 'bold',
-  fontSize: '18px',
-};
-
-const LoginLeadBox = () => {
-  const isLogin = useCheckLogin();
-  if (isLogin) return <></>;
-
-  return (
-    <VStack sx={outerBoxStyles} mb={10} spacing={5} backdropFilter="auto" backdropBlur="8px">
-      <Heading color="white">Connect on Miko</Heading>
-      <Text color="white"> Discover, stream, and share a constantly expanding mix of concert from emerging and major artists around the world.</Text>
-      <Link href="/login">
-        <a>
-          <Button sx={innerBoxStyles} _hover={{ color: 'black', borderColor: 'orange' }} _active={{ bg: 'orange' }}>
-            Sign up for free
-          </Button>
-        </a>
-      </Link>
-    </VStack>
-  );
-};
-
 export default function HomePage({ newData, topData, jpopData, kpopData }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -157,12 +153,12 @@ export default function HomePage({ newData, topData, jpopData, kpopData }: Infer
         <meta property="og:title" content="Miko" key="og:title" />
         <meta name="description" content="miko homepage, concert list" />
       </Head>
-      <LoginLeadBox />
-      {/* <TopList data={topData} /> */}
-      <VStack>
-        <SortList data={newData} sortData={SortItems[0]} />
-        <SortList data={jpopData} sortData={SortItems[1]} />
-        <SortList data={kpopData} sortData={SortItems[2]} />
+      <BuyTicketLeadBox />
+      <VStack w="full" maxW="150vh" pt={6}>
+        <SortList data={topData} sortData={SortItems[0]} />
+        <SortList data={newData} sortData={SortItems[1]} />
+        <SortList data={jpopData} sortData={SortItems[2]} />
+        <SortList data={kpopData} sortData={SortItems[3]} />
       </VStack>
     </>
   );

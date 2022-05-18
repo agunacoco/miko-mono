@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, CSSObject } from '@chakra-ui/react';
 import { IMAGE_DOMAIN } from '@src/const';
 import { convertDate } from '@src/helper';
 import { Concert } from '@miko/share-types';
@@ -12,6 +12,13 @@ import React, { FC } from 'react';
 // fill을 준경우 부모 사이즈로 자동으로 커짐. 그리고 objectFit을 fill contain cover를 줌.
 // fill일 경우 부모는 반드시 relative , responsive일 경우에는 block 모드
 // 스타일링은 className
+const oneLine: CSSObject = {
+  display: 'block',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  height: '1.2em',
+  lineHeight: '1.2',
+};
 
 const ConcertCard: FC<{ concert: Concert }> = ({ concert }) => {
   const concertStartDate = convertDate(concert.allConcertStartDate, 'YMDHM');
@@ -36,18 +43,16 @@ const ConcertCard: FC<{ concert: Concert }> = ({ concert }) => {
             blurDataURL="/image/defaultImage.png"
             quality={70}
             objectFit="cover"
-            width={300}
-            height={300}
+            width={280}
+            height={280}
             layout="responsive"
             alt={`${concert.title} image`}
             style={{ borderRadius: '12px' }}
           />
         </Box>
         <Box my={2}>
-          <Text color="gray.700" fontSize="md">
-            {concertStartDate}
-          </Text>
-          <Text fontSize="2xl" fontWeight="bold">
+          <Text color="gray.600">{concertStartDate}</Text>
+          <Text sx={oneLine} fontSize="xl" fontWeight="extrabold">
             {concert.title}
           </Text>
         </Box>
@@ -61,7 +66,7 @@ const ConcertList: FC<{ data: Concert[] }> = ({ data }) => {
   return (
     <>
       {concerts?.map((concert, index) => (
-        <Box key={index} maxW={350}>
+        <Box key={index} maxW={330}>
           <ConcertCard concert={concert} />
         </Box>
       ))}

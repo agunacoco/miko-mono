@@ -1,7 +1,11 @@
-import { Box, Button } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { Box, Button, Text, HStack, Icon, VStack, Center } from '@chakra-ui/react';
 import { categoryArray } from '@src/const';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { memo } from 'react';
+
+const allConcertURL = '/concerts';
 
 const CategoryFilter = memo(() => {
   const router = useRouter();
@@ -19,21 +23,38 @@ const CategoryFilter = memo(() => {
   };
 
   return (
-    <Box>
+    <HStack pb={8}>
+      <Button
+        borderRadius="md"
+        h="60px"
+        w="full"
+        border="none"
+        key={0}
+        onClick={() => router.push(allConcertURL)}
+        m={1}
+        bg={router.asPath === allConcertURL ? 'teal.300' : 'gray.100'}
+        color={router.asPath === allConcertURL ? 'white' : 'teal.300'}
+        _hover={{ bg: 'teal.300', color: 'white' }}
+      >
+        <Text fontWeight="bold">All</Text>
+      </Button>
       {categoryArray.map((category, idx) => (
         <Button
+          borderRadius="md"
+          h="60px"
+          w="full"
+          border="none"
           key={idx + 1}
           onClick={() => setCategory(idx + 1)}
           m={1}
-          variant="ghost"
-          bg={curCategoryId === idx + 1 && 'cyan.300'}
-          color={curCategoryId === idx + 1 ? 'white' : 'cyan.500'}
-          _hover={{ bg: 'cyan.300', color: 'white' }}
+          bg={curCategoryId === idx + 1 ? 'teal.300' : 'gray.100'}
+          color={curCategoryId === idx + 1 ? 'white' : 'teal.300'}
+          _hover={{ bg: 'teal.300', color: 'white' }}
         >
-          {category}
+          <Text fontWeight="bold">{category}</Text>
         </Button>
       ))}
-    </Box>
+    </HStack>
   );
 });
 
