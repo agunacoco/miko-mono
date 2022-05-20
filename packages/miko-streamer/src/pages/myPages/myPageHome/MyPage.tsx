@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { Concert } from '@miko/share-types';
 import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import RankingCard from '../../../components/main/MainRankingCard';
@@ -173,11 +174,16 @@ const MyPage = () => {
   const newData = latestData.data;
 
   return (
-    <VStack padding="6" bgColor="white" width="full" height="full">
-      <CreateConcertLeadBox />
-      <RankingList rankingData={rankingData} />
-      <NewList newData={newData} />
-    </VStack>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | MainPage</title>
+      </Helmet>
+      <VStack padding="6" bgColor="white" width="full" height="full">
+        <CreateConcertLeadBox />
+        {/* <RankingList rankingData={rankingData} /> */}
+        <NewList newData={newData} />
+      </VStack>
+    </>
   );
 };
 

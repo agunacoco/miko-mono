@@ -13,6 +13,7 @@ import { axiosI } from '@src/state/swr/fetcher';
 import { useUser } from '@src/state/swr/useUser';
 import React, { useRef, useState } from 'react';
 import { FilePond } from 'react-filepond';
+import { Helmet } from 'react-helmet';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Descendant } from 'slate';
 
@@ -70,58 +71,63 @@ const ConcertCreatePage = () => {
   };
 
   return (
-    <Box>
-      <Box borderRadius="md" shadow="md" maxW="container.xl" w="full" p="4" bg={useColorStore('surface')}>
-        <Button
-          onClick={() => {
-            console.log(imageUploadRef.current?.getFile());
-          }}
-        >
-          test
-        </Button>
-        <ImageUpload ref={imageUploadRef}></ImageUpload>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <VStack spacing="10">
-            <InputWrapper registerReturn={register('artist', { required: true })} error={errors.artist} data={['참가 아티스트 리스트', 'ex) 가수A']} />
-            <InputWrapper registerReturn={register('detail', { required: true })} error={errors.detail} data={['설명', '설명']} />
-            <Heading as="h3" size="lg">
-              コンテンツ
-            </Heading>
-            <RichTextExample value={content} setValue={setContent} />
-            <SelectWrapper
-              registerReturn={register('categoryId', {
-                required: '필수 선택입니다.',
-              })}
-              error={errors.categoryId}
-              data={['카테고리', undefined]}
-              selectList={categoryArray}
-            />
-            <InputWrapper registerReturn={register('title', { required: true })} error={errors.title} data={['콘서트 명', '콘서트 이름']} />
-            {/* <InputWrapper registerReturn={register("content", { required: true })} error={errors.content} data={["Content", "Content"]} /> */}
-            <Heading size="md">콘서트 시작 시간</Heading>
-            <DateInputWrapper setValue={setValue} registerReturn={register('allConcertStartDate')} />
-            <Heading size="md">콘서트 종료 시간</Heading>
-            <DateInputWrapper setValue={setValue} registerReturn={register('allConcertEndDate')} />
-          </VStack>
-
-          <Button type="submit" colorScheme="blue" mt={4} mb={12} disabled={!isValid} isLoading={isSubmitting}>
-            콘서트 생성
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | Create Concert</title>
+      </Helmet>
+      <Box>
+        <Box borderRadius="md" shadow="md" maxW="container.xl" w="full" p="4" bg={useColorStore('surface')}>
+          <Button
+            onClick={() => {
+              console.log(imageUploadRef.current?.getFile());
+            }}
+          >
+            test
           </Button>
-        </form>
+          <ImageUpload ref={imageUploadRef}></ImageUpload>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <VStack spacing="10">
+              <InputWrapper registerReturn={register('artist', { required: true })} error={errors.artist} data={['참가 아티스트 리스트', 'ex) 가수A']} />
+              <InputWrapper registerReturn={register('detail', { required: true })} error={errors.detail} data={['설명', '설명']} />
+              <Heading as="h3" size="lg">
+                コンテンツ
+              </Heading>
+              <RichTextExample value={content} setValue={setContent} />
+              <SelectWrapper
+                registerReturn={register('categoryId', {
+                  required: '필수 선택입니다.',
+                })}
+                error={errors.categoryId}
+                data={['카테고리', undefined]}
+                selectList={categoryArray}
+              />
+              <InputWrapper registerReturn={register('title', { required: true })} error={errors.title} data={['콘서트 명', '콘서트 이름']} />
+              {/* <InputWrapper registerReturn={register("content", { required: true })} error={errors.content} data={["Content", "Content"]} /> */}
+              <Heading size="md">콘서트 시작 시간</Heading>
+              <DateInputWrapper setValue={setValue} registerReturn={register('allConcertStartDate')} />
+              <Heading size="md">콘서트 종료 시간</Heading>
+              <DateInputWrapper setValue={setValue} registerReturn={register('allConcertEndDate')} />
+            </VStack>
+
+            <Button type="submit" colorScheme="blue" mt={4} mb={12} disabled={!isValid} isLoading={isSubmitting}>
+              콘서트 생성
+            </Button>
+          </form>
+        </Box>
+        {/* @ts-ignore */}
+        <ModalWrapper
+          useDisclosureReturn={useDisclosureReturn}
+          text={{
+            title: '콘서트 생성 성공',
+            close: '추가 생성',
+            confirm: '콘서트 확인',
+          }}
+          href="/my/concerts"
+        >
+          {createdConcert ? <>성공</> : <></>}
+        </ModalWrapper>
       </Box>
-      {/* @ts-ignore */}
-      <ModalWrapper
-        useDisclosureReturn={useDisclosureReturn}
-        text={{
-          title: '콘서트 생성 성공',
-          close: '추가 생성',
-          confirm: '콘서트 확인',
-        }}
-        href="/my/concerts"
-      >
-        {createdConcert ? <>성공</> : <></>}
-      </ModalWrapper>
-    </Box>
+    </>
   );
 };
 

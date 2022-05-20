@@ -6,6 +6,7 @@ import AsLink from '@src/components/common/wrapChakra/AsLink';
 import convertDate from '@src/helper/convertDate';
 import { usePageLaravel, useSingleLaravel } from '@src/state/swr/useLaravel';
 import { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { S3_URL } from '../../../../const';
@@ -112,17 +113,22 @@ const TicketListPage: FC = () => {
   const concert = concertData.data;
 
   return (
-    <Box padding="6" width="full" height="full">
-      <Text> {'>'} Concert Ticket List</Text>
-      <TicketListHeader concert={concert} />
-      <Divider my={6} />
-      <TicketCardList tickets={tickets} />
-      {tickets.length == 0 && (
-        <Center minH="35vh">
-          <Heading>登録されたグッズがありません。</Heading>
-        </Center>
-      )}
-    </Box>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | {concert.title} Tickets</title>
+      </Helmet>
+      <Box padding="6" width="full" height="full">
+        <Text> {'>'} Concert Ticket List</Text>
+        <TicketListHeader concert={concert} />
+        <Divider my={6} />
+        <TicketCardList tickets={tickets} />
+        {tickets.length == 0 && (
+          <Center minH="35vh">
+            <Heading>登録されたグッズがありません。</Heading>
+          </Center>
+        )}
+      </Box>
+    </>
   );
 };
 

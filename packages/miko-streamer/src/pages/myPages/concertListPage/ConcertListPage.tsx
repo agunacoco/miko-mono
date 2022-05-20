@@ -11,6 +11,7 @@ import { usePageLaravel } from '@src/state/swr/useLaravel';
 import { useUser } from '@src/state/swr/useUser';
 import { motion } from 'framer-motion';
 import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 const CategoryCard: FC<{ concert: Concert[] }> = ({ concert }) => {
@@ -130,10 +131,15 @@ const ConcertListPage = () => {
   let location = useLocation();
 
   return (
-    <VStack spacing={20} padding="6" bgColor="white" width="full" height="full">
-      <Heading size="2xl">All Concerts</Heading>
-      <ConcertCardList />
-    </VStack>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | Concert List</title>
+      </Helmet>
+      <VStack spacing={20} padding="6" bgColor="white" width="full" height="full">
+        <Heading size="2xl">All Concerts</Heading>
+        <ConcertCardList />
+      </VStack>
+    </>
   );
 };
 

@@ -29,6 +29,7 @@ import { FiShoppingCart } from '@react-icons/all-files/fi/FiShoppingCart';
 import { RiMoneyCnyCircleLine } from '@react-icons/all-files/ri/RiMoneyCnyCircleLine';
 import { usePageLaravel, useSingleLaravel } from '@src/state/swr/useLaravel';
 import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { S3_URL } from '../../../../const';
@@ -84,47 +85,48 @@ const ProductBox: FC<{ data: Product }> = ({ data }) => {
   const { name, price, image, detail, color, createdAt } = data;
 
   return (
-    <Wrap spacing="30px" marginTop="5" rounded="lg" border="1px" shadow="xl" borderColor="gray.100">
-      <WrapItem h="full" width={{ base: '100%', sm: '45%', md: '45%', lg: '400px' }}>
-        <Box w="full" h="full">
-          <Box overflow="hidden" px={3}>
-            <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
-              <Image
-                transform="scale(1.0)"
-                src={S3_URL + image}
-                alt="some text"
-                objectFit="contain"
-                width="400px"
-                height="280px"
-                transition="0.3s ease-in-out"
-                _hover={{
-                  transform: 'scale(1.05)',
-                }}
-              />
-            </Link>
-          </Box>
-          <HStack alignContent="end" px={6} py={3} bg="gray.900">
-            <Icon as={RiMoneyCnyCircleLine} h={6} w={6} color="white" />
-            <chakra.h3 mx={3} color="white" fontWeight="bold" fontSize="md" alignSelf="start">
-              {price}
-            </chakra.h3>
-          </HStack>
-          <Box p={3}>
-            <BlogTags tags={['color', 'Product']} marginTop="3" />
-            <Heading fontSize="xl" marginTop="2">
+    <>
+      <Wrap spacing="30px" marginTop="5" rounded="lg" border="1px" shadow="xl" borderColor="gray.100">
+        <WrapItem h="full" width={{ base: '100%', sm: '45%', md: '45%', lg: '400px' }}>
+          <Box w="full" h="full">
+            <Box overflow="hidden" px={3}>
               <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                {name}
+                <Image
+                  transform="scale(1.0)"
+                  src={S3_URL + image}
+                  alt="some text"
+                  objectFit="contain"
+                  width="400px"
+                  height="280px"
+                  transition="0.3s ease-in-out"
+                  _hover={{
+                    transform: 'scale(1.05)',
+                  }}
+                />
               </Link>
-            </Heading>
-            <Text className="detail" as="p" fontSize="md" marginTop="2">
-              {detail}
-            </Text>
-            <Text py={2}>{convertDate(createdAt, 'YMDHMS')}</Text>
+            </Box>
+            <HStack alignContent="end" px={6} py={3} bg="gray.900">
+              <Icon as={RiMoneyCnyCircleLine} h={6} w={6} color="white" />
+              <chakra.h3 mx={3} color="white" fontWeight="bold" fontSize="md" alignSelf="start">
+                {price}
+              </chakra.h3>
+            </HStack>
+            <Box p={3}>
+              <BlogTags tags={['color', 'Product']} marginTop="3" />
+              <Heading fontSize="xl" marginTop="2">
+                <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                  {name}
+                </Link>
+              </Heading>
+              <Text className="detail" as="p" fontSize="md" marginTop="2">
+                {detail}
+              </Text>
+              <Text py={2}>{convertDate(createdAt, 'YMDHMS')}</Text>
+            </Box>
           </Box>
-        </Box>
-      </WrapItem>
-      <style>
-        {`
+        </WrapItem>
+        <style>
+          {`
         .detail {
         display: block; 
         overflow: hidden;
@@ -136,8 +138,9 @@ const ProductBox: FC<{ data: Product }> = ({ data }) => {
         -webkit-box-orient: vertical;
         }
         `}
-      </style>
-    </Wrap>
+        </style>
+      </Wrap>
+    </>
   );
 };
 
@@ -162,17 +165,22 @@ const GoodsPage = () => {
   const concert = concertData.data;
 
   return (
-    <Box padding="6" bgColor="white" width="full" height="full">
-      <Text> {'>'} Concert Goods List</Text>
-      <ProductPageHeader concert={concert} />
-      <Divider marginTop="5" />
-      <ProductsCardList products={products} />
-      {products.length == 0 && (
-        <Center minH="35vh">
-          <Heading>登録されたグッズがありません。</Heading>
-        </Center>
-      )}
-    </Box>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | {concert.title} Goods</title>
+      </Helmet>
+      <Box padding="6" bgColor="white" width="full" height="full">
+        <Text> {'>'} Concert Goods List</Text>
+        <ProductPageHeader concert={concert} />
+        <Divider marginTop="5" />
+        <ProductsCardList products={products} />
+        {products.length == 0 && (
+          <Center minH="35vh">
+            <Heading>登録されたグッズがありません。</Heading>
+          </Center>
+        )}
+      </Box>
+    </>
   );
 };
 

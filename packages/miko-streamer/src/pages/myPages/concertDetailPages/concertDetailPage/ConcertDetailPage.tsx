@@ -5,6 +5,7 @@ import { categoryArray, S3_URL } from '@src/const';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import convertDate from '../../../../helper/convertDate';
@@ -76,10 +77,15 @@ const ConcertDetailPage = () => {
   const concert = data.data;
 
   return (
-    <Box padding="6" bgColor="white" width="full" height="full">
-      <Text> {'>'} Concert Detail Page</Text>
-      <ConcertDetailCard concert={concert} />
-    </Box>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | {concert.title} Detail</title>
+      </Helmet>
+      <Box padding="6" bgColor="white" width="full" height="full">
+        <Text> {'>'} Concert Detail Page</Text>
+        <ConcertDetailCard concert={concert} />
+      </Box>
+    </>
   );
 };
 

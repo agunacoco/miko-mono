@@ -3,6 +3,7 @@ import useColorStore from '@src/state/hooks/useColorStore';
 import { isLoginState } from '@src/state/recoil/authState';
 import { useLogin } from '@src/state/swr/useUser';
 import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -29,7 +30,10 @@ const LoginPage: FC = () => {
   const fromPathname = ((location.state as any)?.from?.pathname as string) || undefined || '/';
 
   return (
-    <Box>
+    <>
+      <Helmet>
+        <title>MIKO-STREAMER | Login</title>
+      </Helmet>
       <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorStore('background')}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={8} px={2}>
           <Stack align={'center'}>
@@ -91,7 +95,7 @@ const LoginPage: FC = () => {
           </Box>
         </Stack>
       </Flex>
-    </Box>
+    </>
   );
 };
 
