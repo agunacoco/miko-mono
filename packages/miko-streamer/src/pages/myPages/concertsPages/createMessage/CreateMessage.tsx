@@ -47,7 +47,7 @@ const CreateMsg = () => {
           <Divider my="4" />
           <EditMsgCommonData />
         </Flex>
-        <DragTest />
+        {/* <DragTest /> */}
 
         <Divider my="4" />
         <Flex justifyContent="end" gap="4">
