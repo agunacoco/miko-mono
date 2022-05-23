@@ -43,14 +43,7 @@ export const My3DAvatar = memo(() => {
         </AvatarMenu>
         {isOnAvatar && (
           <Box overflow="hidden" position="relative" pointerEvents="none">
-            <AvatarModel
-              width={AVATAR_SIZE}
-              height={AVATAR_SIZE}
-              isMyAvatar={true}
-              peerId={uuid}
-              onAntialias
-              path={`${NEXT_URL}/resources/babylonjs/models/proseka/proseka_tmp.glb`}
-            />
+            <AvatarModel width={AVATAR_SIZE} height={AVATAR_SIZE} isMyAvatar={true} peerId={uuid} onAntialias />
           </Box>
         )}
         <AvatarConnectionStatus>

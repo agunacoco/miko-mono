@@ -36,6 +36,8 @@ const AVATAR_FILE_NAME = [
   'light/penlight_glory.glb',
   'light/penlight_glory.glb',
 ];
+const avatar_import = [false, false, false, false, false, false];
+
 let currentAvatar = 0;
 /**
  * proseka = leftShoulder 22, Elbow 21, Wrist 20
@@ -177,39 +179,50 @@ const avatarResetPosition = (index: number) => {
   penlight[1][4][0].setAbsolutePosition(new BABYLON.Vector3(ra.x + 0.05, ra.y - 0.05, ra.z));
 };
 
-// 아바타 init시 avatar로드
-const addMesh = (functionScene: BABYLON.Scene, index: number) => {
-  console.log('load', index);
-  if (index >= AVATAR_FILE_NAME.length) {
-    console.log('setting', index);
-    createLights(penlight[0][4], 2, 1, 1, 1, 1, functionScene, 1);
-    createLights(penlight[1][4], 2, 1, 1, 1, 1, functionScene, -1);
-    // 27, 30 라이트, 26, 29 손잡이
-    functionScene.render();
-    const [mat] = penMat;
-    // eslint-disable-next-line
-    functionScene.meshes[27].material = mat; // eslint-disable-line
-    functionScene.meshes[25].material = mat; // eslint-disable-line
-    functionScene.meshes[30].material = mat; // eslint-disable-line
-    functionScene.meshes[28].material = mat; // eslint-disable-line
-    functionScene.render();
-
-    avatarResetPosition(currentAvatar);
-    functionScene.render();
-    avatarStart = true;
+const initSettingImportMesh = () => {
+  if (avatar_import.includes(false)) {
     return;
   }
+  console.log('avatar setting import 들어옴');
+  createLights(penlight[0][4], 2, 1, 1, 1, 1, scene, 1);
+  createLights(penlight[1][4], 2, 1, 1, 1, 1, scene, -1);
+  // 27, 30 라이트, 26, 29 손잡이
+  scene.render();
+  const [mat] = penMat;
+  // eslint-disable-next-line
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 3; j++) {
+      penlight[i][0][j].material = mat;
+    }
+  }
+  // functionScene.meshes[27].material = mat; // eslint-disable-line
+  // functionScene.meshes[25].material = mat; // eslint-disable-line
+  // functionScene.meshes[30].material = mat; // eslint-disable-line
+  // functionScene.meshes[28].material = mat; // eslint-disable-line // 이거 임포트한 메쉬의 매터리얼을 바꾸지 penlight[0][0][0]...이런식으로
+  scene.render();
+
+  avatarResetPosition(currentAvatar);
+  scene.render();
+  avatarStart = true;
+  return;
+};
+
+// 아바타 init시 avatar로드
+const addMesh = (functionScene: BABYLON.Scene, index: number) => {
   BABYLON.SceneLoader.ImportMesh('', AVATAR_PATH + AVATAR_FILE_NAME[index], '', functionScene, (...args) => {
     const { rs, ls } = getJointNumber(index);
+    console.log('avatar init this is import', index);
     if (index < AVATAR_FILE_NAME.length - 2) {
+      console.log('avatar init this is import2', index);
       args[4][rs].rotate(new BABYLON.Vector3(0, 0, 1), (Math.PI * 7) / 36, 2);
       args[4][ls].rotate(new BABYLON.Vector3(0, 0, 1), -(Math.PI * 7) / 36, 2);
       if (index > 1) {
         args[4][rs].rotate(new BABYLON.Vector3(0, 0, 1), (Math.PI * 7) / 36, 2);
         args[4][ls].rotate(new BABYLON.Vector3(0, 0, 1), -(Math.PI * 7) / 36, 2);
       }
-      avatarSkin.push(args);
-      avatarSkinOriginalBones.push([]);
+      avatarSkin[index] = args;
+      console.log('avatar init args insert', index);
+      avatarSkinOriginalBones[index] = [];
       // eslint-disable-next-line
       for (let i = 0; i < args[4].length; i++) {
         const copyBone = args[4][i].rotationQuaternion?.clone();
@@ -218,18 +231,21 @@ const addMesh = (functionScene: BABYLON.Scene, index: number) => {
       args[0][0].setAbsolutePosition(new BABYLON.Vector3(100, 0, 0));
     } else {
       // -2 왼손, -1 오른손
-      penlight.push(args);
+      const value = (AVATAR_FILE_NAME.length - index - 2) * -1;
+      console.log('avatar init penlight insert', index);
+      penlight[value] = args;
       const mat = new BABYLON.StandardMaterial(`${index}_hand_light`, functionScene);
       mat.emissiveColor = new BABYLON.Color3(1, 1, 1);
-      penMat.push(mat);
+      console.log('avatar init mat insert', index);
+      penMat[value] = mat;
       // eslint-disable-next-line
       // args[0][0].material = mat;
-      // console.log(functionScene.meshes);
       // args[4][0].translate(new BABYLON.Vector3(0, 0, 1), 2);
       // args[4][0].rotate(new BABYLON.Vector3(1, 0, 0), Math.PI / 2);
     }
-
-    addMesh(functionScene, index + 1);
+    avatar_import[index] = true;
+    // addMesh(functionScene, index + 1);
+    initSettingImportMesh();
   });
 };
 
@@ -252,17 +268,18 @@ const onSceneReady = async (resultScene: BABYLON.Scene) => {
     light.intensity = 0.6;
 
     BABYLON.MeshBuilder.CreateGround('ground', { width: 30, height: 6 }, resultScene);
-
-    addMesh(resultScene, 0);
+    console.log('avatar init render before');
+    for (let i = 0; i < AVATAR_FILE_NAME.length; i++) {
+      addMesh(resultScene, i);
+    }
   }
 };
 
 // eslint-disable-next-line no-restricted-globals
-addEventListener('error', e => console.log('avatar model에서 에러났습니다 확인 부탁드립니다, 이건 워커 안에서 작동하는 코드입니다', e));
-// eslint-disable-next-line no-restricted-globals
 addEventListener('message', async ({ data }) => {
   switch (data.type) {
     case 'init':
+      console.log('avatar init');
       const { canvas, width, height } = data;
 
       const engine = new BABYLON.Engine(canvas);
@@ -276,15 +293,15 @@ addEventListener('message', async ({ data }) => {
 
       scene.render();
 
-      let count = 0;
-      const firstRenderIntervalId = setInterval(() => {
-        if (count <= 20) {
-          scene.render();
-          count += 1;
-        } else {
-          clearInterval(firstRenderIntervalId);
-        }
-      }, 16);
+      // let count = 0;
+      // const firstRenderIntervalId = setInterval(() => {
+      //   if (count <= 20) {
+      //     scene.render();
+      //     count += 1;
+      //   } else {
+      //     clearInterval(firstRenderIntervalId);
+      //   }
+      // }, 16);
 
       break;
     case 'motionChange':
@@ -310,7 +327,6 @@ addEventListener('message', async ({ data }) => {
     //   avatarSkin[2][0][1].material = mat;
     //   break;
     case 'avatarChange':
-      console.log('아바타 바꾸러 들어옴');
       const { avatarType } = data;
       let avatarIndex = avatarType;
       if (typeof avatarType === 'string') avatarIndex = parseInt(avatarType, 10);
