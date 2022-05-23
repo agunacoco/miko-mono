@@ -104,12 +104,16 @@ const DraftMessagePreview = () => {
   const draftMsgData = useRecoilValue(draftMsgState);
   const { boxData, mainTextData, subTextData, positionIndex } = draftMsgData.data;
   return (
-    <Box position="absolute" {...positionSwith[positionIndex]} bgColor={boxData?.hexColor} width={boxData.width} height={boxData.height} borderRadius={boxData.round}>
-      {/* <EditableText type="mt" />
-      <EditableText type="st" /> */}
-      <MessageText data={mainTextData} />
-      <Box height={boxData.spacing + 'px'}></Box>
-      <MessageText data={subTextData} />
+    // <Box position="absolute" {...positionSwith[positionIndex]} bgColor={boxData?.hexColor} width={boxData.width} height={boxData.height} borderRadius={boxData.round}>
+    //   {/* <EditableText type="mt" />
+    //   <EditableText type="st" /> */}
+    //   <MessageText data={mainTextData} />
+    //   <Box height={boxData.spacing + 'px'}></Box>
+    //   <MessageText data={subTextData} />
+    // </Box>
+    <Box position="absolute" top="2" left="2" zIndex="2" backgroundColor="whiteAlpha.700" textColor="black" padding="1" borderRadius="base">
+      <Text fontSize="2xl">{mainTextData.text}</Text>
+      <Text fontSize="1xl">{subTextData.text}</Text>
     </Box>
   );
 };

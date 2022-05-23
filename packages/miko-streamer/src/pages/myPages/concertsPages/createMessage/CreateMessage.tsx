@@ -34,10 +34,10 @@ const CreateMsg = () => {
       </Box>
       <Box maxW="400px" h="full" overflowY="scroll" px="2">
         <Flex flexWrap="wrap" flexDir="column">
-          <PositionSelector />
-          <Divider my="4" />
-          <MsgBoxEditor />
-          <Divider my="4" />
+          {/* <PositionSelector /> */}
+          {/* <Divider my="4" /> */}
+          {/* <MsgBoxEditor /> */}
+          {/* <Divider my="4" /> */}
           <Flex flexDir="column" flexGrow={1} minW="200px" gap="2" alignItems="start">
             <MsgTextDataEditor atom={draftMsgMainTextState} type="main" />
             <MsgTextDataEditor atom={draftMsgSubTextState} type="sub" />
