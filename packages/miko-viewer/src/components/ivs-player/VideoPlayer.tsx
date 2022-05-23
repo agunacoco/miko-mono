@@ -16,6 +16,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import QuizResultView from './QuizResultView';
 import QuizView from './QuizView';
 import VideoQualitySelect from './VideoQualitySelect';
+import VideoMsgView from './VideoMsgView';
 
 // const streamUrl = 'https://de853ef2a345.us-east-1.playback.live-video.net/api/video/v1/us-east-1.121323684128.channel.Cj5ynk97sEJv.m3u8';
 
@@ -302,6 +303,7 @@ const VideoPlayer: FC = () => {
       <Box height="100%" width="100%" position="absolute" top="0">
         <QuizView />
         <QuizResultView />
+        <VideoMsgView />
         <Center position="absolute" w="full" h="full" zIndex="300" pointerEvents="none">
           {loading && <Spinner boxSize="36" />}
         </Center>

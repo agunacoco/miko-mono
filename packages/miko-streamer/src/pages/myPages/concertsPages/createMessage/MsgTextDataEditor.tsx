@@ -36,7 +36,7 @@ const MsgTextDataEditor: FC<{
     <VStack alignItems="start">
       <Heading size="md">{type === 'main' ? 'メインテキスト' : 'サブスク'}</Heading>
       <Input value={text} onChange={handleChangeText}></Input>
-      <HStack>
+      {/* <HStack>
         <HStack>
           <Text>S</Text>
           <NumberInput w="5rem" step={1} defaultValue={15} min={10} max={100} value={size} onChange={(_, value) => handleChangeSize(value)}>
@@ -69,7 +69,7 @@ const MsgTextDataEditor: FC<{
       <HStack>
         <Text>色</Text>
         <TextColorPicker color={hexColor} onChnage={handleChangeColor} />
-      </HStack>
+      </HStack> */}
     </VStack>
   );
 };
