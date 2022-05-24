@@ -56,7 +56,7 @@ export const Peer3DAvatar = memo<Props>(({ peer }) => {
         position="relative"
         width={AVATAR_SIZE}
         height={AVATAR_SIZE}
-        {...(isOnModel ? {} : { backgroundImage: "url('/image/temp/avatar.png')" })}
+        {...(isOnModel ? {} : { backgroundImage: "url('/image/pageIcon/live/avatar.png')" })}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
       >
