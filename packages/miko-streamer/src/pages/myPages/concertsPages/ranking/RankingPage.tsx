@@ -121,7 +121,7 @@ const RankingPage: FC = () => {
                       <Heading display="inline-block">{idx + 1 + start} </Heading>
                     </Box>
                     <Box>
-                      <Heading w="full" fontSize="md" isTruncated>
+                      <Heading w="full" fontSize="md" noOfLines={1}>
                         {value} / {score}
                       </Heading>
                     </Box>

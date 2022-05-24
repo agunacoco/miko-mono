@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { DevDrawer } from '@src/components/common/dev/DevDrawer';
 import PWALifecycle from '@src/components/pageParts/home/PWALifecycle';
 import { LARAVEL_URL, NEST_URL } from '@src/const';
-import { toastLog } from '@src/helper';
+import { ToastContainer, toastLog } from '@src/helper';
 import RootEventCatchLayout from '@src/layout/RootEventCatchLayout';
 import '@src/style/css/fonts.css';
 import '@src/style/css/global.css';
@@ -134,6 +134,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <RecoilRoot>
           <DevDrawer />
           <RootEventCatchLayout>{getLayout(<Component {...pageProps} />)}</RootEventCatchLayout>
+          <ToastContainer />
         </RecoilRoot>
       </ChakraProvider>
     </>

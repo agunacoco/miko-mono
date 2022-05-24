@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { ToastContainer } from './state/swr/fetcher';
 import theme from './theme';
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
     <RecoilRoot>
       <ChakraProvider resetCSS theme={theme}>
         <App />
+        <ToastContainer />
       </ChakraProvider>
     </RecoilRoot>
   </React.StrictMode>,

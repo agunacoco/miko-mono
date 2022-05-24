@@ -9,7 +9,7 @@ const config = {
 };
 
 const axiosI = axios.create(config);
-const toast = createStandaloneToast();
+const { ToastContainer, toast } = createStandaloneToast();
 // 요청 인터셉터 추가
 const requestInterceptor = axiosI.interceptors.request.use(
   function (config) {
@@ -54,11 +54,11 @@ const responseInterceptor = axiosI.interceptors.response.use(
 const fetcher = (url: string) =>
   axiosI
     .get(url)
-    .then((res) => {
+    .then(res => {
       console.log('aaaaa', res);
       return res.data;
     })
-    .catch((err) => {
+    .catch(err => {
       console.log('err', err);
       throw new Error('An error occurred while fetching the data.');
     });
@@ -66,21 +66,21 @@ const fetcher = (url: string) =>
 const fetcherForInfinite = (url: string) =>
   axiosI
     .get(url)
-    .then((res) => {
+    .then(res => {
       return res.data;
     })
-    .catch((err) => {
+    .catch(err => {
       throw new Error('An error occurred while fetching the data.');
     });
 
 const nodeFetcher = (url: string) =>
   axiosI
     .get(url, { baseURL: NEST_URL })
-    .then((res) => {
+    .then(res => {
       return res.data;
     })
-    .catch((err) => {
+    .catch(err => {
       throw new Error('An error occurred while fetching the data.');
     });
 
-export { axiosI, fetcher, fetcherForInfinite, nodeFetcher };
+export { axiosI, fetcher, fetcherForInfinite, nodeFetcher, ToastContainer };

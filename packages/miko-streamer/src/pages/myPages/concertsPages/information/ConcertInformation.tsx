@@ -53,7 +53,7 @@ const KeyView: FC<{ keyName: string; tipText?: string; keyValue: string }> = ({ 
         <Tag flexShrink={0}>{keyName}</Tag>
       </Tooltip>
       {` ・ `}
-      <Text isTruncated flexShrink={1}>
+      <Text noOfLines={1} flexShrink={1}>
         {keyValue}
       </Text>
       <Box flexShrink={0} as="span" display="inline">
