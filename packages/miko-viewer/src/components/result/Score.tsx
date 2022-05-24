@@ -5,7 +5,7 @@ const Score = ({ score }) => {
     <SimpleGrid columns={[5]}>
       <Flex justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
         <Text fontWeight={'bold'}>Volume</Text>
-        <Text fontSize={'7xl'}>50</Text>
+        <Text fontSize={'7xl'}>{score}</Text>
       </Flex>
       <Flex justifyContent={'center'} alignItems={'center'}>
         <Text mt={'20%'} fontSize={'5xl'}>

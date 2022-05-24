@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Flex, HStack, Stack, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Stack, Text } from '@chakra-ui/react';
 import { convertDate } from '@src/helper';
 import { curUserTicketState, enterTicketDataState } from '@src/state/recoil';
 import React from 'react';

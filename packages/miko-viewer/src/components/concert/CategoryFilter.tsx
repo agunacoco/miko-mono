@@ -1,7 +1,6 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Button, Text, HStack, Icon, VStack, Center } from '@chakra-ui/react';
+/* eslint-disable unused-imports/no-unused-vars */
+import { Button, Text, HStack } from '@chakra-ui/react';
 import { categoryArray } from '@src/const';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { memo } from 'react';
 
@@ -9,9 +8,10 @@ const allConcertURL = '/concerts';
 
 const CategoryFilter = memo(() => {
   const router = useRouter();
-  const curCategoryId = parseInt(router.query.category_id as string);
+  const curCategoryId = parseInt(router.query.category_id as string, 10);
   const setCategory = id => {
     if (id === curCategoryId) {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { category_id, ...rest } = router.query;
       router.query = rest;
     } else {

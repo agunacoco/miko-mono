@@ -77,7 +77,7 @@ const PreparePeerConnectToServer: FC<{ setReady: Dispatch<SetStateAction<boolean
     };
   }, []);
 
-  return <PrepareErrorAlert errorText={undefined} />;
+  return <PrepareErrorAlert errorText={peerError} />;
 };
 
 export default PreparePeerConnectToServer;

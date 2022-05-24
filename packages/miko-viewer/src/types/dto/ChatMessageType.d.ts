@@ -1,4 +1,4 @@
-import { User } from '../share';
+import { User } from '@miko/share-types';
 
 interface ChatMessageInterface {
   sender: string;

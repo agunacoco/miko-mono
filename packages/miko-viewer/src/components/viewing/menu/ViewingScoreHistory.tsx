@@ -88,7 +88,7 @@ const LatestScoreHistoryView: FC<{ page: number }> = ({ page }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {scoreHistory?.map(({ id, addedScore, totalScore, createdAt, type }) => (
+            {scoreHistory?.map(({ id, addedScore, totalScore: _totalScore, createdAt, type }) => (
               <Tr key={id}>
                 <Td>{convertDate(createdAt, 'YMDHMS')}</Td>
                 <Td>{scoreIdxToStringArray[type]}</Td>

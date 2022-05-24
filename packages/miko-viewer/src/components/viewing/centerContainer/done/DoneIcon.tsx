@@ -8,6 +8,7 @@ type DoneProps = {
 };
 
 type URL = string;
+// eslint-disable-next-line @typescript-eslint/naming-convention
 type ART_BOARD = string;
 type ANIMATION = string | string[];
 

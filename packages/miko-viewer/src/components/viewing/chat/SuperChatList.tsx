@@ -6,7 +6,7 @@ import { Dispatch, FC, memo, SetStateAction, useEffect } from 'react';
 import { COLORS, DARKEN_COLORS, getColorIdxByAmount } from './Message';
 
 const SuperChatItem: FC<{ message: ChatMessageInterface; setMessages: Dispatch<SetStateAction<ChatMessageInterface[]>> }> = ({
-  message: { sender, text, timestamp, amount, itemId, user },
+  message: { sender, timestamp, amount, user },
   setMessages,
 }) => {
   const colorIdx = getColorIdxByAmount(amount as number);

@@ -1,6 +1,5 @@
 import { Badge, Box, Center, Divider, Flex, Heading, HStack, Image, Tag, TagCloseButton, TagLabel, Text } from '@chakra-ui/react';
 import { Concert } from '@miko/share-types';
-import { MarkDownView } from '@src/components/markdownEditor/MarkDownView';
 import { categoryArray, S3_URL } from '@src/const';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { motion } from 'framer-motion';

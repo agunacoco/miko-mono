@@ -26,7 +26,7 @@ type PeerFatalErrorType = 'browser-incompatible' | 'invalid-id' | 'invalid-key' 
 
 type PeerNotFatalType = 'disconnected' | 'network' | 'peer-unavailable' | 'unavailable-id' | 'webrtc';
 
-type PeerErrorType = PeerFatalErrorType | PeerNotFatalType;
+// type PeerErrorType = PeerFatalErrorType | PeerNotFatalType;
 
 const WithSocketEventLayout: FC<{ children: ReactElement }> = ({ children }) => {
   const socket = useSocket();

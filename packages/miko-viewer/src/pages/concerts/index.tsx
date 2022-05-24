@@ -1,6 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Box, Button, Center, Flex, Heading, HStack, Icon, Input, InputGroup, InputLeftElement, InputRightElement, SimpleGrid, Spacer, Text, VStack } from '@chakra-ui/react';
-import { FiFilter } from '@react-icons/all-files/fi/FiFilter';
+import { Box, Center, Heading, HStack, Input, InputGroup, InputLeftElement, SimpleGrid, Spacer, Text } from '@chakra-ui/react';
 import PaginationBtn from '@src/components/common/button/PaginationBtn';
 import CategoryFilter from '@src/components/concert/CategoryFilter';
 import ConcertList from '@src/components/home/ConcertList';

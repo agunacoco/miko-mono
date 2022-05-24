@@ -23,19 +23,14 @@ const RedirectLogic = () => {
 const SignPage = () => {
   const {
     handleSubmit,
-    control,
-    reset,
-    watch,
-    setValue,
     register,
-    getValues,
     formState: { errors, isSubmitting },
   } = useForm<{ name: string; email: string; password: string; avatar: string }>({ mode: 'all' });
 
   const onSubmit = async (data: any) => {
     // post로 보내기
     // console.log("submit");
-    // console.log(data);
+    console.log(data);
     // const result = await axios.post(
     //   `http://localhost:8080/api/users`, data
     // ).then(res => {

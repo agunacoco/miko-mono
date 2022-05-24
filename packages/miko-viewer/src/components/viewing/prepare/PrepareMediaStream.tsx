@@ -1,7 +1,7 @@
 import { toastLog } from '@src/helper';
 import { myStreamState, streamErrorState } from '@src/state/recoil';
 import { Dispatch, FC, SetStateAction, useLayoutEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import PrepareErrorAlert from './PrepareErrorAlert';
 
 // NOTE video를 true로 할경우 여러 브라우저에서 카메로 리소스 접근할때 보안상의 이유로 에러가 나올 확률이 높음
@@ -10,7 +10,7 @@ import PrepareErrorAlert from './PrepareErrorAlert';
 const getUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
 
 const PrepareMediaStream: FC<{ setReady: Dispatch<SetStateAction<boolean>> }> = ({ setReady }) => {
-  const [myStream, setMyStream] = useRecoilState(myStreamState);
+  const setMyStream = useSetRecoilState(myStreamState);
   const [streamError, setStreamError] = useRecoilState(streamErrorState);
 
   useLayoutEffect(() => {

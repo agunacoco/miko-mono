@@ -23,6 +23,7 @@ const SyncMotion = () => {
         console.info('Linear acceleration along the X-axis ' + laSensor.x);
         console.info('Linear acceleration along the Y-axis ' + laSensor.y);
         console.info('Linear acceleration along the Z-axis ' + laSensor.z);
+        console.log(e);
         setXyz(() => [laSensor.x as number, laSensor.y as number, laSensor.z as number]);
       });
 

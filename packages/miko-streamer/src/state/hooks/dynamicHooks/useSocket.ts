@@ -13,14 +13,14 @@ export const useSocket = () => {
         .on('connect', () => {
           console.log('socket connect 👌 ', window.socket.connected);
         })
-        .on('connect_error', (err) => {
+        .on('connect_error', err => {
           console.error('socket_connect_error', err);
           setTimeout(() => socket.current.connect(), 1000);
         })
-        .on('error', (err) => {
+        .on('error', err => {
           console.error('socket error', err);
         })
-        .on('disconnect', (reason) => {
+        .on('disconnect', reason => {
           console.error('socket disconnect', reason);
         }),
   );

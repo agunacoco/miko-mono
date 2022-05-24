@@ -21,6 +21,7 @@ type Data = {};
 
 export const getServerSideProps: GetServerSideProps<Data> = async context => {
   const userTicketId = context.req.cookies.userTickId;
+  console.log(userTicketId);
   // console.log(userTicketId);
   // const { data: data2 } = await axiosI.get('test');
   // console.log('laravel', data2);

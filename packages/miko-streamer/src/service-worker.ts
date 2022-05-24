@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// <reference lib="webworker" />
 /* eslint-disable no-restricted-globals */
 
@@ -14,7 +15,8 @@ import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 
-declare const self: ServiceWorkerGlobalScope;
+// declare const self: ServiceWorkerGlobalScopeEventMap;
+declare const self;
 
 clientsClaim();
 
@@ -71,7 +73,7 @@ registerRoute(
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }

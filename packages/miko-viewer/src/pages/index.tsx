@@ -1,14 +1,11 @@
-import { Badge, Box, Button, Center, Container, CSSObject, Flex, Heading, HStack, SimpleGrid, Spacer, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Container, Flex, SimpleGrid, Spacer, Stack, Text, VStack } from '@chakra-ui/react';
 import ConcertList from '@src/components/home/ConcertList';
-import MainRanking from '@src/components/home/MainRanking';
 import { getPageLaravelData } from '@src/helper/getDataFromLaravel';
 import BasicLayout from '@src/layout/BasicLayout';
-import { useCheckLogin } from '@src/state/swr';
 import { Concert } from '@miko/share-types';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { FC, ReactElement } from 'react';
-import RankingCard from '@src/components/home/MainRanking';
 import Link from 'next/link';
 
 type Data = {

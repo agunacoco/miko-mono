@@ -5,13 +5,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 const withPWA = require('next-pwa');
-const runtimeCaching = require('./src/pwa/workbox/cache.js');
 const withInterceptStdout = require('next-intercept-stdout')(
   {
     reactStrictMode: true,
   },
   text => (text.includes('Duplicate atom key') ? '' : text),
 );
+
+const runtimeCaching = require('./src/pwa/workbox/cache');
 
 const ContentSecurityPolicy = `
   media-src blob:;

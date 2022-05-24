@@ -17,8 +17,6 @@ import { Helmet } from 'react-helmet';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Descendant } from 'slate';
 
-import RichTextExample from '../../../components/markdownEditor/MarkDownEditor';
-
 interface FormInputs {
   name: string;
 }
@@ -40,7 +38,6 @@ const ConcertCreatePage = () => {
   const useDisclosureReturn = useDisclosure();
   const [content, setContent] = useState<Descendant[]>([
     {
-      type: 'paragraph',
       children: [{ text: 'This is editable ' }],
     },
   ]);
@@ -92,7 +89,6 @@ const ConcertCreatePage = () => {
               <Heading as="h3" size="lg">
                 コンテンツ
               </Heading>
-              <RichTextExample value={content} setValue={setContent} />
               <SelectWrapper
                 registerReturn={register('categoryId', {
                   required: '필수 선택입니다.',

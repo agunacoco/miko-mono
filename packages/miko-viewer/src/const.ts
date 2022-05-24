@@ -1,6 +1,6 @@
 import { DoneItem } from '@miko/share-types';
 
-const isDev = process.env.NODE_ENV !== 'production';
+export const isDev = process.env.NODE_ENV !== 'production';
 
 // Debug Mode
 export const dummyMotion = true;

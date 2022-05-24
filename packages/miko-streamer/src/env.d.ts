@@ -1,4 +1,6 @@
 /// <reference types="vite/client" />
+import type * as ivs from 'amazon-ivs-player';
+import type { Socket } from 'socket.io-client';
 
 interface ImportMetaEnv {
   readonly VITE_LARAVEL_URL: string;

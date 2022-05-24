@@ -1,4 +1,11 @@
 **/node_modules
-packages/miko-streamer/tsconfig.tsbuildinfo
 **/.eslintcache
 **/.next
+**/build
+**/temp
+**/.vercel
+**/dist
+**/sw.js
+**/workbox-*.js
+**/public/fallback-*.js
+**/tsconfig.tsbuild.info

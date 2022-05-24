@@ -4,7 +4,9 @@ import { useRive } from 'rive-react';
 
 function sleep(ms) {
   const wakeUpTime = Date.now() + ms;
-  while (Date.now() < wakeUpTime) {}
+  while (Date.now() < wakeUpTime) {
+    // do nothing
+  }
 }
 const TextTestPage = () => {
   const params: Parameters<typeof useRive>[0] = { src: '/rive/emoji.riv', autoplay: true, artboard: 'Bother', animations: 'Animation 1' };
@@ -25,7 +27,7 @@ const TextTestPage = () => {
     worker.onmessage = function (oEvent) {
       console.info('Worker said : ', oEvent);
     };
-    worker.onerror = e => console.info;
+    worker.onerror = e => console.info(e);
 
     if ('OffscreenCanvas' in window) {
       const el = document.getElementById('rive_test') as HTMLCanvasElement;

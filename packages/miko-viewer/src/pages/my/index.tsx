@@ -6,6 +6,7 @@ import { User } from '@miko/share-types';
 import Head from 'next/head';
 import { FC, ReactElement } from 'react';
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const MyCard: FC<{ data: User }> = ({ data }) => {
   return (
     <Flex width="full" justifyContent="center" p={4}>

@@ -29,8 +29,8 @@ export const SideBarNavItem = ({ link, ...rest }: NavItemProps) => {
       _hover={{
         color: '#39c5bb',
       }}
-      bg={nowPath == url && 'cyan.50'}
-      color={nowPath == url && '#39c5bb'}
+      bg={nowPath === url && 'cyan.50'}
+      color={nowPath === url && '#39c5bb'}
       userSelect="none"
       position="relative"
       onHover

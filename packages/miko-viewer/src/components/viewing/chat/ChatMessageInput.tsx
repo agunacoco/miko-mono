@@ -21,7 +21,7 @@ const ChatMessageInput = memo(() => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [newMessage, setNewMessage] = useState<string>('');
   const [amount, setAmount] = useState<number>(0);
-  const [mySyncDataConnection, setMySyncDataConnection] = useRecoilState(mySyncDataConnectionState);
+  const [mySyncDataConnection] = useRecoilState(mySyncDataConnectionState);
   const chatMode = useRecoilValue(chatModeState);
 
   const sendMessage = useCallback(

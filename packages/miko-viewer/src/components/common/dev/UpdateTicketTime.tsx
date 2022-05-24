@@ -51,7 +51,7 @@ export const UpdateTicketTime: FC = () => {
     <Box>
       <HStack justifyContent="space-between">
         <Heading fontSize="sm">ticket id</Heading>
-        <Input placeholder="minute" w="28" value={ticketId} onChange={e => setTicketId(parseInt(e.target.value))} />
+        <Input placeholder="minute" w="28" value={ticketId} onChange={e => setTicketId(parseInt(e.target.value, 10))} />
       </HStack>
       {property.map((key, idx) => (
         <HStack key={key} justifyContent="space-between">

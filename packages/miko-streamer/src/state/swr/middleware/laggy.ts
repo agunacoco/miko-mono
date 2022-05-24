@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { Middleware } from 'swr';
 // 키가 변경되더라도 데이터를 유지하기 위한 SWR 미들웨어입니다.
-const laggy: Middleware = (useSWRNext) => {
+const laggy: Middleware = useSWRNext => {
   return (key, fetcher, config) => {
     // 이전에 반환된 데이터를 저장하기 위해 ref를 사용합니다.
     const laggyDataRef = useRef<any>();

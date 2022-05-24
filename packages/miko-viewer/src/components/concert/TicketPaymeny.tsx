@@ -102,7 +102,6 @@ const TicketPaymentButton: FC<{ data: Ticket }> = ({ data: ticket }) => {
 };
 
 const TicketPay: FC<{ data: Ticket }> = ({ data: ticket }) => {
-  const { data: userData } = useUser();
   const ticketPrice = ticket.price as number;
   const [showIcon, setShowIcon] = useState(false);
   const archiveEndTime = convertDate(ticket.archiveEndTime, 'YMDHM');

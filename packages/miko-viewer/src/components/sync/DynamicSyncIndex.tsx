@@ -1,7 +1,7 @@
 import { Box, Flex, Tag } from '@chakra-ui/react';
 import { useMyPeer } from '@src/hooks/dynamicHooks';
 import { useUser } from '@src/state/swr';
-import Peer from 'peerjs';
+import { DataConnection } from 'peerjs';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 import CleanUp from '../viewing/prepare/CleanUp';
@@ -11,7 +11,7 @@ import SyncMotion from './motion/SyncMotion';
 
 const ConnectToMyPeer: FC<{ myAccountPeerId: string }> = ({ myAccountPeerId }) => {
   const myPeer = useMyPeer();
-  const [myDataConnection, setMyDataConnection] = useState<Peer.DataConnection>();
+  const [myDataConnection, setMyDataConnection] = useState<DataConnection>();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const SyncToMyPeer: FC<{ peerId: string }> = ({ peerId }) => {
 };
 
 export default function SyncPage() {
-  const [data, setData] = useState('No result');
+  const [, setData] = useState('No result');
   const { data: userData } = useUser();
   const [userPeerId, setUserPeerId] = useState<string>();
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function SyncPage() {
           <QrReader
             onResult={(result, error) => {
               if (result) {
-                setData(result?.text);
+                setData(result?.getText());
               }
 
               if (error) {

@@ -17,7 +17,7 @@ interface DoneRenderData {
 
 const DONE_HOLD_TIME = 2000;
 
-const [MAX_X, MAX_Y] = [window.innerWidth, window.innerHeight];
+const [MAX_X] = [window.innerWidth, window.innerHeight];
 
 function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);

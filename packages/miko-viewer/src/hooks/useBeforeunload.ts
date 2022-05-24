@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { useEffect, useRef } from 'react';
 
 export const useBeforeunload = (handler: (event: BeforeUnloadEvent) => void) => {

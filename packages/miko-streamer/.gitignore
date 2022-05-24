@@ -9,3 +9,4 @@ node_modules/*
 build
 **/debug.log
 **/.eslintcache
+tsconfig.tsbuildinfo
