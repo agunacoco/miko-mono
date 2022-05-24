@@ -14,6 +14,7 @@ import {
   Tag,
   Text,
   useDisclosure,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from '@miko/share-types';
@@ -149,18 +150,17 @@ const MetadataPreviewContainer: FC<{ data: MetaData; children: ReactElement; pus
       <Modal isOpen={editIsOpen} onClose={editOnClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>데이터 전송</ModalHeader>
+          <ModalHeader>データを送る</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>예약하기</Text>
-            {ticketData && <Button onClick={() => pushMetaData(ticketData.data.channelArn, data)}>지금 보내기</Button>}
+            {/* <Text>예약하기</Text> */}
+            {ticketData && <Button onClick={() => pushMetaData(ticketData.data.channelArn, data)}>今送る</Button>}
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={editOnClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -171,8 +171,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; children: ReactElement; pus
 const MetadataListContainer = () => {
   const [metadata, setMetaData] = useRecoilState(metadataState);
   const metadataFilter = useRecoilValue(metadataListFilterState);
-
-  console.log('metadata', metadata);
+  const toast = useToast();
 
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
     switch (data.data.dataType) {
@@ -189,18 +188,28 @@ const MetadataListContainer = () => {
     async (channelArn: string, metadata: MetaData) => {
       const result = await pushMetaData(channelArn, metadata);
 
-      if (result) {
-        if (result.data.result.$metadata.httpStatusCode) {
-          console.log('성공');
-          setMetaData(prev =>
-            produce(prev, draft => {
-              const idx = draft.findIndex(data => (data.createdAt = metadata.createdAt));
-              if (idx !== -1) {
-                draft[idx].used = true;
-              }
-            }),
-          );
-        }
+      if (result && result.data.result.$metadata.httpStatusCode === 204) {
+        toast({
+          title: 'Msg sended',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+        setMetaData(prev =>
+          produce(prev, draft => {
+            const idx = draft.findIndex(data => (data.createdAt = metadata.createdAt));
+            if (idx !== -1) {
+              draft[idx].used = true;
+            }
+          }),
+        );
+      } else {
+        toast({
+          title: 'Msg send failed',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
       }
     },
     [setMetaData],
