@@ -31,7 +31,7 @@ export const My3DAvatar = memo(() => {
         position="relative"
         width={AVATAR_SIZE}
         height={AVATAR_SIZE}
-        backgroundImage={!isOnAvatar ? "url('/image/temp/avatar.png')" : ''}
+        backgroundImage={!isOnAvatar ? "url('/image/pageIcon/live/avatar.png')" : ''}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
       >
