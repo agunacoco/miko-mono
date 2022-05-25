@@ -10,12 +10,11 @@ import produce from 'immer';
 export const AvatarModel: FC<{
   width: number;
   height: number;
-  path: string;
   peerId: string;
   onAntialias?: boolean | undefined;
   isMyAvatar?: boolean | undefined;
   // eslint-disable-next-line
-}> = ({ height, path, peerId, width, onAntialias, isMyAvatar }) => {
+}> = ({ height, peerId, width, onAntialias, isMyAvatar }) => {
   const tagId = 'avatar' + peerId;
   const workerRef = useRef<Worker>();
   const [currentAvatar, setCurrentAvatar] = useRecoilState(currentAvatarState);
@@ -26,6 +25,7 @@ export const AvatarModel: FC<{
     workerRef.current = worker;
     worker.onerror = e => {
       toastLog('error', 'avatar worker error', '', e.error);
+      console.log('avatar worker error', e);
     };
     worker.onmessageerror = e => {
       toastLog('error', 'avatar worker message error', '');
@@ -38,7 +38,7 @@ export const AvatarModel: FC<{
         aCanvas.className = 'used-canvas-one-more-time';
         const offCanvas = aCanvas.transferControlToOffscreen();
 
-        worker.postMessage({ type: 'init', canvas: offCanvas, path, width, height, newPeerId: peerId }, [offCanvas]);
+        worker.postMessage({ type: 'init', canvas: offCanvas, width, height, newPeerId: peerId }, [offCanvas]);
       }
     } else {
       toastLog('info', 'OffScreen Canvas 미지원 브라우저');
