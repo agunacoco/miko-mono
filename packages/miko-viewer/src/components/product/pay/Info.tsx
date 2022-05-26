@@ -21,7 +21,7 @@ const Info = ({ address, setAddress, tabIndex, setTabIndex }: InfoType) => {
   }
   return (
     <Flex w={'100%'} justifyContent="center">
-      <Flex flexDirection={'column'} w={'65%'} h="100%" p={'2%'}>
+      <Flex flexDirection={'column'} w={'100%'} h="100%" p={'2%'}>
         <Flex mt={'14%'} justifyContent={'space-between'} alignItems={'center'}>
           <Text w={'15%'}>
             お名前<span style={{ color: 'red', fontSize: '1px', marginLeft: '10%' }}>必要</span>
@@ -33,7 +33,7 @@ const Info = ({ address, setAddress, tabIndex, setTabIndex }: InfoType) => {
         </Flex>
         <CommonDivider></CommonDivider>
         <Flex justifyContent={'space-between'} alignItems={'center'}>
-          <Text w={'22%'}>
+          <Text w={'23%'}>
             お名前(ふりがな)<span style={{ color: 'red', fontSize: '1px', marginLeft: '10%' }}>必要</span>
           </Text>
           <Flex w={'70%'} justifyContent={'space-around'}>

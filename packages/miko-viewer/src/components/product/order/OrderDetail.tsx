@@ -10,28 +10,32 @@ type OrderDetailType = {
 
 export default function OrderDetail({ order }: OrderDetailType) {
   const { data: userData } = useUser();
+  // alert(orderId);
+  // const order = useSingleLaravel('/orders', orderId, {});
+  // alert(JSON.stringify(order));
   // eslint-disable-next-line no-restricted-globals
   // alert(JSON.stringify(order));
+  const orderDate = convertDate(order.createdAt, 'YMDHM');
   return (
     <Flex flexDir={'column'} h="45vh" overflow={'auto'} scrollPadding="5%">
       <Text border={'1px'} p="1%" borderRadius="xl" w={'30%'} textAlign="center">
         注文番号 - <span style={{ fontWeight: 'bold' }}>{order.id}</span>
       </Text>
       <Flex alignSelf={'center'} my="5%" justifyContent={'center'} background={'gray.100'} w="200px" h={'200px'} p={'2%'} borderRadius={'2xl'}>
-        <Image borderRadius={'md'} w={'100%'} src={`${IMAGE_DOMAIN}product_image/${order.products[0].image}`} alt="productIamge"></Image>
+        <Image borderRadius={'md'} w={'100%'} src={`${IMAGE_DOMAIN}${order.products[0].image}`} alt="productIamge"></Image>
       </Flex>
       <Text alignSelf={'center'}>{order.products[0].name}</Text>
       <Text color={'blackAlpha.500'} fontSize="xl" alignSelf={'center'}>
         {order.products[0].concert_title}
       </Text>
-      <Flex alignSelf={'end'} my="1%" w="30%" justifyContent={'end'}>
+      <Flex mr={'4%'} alignSelf={'end'} my="1%" w="30%" justifyContent={'end'}>
         <Tag variant={'outline'} mr="5%" colorScheme={`${order.color.toLowerCase()}`}>
           color
         </Tag>
         <Text>{order.color}</Text>
       </Flex>
-      <Flex alignSelf={'end'} my="1%" w="30%" justifyContent={'end'}>
-        <Tag variant={'outline'} mr="5%" colorScheme={'telegram'}>
+      <Flex mr={'4%'} alignSelf={'end'} my="1%" w="30%" justifyContent={'end'}>
+        <Tag variant={'outline'} mr="5%" colorScheme={'pink'}>
           size
         </Tag>
         <Text>{order.size}</Text>
@@ -70,7 +74,7 @@ export default function OrderDetail({ order }: OrderDetailType) {
             購入日
           </Text>
           <Text w={'170px'} textAlign="center" fontSize={'sm'}>
-            {convertDate(order.createdAt, 'YMDHM')}
+            {orderDate}
           </Text>
         </Flex>
         <Heading mt={'7%'} fontSize={'xl'}>

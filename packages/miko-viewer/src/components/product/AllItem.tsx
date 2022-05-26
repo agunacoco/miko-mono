@@ -1,40 +1,49 @@
 /* eslint-disable array-callback-return */
-import { Box, Button, Flex, Image, SimpleGrid, Text } from '@chakra-ui/react';
+import { Button, Flex, Image, SimpleGrid, Text } from '@chakra-ui/react';
+import { Pagination } from '@miko/share-types/src/share/common';
+import { Product } from '@miko/share-types/src/share/Product';
+import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { IMAGE_DOMAIN, NEXT_URL } from '@src/const';
-import { Product, Pagination } from '@miko/share-types';
-
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 const AllItem: FC<{ allItem: Pagination<Product> }> = ({ allItem }) => {
   const router = useRouter();
   return (
-    <Flex flexDir={'column'} w={'82%'}>
+    <Flex mt={'50px'} flexDir={'column'} w={'92%'}>
       <Text fontSize={'3xl'} fontWeight={'bold'}>
         このコンサートの他の商品
       </Text>
       <Flex>
-        <SimpleGrid spacing={20} p={'2%'} columns={5}>
+        <SimpleGrid spacing={'230px'} columns={5}>
           {allItem.data.map((item, key) => {
-            if (key < 5) {
+            // eslint-disable-next-line eqeqeq
+            if (key < 6 && !(parseInt(router.query?.product_id, 10) === item.id)) {
               return (
                 <Flex
+                  mt={'60px'}
+                  mb="90px"
                   onClick={() => window.open(`/concerts/${router.query.id}/products/${item.id}`, '_self')}
                   cursor={'pointer'}
-                  rounded="3%"
-                  _hover={{ boxShadow: '2xl' }}
                   flexDirection={'column'}
                   key={key}
                 >
-                  <Box>
-                    <Box>
-                      <Image src={`${IMAGE_DOMAIN}product_image/${item.image}`}></Image>
-                    </Box>
-                    <Text textAlign={'right'}>{item.name}</Text>
-                    <Text textAlign={'right'} fontWeight={'bold'}>
-                      ¥{item.price}
+                  <Flex boxShadow={'inner'} rounded="2xl" flexDir={'column'} w="200px" p={'15px'} _hover={{ boxShadow: '2xl' }}>
+                    <Flex justifyContent="center">
+                      <Flex w={'200px'} h="150px" justifyContent={'center'}>
+                        <Image rounded={'xl'} src={`${IMAGE_DOMAIN}${item.image}`} alt={item.image}></Image>
+                      </Flex>
+                    </Flex>
+                    <Text textAlign={'right'} my="7px">
+                      {item.name}
                     </Text>
-                  </Box>
+                    <Flex fontSize={'lg'} alignItems={'center'} justifyContent="end">
+                      <Text textAlign={'right'} fontWeight={'bold'}>
+                        {item.price}&nbsp;
+                      </Text>
+                      <FaCoins color="#FFC300"></FaCoins>
+                    </Flex>
+                  </Flex>
                 </Flex>
               );
             }

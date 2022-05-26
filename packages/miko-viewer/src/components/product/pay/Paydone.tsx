@@ -1,35 +1,24 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Button,
-  Flex,
-  Link,
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, Link, Table, TableCaption, TableContainer, Tbody, Td, Text } from '@chakra-ui/react';
+import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { NEXT_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
+import { useSingleLaravel } from '@src/state/swr/useLaravel';
 import { useRouter } from 'next/router';
 
 const Paydone = () => {
   const router = useRouter();
   const { data: userData } = useUser();
-  // const orders = useSingleLaravel('/orders', userData?.id, {});
+  const orders = useSingleLaravel('/orders', userData?.id, {});
+  const orderLen: any = orders.data.length;
+  const order = orders?.data[orderLen - 1];
   return (
     <Flex flexDir={'column'}>
-      <Text fontSize={'3xl'} textAlign={'center'} my={'5%'}>
+      <Text fontSize={'3xl'} textAlign={'center'} my={'10%'}>
         ありがとうございます。ご注文手続きが完了しました。
       </Text>
-      <TableContainer alignSelf={'center'} w={'70%'}>
+      <TableContainer alignSelf={'center'} w={'100%'}>
         <Table mb={'15%'}>
-          <TableCaption textAlign={'left'}>
+          <TableCaption mt={'80px'} textAlign={'left'}>
             会員様は、会員メニュー内の
             <Link color="blue.500" href="#">
               「お買い物リスト」
@@ -42,28 +31,21 @@ const Paydone = () => {
           <Tbody>
             <Td>ご注文番号</Td>
             <Td textAlign={'center'}>
-              {/* <Flex justifyContent={'end'}> */}
-              <Accordion allowMultiple>
-                <Flex justifyContent={'center'}>
-                  <AccordionItem>
-                    <AccordionButton color={'blue.500'}>
-                      {/* {data.id} */}
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel>data</AccordionPanel>
-                  </AccordionItem>
-                </Flex>
-              </Accordion>
-              {/* </Flex> */}
+              <Text as="u">{order.id}</Text>
             </Td>
           </Tbody>
           <Tbody>
             <Td>お支払い総額(コイン)</Td>
-            <Td textAlign={'center'}>data</Td>
+            <Td textAlign={'center'} color="#EE5338">
+              <Flex justifyContent={'center'} alignItems="center">
+                {order.total_price}&nbsp;
+                <FaCoins color="#FFC300" />
+              </Flex>
+            </Td>
           </Tbody>
           <Tbody>
             <Td>今回のお買い物のポイント</Td>
-            <Td textAlign={'center'}>data</Td>
+            <Td textAlign={'center'}>{order.total_price * 0.05}P</Td>
           </Tbody>
           <Tbody>
             <Td>ご注文履歴</Td>

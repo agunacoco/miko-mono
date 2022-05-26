@@ -1,5 +1,5 @@
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
-import { Product } from '@miko/share-types';
+import { Product } from '@miko/share-types/';
 import { FC, useState } from 'react';
 import Comment from './Comment';
 import Delivery from './Delivery';
@@ -8,9 +8,9 @@ import QnA from './QnA';
 
 const Details: FC<{ item: Product }> = ({ item }) => {
   const [ch, setCh] = useState(1);
-  console.log(ch);
+  // console.log(ch);
   return (
-    <Flex flexDirection={'column'} w={'100vw'} overflow="auto" mt={'4%'} h="120vh">
+    <Flex flexDirection={'column'} w={'100vw'} overflow="auto" mt={'150px'} h="80vh">
       <Box alignSelf={'center'} w={'60%'} borderTop="2px" cursor={'pointer'}>
         <SimpleGrid bg="gray.100" alignItems={'center'} columns={4} h={'80px'} fontSize={'xl'} textAlign={'center'}>
           <Box onClick={() => setCh(1)}>

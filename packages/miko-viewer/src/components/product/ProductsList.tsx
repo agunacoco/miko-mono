@@ -1,11 +1,12 @@
-import { Box, Flex, Image, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
+import { Flex, Image, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
+import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { IMAGE_DOMAIN } from '@src/const';
-import { Product } from '@miko/share-types';
+import { Concert, Product } from '@src/types/share';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
-const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
+const ProductsList: FC<{ products: Product[]; concert: Concert }> = ({ products, concert }) => {
   const router = useRouter();
   const [isLargerThan960] = useMediaQuery('(min-width: 960px)');
   return (
@@ -14,13 +15,22 @@ const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
         <Link key={id} href={`/concerts/${router.query.id}/products/${item.id}`}>
           <a>
             {/* <Flex justifyItems={'center'}> */}
-            <Box _hover={{ boxShadow: '2xl' }} rounded="md" p={'3%'}>
-              <Image border={'solid'} src={`${IMAGE_DOMAIN}product_image/${item.image}`} alt={item.name}></Image>
-              <Text>{item.name}</Text>
-              <Flex justifyContent={'flex-end'}>
-                <Text fontWeight={'bold'}>¥{item.price}</Text>
+            <Flex flexDir={'column'} alignItems="center" rounded="2xl" _hover={{ boxShadow: '2xl' }} p={'3%'}>
+              {/* <Flex p={'2%'} bg="blackAlpha.200" rounded="2xl"> */}
+              <Flex justifyContent={'center'} w={'200px'} h="200px" bg={'white'}>
+                <Image h="200px" src={`${IMAGE_DOMAIN} ${item.image}`} rounded="2xl" alt={item.name}></Image>
               </Flex>
-            </Box>
+              {/* </Flex> */}
+              <Text my={'10px'} textAlign={'right'}>
+                {item.name}
+              </Text>
+              <Flex alignSelf={'end'} alignItems="center">
+                <Text fontSize="lg" fontWeight={'bold'}>
+                  {item.price}&nbsp;
+                </Text>
+                <FaCoins fontSize={'lg'} color="#FFC300"></FaCoins>
+              </Flex>
+            </Flex>
             {/* </Flex> */}
           </a>
         </Link>

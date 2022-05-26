@@ -5,7 +5,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
-  Box,
   Button,
   Flex,
   Image,
@@ -19,6 +18,7 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { FaShoppingCart } from '@react-icons/all-files/fa/FaShoppingCart';
@@ -46,6 +46,8 @@ export default function ProductList({ product, setCartCount }: ProductType) {
   const { data: userData } = useUser();
   const cancelRef = useRef(null);
 
+  const toast = useToast();
+
   function resetOptions() {
     setSize('');
     setColor('');
@@ -55,7 +57,13 @@ export default function ProductList({ product, setCartCount }: ProductType) {
   function onCart() {
     console.log('onCart');
     if (stockValue === 0 || colorValue === '' || sizeValue === '') {
-      alert('オプションを全部選択して下さい。');
+      toast({
+        title: 'エラー',
+        description: 'オプションを全部選択して下さい。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (stockValue !== 0 && colorValue !== '' && sizeValue !== '') {
       axios
         .post(
@@ -69,12 +77,20 @@ export default function ProductList({ product, setCartCount }: ProductType) {
           },
           // { withCredentials: true },
         )
-        .then(() => {
+        .then(res => {
           setCartCount((prev: number) => prev + 1);
           resetOptions();
-          alert('カートに入れました。');
+          toast({
+            title: '完了',
+            description: 'カートに入れました。',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+          // cart refresh
+          console.log(JSON.stringify(res.data));
         })
-        .catch(error => alert(error));
+        .catch(error => console.log(error));
     }
   }
 
@@ -99,9 +115,21 @@ export default function ProductList({ product, setCartCount }: ProductType) {
 
   function goBuy() {
     if (stockValue === 0 || colorValue === '' || sizeValue === '') {
-      alert('オプションを全部選択して下さい。');
+      toast({
+        title: 'エラー',
+        description: 'オプションを全部選択して下さい。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (address === '') {
-      alert('ご住所を入力してください。');
+      toast({
+        title: 'エラー',
+        description: 'ご住所を入力してください。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (address !== '' && stockValue !== 0 && colorValue !== '' && sizeValue !== '') {
       axios
         .post(`${LARAVEL_URL}/orders`, {
@@ -114,23 +142,29 @@ export default function ProductList({ product, setCartCount }: ProductType) {
           total_price: totalPrice,
           product_id: product.id,
         })
-        .then(response => {
+        .then(() => {
           // confirmSwitch();
-          console.log(response);
+          toast({
+            title: '完了',
+            description: 'ご注文が完了しました。',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
           resetOptions();
           onClose();
           // return <BuyAlert></BuyAlert>;
         })
-        .catch(err => alert(err));
+        .catch(err => console.log(err));
     }
   }
   // alert(size);
   return (
     <Flex mb={'200px'} justifyContent={'center'}>
-      <Flex alignItems={'center'} flexDir="column">
-        <Box w={'300px'}>
-          <Image alt="product_image" src={`${IMAGE_DOMAIN}product_image/${product.image}`} boxSize={'full'}></Image>
-        </Box>
+      <Flex alignItems={'center'} flexDir="column" boxShadow="inner" p={'2%'} borderRadius="2xl">
+        <Flex w={'250px'} h={'250px'} justifyContent="center">
+          <Image alt="product_image" src={`${IMAGE_DOMAIN}${product.image}`}></Image>
+        </Flex>
         <Text>{product.name}</Text>
         <Text fontWeight={'bold'}>¥{product.price}</Text>
         <Flex mt={'5%'} w={'300px'} justifyContent="space-around">

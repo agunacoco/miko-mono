@@ -4,7 +4,7 @@ const Status = ({ status }) => {
   return (
     <Flex justifyContent={'center'} mb={'10%'}>
       <SimpleGrid fontSize={'lg'} w={'80%'} columns={4} textAlign={'center'}>
-        {status == 1 ? (
+        {status === 1 ? (
           <Text p={'2%'} bg={'gray.200'} border={'1px'}>
             カートの商品
           </Text>
@@ -13,7 +13,7 @@ const Status = ({ status }) => {
             カートの商品
           </Text>
         )}
-        {status == 2 ? (
+        {status === 2 ? (
           <Text p={'2%'} bg={'gray.200'} border={'1px'}>
             お客様情報
           </Text>
@@ -22,7 +22,7 @@ const Status = ({ status }) => {
             お客様情報
           </Text>
         )}
-        {status == 3 ? (
+        {status === 3 ? (
           <Text p={'2%'} bg={'gray.200'} border={'1px'}>
             ご注文内容確認
           </Text>
@@ -31,7 +31,7 @@ const Status = ({ status }) => {
             ご注文内容確認
           </Text>
         )}
-        {status == 4 ? (
+        {status === 4 ? (
           <Text p={'2%'} bg={'gray.200'} border={'1px'}>
             完了
           </Text>

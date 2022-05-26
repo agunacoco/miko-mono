@@ -24,16 +24,19 @@ import React, { FC, forwardRef, useEffect, useImperativeHandle, useState } from 
 import Carts from './Carts';
 import Product from './Product';
 
-const CartView: FC<{ size: string; cartIsOpen: boolean; setCartCount: (value: React.SetStateAction<number>) => void }> = ({ size, cartIsOpen, setCartCount }) => {
+const CartView: FC<{ size: string; cartIsOpen: boolean; setCartCount: (value: React.SetStateAction<unknown>) => void }> = ({ size, cartIsOpen, setCartCount }) => {
   const { data: userData } = useUser();
   const cart = useSingleLaravel('/cart_products', userData?.id, {});
   useEffect(() => {
+    console.log('ㄹㅁㄴㄹㅁ' + cart.data.length);
     setCartCount(cart.data?.length);
   }, [cart.data?.length, setCartCount]);
   if (cartIsOpen && cart.data) return <Carts cart={cart.data}></Carts>;
 
   return <Product size={size} setCartCount={setCartCount} />;
 };
+
+console.log('setCart');
 
 const SideShop = forwardRef((_, ref) => {
   const [cartCount, setCartCount] = useState(0);
@@ -55,19 +58,10 @@ const SideShop = forwardRef((_, ref) => {
     sizeValue = 'md';
   }
 
-  // const [bg, setBg] = useState('100');
-
   const onOpacity = (event: number) => {
     if (event > 31) {
       setOpacity(event);
     }
-    // if (event === 100) {
-    //   setBg(`rgba(255,255,255, 1)`);
-    //   // bg = `rgba(255,255,255)`;/
-    // } else {
-    //   setBg(`rgba(255,255,255, .${event / 10})`);
-    // }
-    // // alert(ov);
   };
 
   return (
@@ -106,6 +100,7 @@ const SideShop = forwardRef((_, ref) => {
             mr={3}
             onClick={() => {
               onClose();
+              setCartOpen(false);
               setOpacity(100);
             }}
           >

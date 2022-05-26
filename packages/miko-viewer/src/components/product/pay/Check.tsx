@@ -3,19 +3,12 @@ import { Button, Divider, Flex, Image, List, ListIcon, ListItem, Table, TableCon
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import CommonDivider from '@src/components/common/divider/CommonDivider';
 import { IMAGE_DOMAIN } from '@src/const';
+import { convertDate } from '@src/helper';
 import { useUser } from '@src/state/swr/useUser';
 import { Cart } from '@src/types/local';
 import PaymentModal from './PaymentModal';
 
-type CheckType = {
-  address: string;
-  carts: Cart;
-  setTabIndex: Function;
-  setPayCheck: Function;
-};
-
-const Check = ({ address, carts, setTabIndex, setPayCheck }: CheckType) => {
-  // console.log(data);
+const Check = ({ address, carts, setTabIndex, setPayCheck }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: userData } = useUser();
   let totalCoast: number = 0;
@@ -28,43 +21,43 @@ const Check = ({ address, carts, setTabIndex, setPayCheck }: CheckType) => {
     size.push(item.size);
     color.push(item.color);
     quantity.push(item.quantity);
-    // alert(JSON.stringify(item));
     if (!productIds.includes(item.product_id)) productIds.push(item.product_id);
     return 1;
   });
-  // console.log(typeof productIds);
 
   return (
-    <Flex w={'50%'} p={'2%'} ml={'25%'} justifyContent="center" flexDir={'column'}>
+    <Flex mt={'5%'} p={'2%'} justifyContent="center" flexDir={'column'}>
       <TableContainer w={'100%'} alignSelf={'center'}>
         <Table border={'1px'} borderColor="blackAlpha.200" variant={'unstyled'}>
           <Tbody>
             <Tr borderBottom={'1px'} borderColor="blackAlpha.200">
               <Td background={'blackAlpha.100'}>お届けの日時</Td>
-              <Td>{}</Td>
+              <Td>{convertDate(Date.now() + 6.048e8)}&nbsp;(予定)</Td>
             </Tr>
             <Tr borderBottom={'1px'} borderColor="blackAlpha.200">
               <Td background={'blackAlpha.100'}>お届け先</Td>
               <Td>
-                お名前&nbsp;：&nbsp;{userData?.name} 様<br />
+                お名前&nbsp;:&nbsp;{userData?.name} 様<br />
                 <CommonDivider />
-                ご住所&nbsp;：&nbsp;{address}
+                ご住所&nbsp;:&nbsp;{address}
               </Td>
             </Tr>
             <Tr borderBottom={'1px'} borderColor="blackAlpha.200">
               <Td background={'blackAlpha.100'}>お支払い</Td>
-              <Td>コイン</Td>
+              <Td color={'red'}>コイン</Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
       <Text my="7%" fontSize={'2xl'}>
-        商品情報({carts.length})
+        商品情報&nbsp;({carts.length})
       </Text>
       <Flex rounded={'xl'} w="100%" h={'40%'} alignSelf="center" border="solid" p={'3%'} borderColor={'blackAlpha.200'} overflowX="scroll">
         {carts.map((item: Cart, key: number) => (
           <Flex key={key} justifyContent="space-around" mr={'10%'} w={'100%'} flexShrink={0}>
-            <Image w={'25%'} src={`${IMAGE_DOMAIN}product_image/${item.products[0].image}`} alt="productImage"></Image>
+            <Flex w={'150px'} h={'150px'} justifyContent={'center'}>
+              <Image src={`${IMAGE_DOMAIN}${item.products[0].image}`} alt="productImage"></Image>
+            </Flex>
             <Flex w={'65%'} flexDir={'column'}>
               <Text fontSize={'lg'}>{item.products[0].name}</Text>
               <Text mb={'4%'} fontWeight={'bold'}>

@@ -11,6 +11,7 @@ import {
   Flex,
   Input,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { LARAVEL_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
@@ -29,6 +30,7 @@ export default function BuyCart({ cart }: CartType) {
   const cancelRef = useRef(null);
   const { data: userData } = useUser();
   let totalCoast: number = 0;
+  const toast = useToast();
   const productIds: Array<number> = [];
   const quantity: Array<number> = [];
   const size: Array<string> = [];
@@ -59,11 +61,24 @@ export default function BuyCart({ cart }: CartType) {
         })
         .then(() => {
           onClose();
-          // setDone(true);
-          alert('ご注文が完了しました。');
+          toast({
+            title: '完了',
+            description: 'ご注文が完了しました。',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+          // setCart(res.data);
         })
         .catch(err => console.log(err));
-    } else alert('ご住所を入力してください。');
+    } else
+      toast({
+        title: 'エラー',
+        description: 'ご住所を入力して下さい。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
   }
   function inputAddress(e: ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value);
