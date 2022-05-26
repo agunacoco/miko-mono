@@ -15,7 +15,7 @@ const ProductDetail: FC<{ item: Product }> = ({ item }) => {
   // console.log(carts);
   // alert(carts.length);
   // alert(JSON.stringify(carts));
-  const [cartCount, setCartCount] = useState(carts?.length);
+  const [cartCount, setCartCount] = useState(Number(carts?.length));
   // if (carts) {
   //   setCartCount(carts.length);
   // }

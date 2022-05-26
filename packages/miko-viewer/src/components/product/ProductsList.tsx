@@ -1,12 +1,12 @@
 import { Flex, Image, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
+import { Product, Concert } from '@miko/share-types';
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { IMAGE_DOMAIN } from '@src/const';
-import { Concert, Product } from '@src/types/share';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
-const ProductsList: FC<{ products: Product[]; concert: Concert }> = ({ products, concert }) => {
+const ProductsList: FC<{ products: Product[]; concert: Concert }> = ({ products }) => {
   const router = useRouter();
   const [isLargerThan960] = useMediaQuery('(min-width: 960px)');
   return (

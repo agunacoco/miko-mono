@@ -1,5 +1,4 @@
-import { ArrowForwardIcon, PlusSquareIcon } from '@chakra-ui/icons';
-import { Button, ButtonGroup, Flex, IconButton, Popover, PopoverBody, PopoverContent, PopoverFooter, PopoverTrigger } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex, Popover, PopoverBody, PopoverContent, PopoverFooter } from '@chakra-ui/react';
 import { LARAVEL_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
 import axios from 'axios';
@@ -19,10 +18,10 @@ type PopOverProps = {
 
 const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, setCartCount }: PopOverProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const open = () => setIsOpen(true);
+  // const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-  const cartOpen = () => setCartIsOpen(true);
+  // const cartOpen = () => setCartIsOpen(true);
   const cartClose = () => setCartIsOpen(false);
   const router = useRouter();
   const { data: userData } = useUser();
@@ -67,7 +66,7 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
     <Flex w={'100%'} justifyContent={'space-between'}>
       <Flex>
         <Popover isOpen={cartIsOpen} onClose={cartClose} returnFocusOnClose={false} placement="bottom" closeOnBlur={false}>
-          <PopoverTrigger>
+          {/* <PopoverTrigger>
             <ButtonGroup
               _hover={{ shadow: 'xl' }}
               float={'right'}
@@ -81,7 +80,7 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
               <Button bg={'gray.100'}>カートに入れる</Button>
               <IconButton bg={'gray.100'} aria-label="Cart" icon={<PlusSquareIcon></PlusSquareIcon>}></IconButton>
             </ButtonGroup>
-          </PopoverTrigger>
+          </PopoverTrigger> */}
           <PopoverContent>
             <PopoverBody>カートに入れますか？</PopoverBody>
             <PopoverFooter d="flex" justifyContent="flex-end">
@@ -105,7 +104,7 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
       </Flex>
       <Flex>
         <Popover isOpen={isOpen} onClose={close} returnFocusOnClose={false} placement="bottom" closeOnBlur={false}>
-          <PopoverTrigger>
+          {/* <PopoverTrigger>
             <ButtonGroup
               _hover={{ shadow: 'xl' }}
               onClick={() => {
@@ -118,7 +117,7 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
               <Button bg={'gray.100'}>注文する</Button>
               <IconButton bg={'gray.100'} aria-label="Buy" icon={<ArrowForwardIcon></ArrowForwardIcon>}></IconButton>
             </ButtonGroup>
-          </PopoverTrigger>
+          </PopoverTrigger> */}
           <PopoverContent>
             <PopoverBody>レージに進みますか？</PopoverBody>
             <PopoverFooter d="flex" justifyContent="flex-end">

@@ -18,7 +18,7 @@ const AllItem: FC<{ allItem: Pagination<Product> }> = ({ allItem }) => {
         <SimpleGrid spacing={'230px'} columns={5}>
           {allItem.data.map((item, key) => {
             // eslint-disable-next-line eqeqeq
-            if (key < 6 && !(parseInt(router.query?.product_id, 10) === item.id)) {
+            if (key < 6 && !(parseInt(router.query.product_id[0], 10) === item.id)) {
               return (
                 <Flex
                   mt={'60px'}

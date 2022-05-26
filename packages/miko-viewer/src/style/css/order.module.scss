@@ -12,7 +12,7 @@
   animation-fill-mode: forwards;
 }
 
-@-webkit-keyframes textAnimate {
+@keyframes textAnimate {
   0% {
     stroke-dasharray: 0 50%;
   }
@@ -32,7 +32,7 @@
 .flex {
   animation: flexAnimate 1s;
   // animation-direction: reverse;
-  @-webkit-keyframes flexAnimate {
+  @keyframes flexAnimate {
     from {
       // margin-left: 100%;
       width: 0;

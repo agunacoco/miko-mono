@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight';
 import CommonDivider from '@src/components/common/divider/CommonDivider';
 import Address from './Address';
@@ -12,9 +12,16 @@ type InfoType = {
 };
 
 const Info = ({ address, setAddress, tabIndex, setTabIndex }: InfoType) => {
+  const toast = useToast();
   function goNext() {
     if (address === '   -') {
-      alert('ご住所を入力してください。');
+      toast({
+        title: 'error',
+        description: 'ご住所を入力してください。',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
     } else {
       setTabIndex(tabIndex + 1);
     }
