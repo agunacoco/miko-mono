@@ -60,6 +60,7 @@ export interface Pagination<T> {
 }
 
 export interface CommonDataResponse<T> {
+  length: unknown;
   data: T;
 }
 

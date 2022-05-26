@@ -2,13 +2,14 @@ import { CloseButton, Flex, Image, Tag, TagLabel, Text } from '@chakra-ui/react'
 import { Cart } from '@miko/share-types';
 import { FaCoins } from '@react-icons/all-files/fa/FaCoins';
 import { IMAGE_DOMAIN, LARAVEL_URL } from '@src/const';
-import axios from 'axios';
 import { FC } from 'react';
+import { axiosI } from '../../../state/fetcher';
 
 const CartItem: FC<{ cart: Cart }> = ({ cart }) => {
-  function deleteCart(cartId: number) {
-    axios
-      .delete(`${LARAVEL_URL}/cart_products/${cartId}`)
+  function deleteCart(productId: number) {
+    axiosI
+      .delete(`${LARAVEL_URL}/cart_products/${productId}`)
+      // eslint-disable-next-line no-restricted-globals
       .then(() => location.reload())
       .catch(error => console.log(error));
   }
@@ -17,8 +18,8 @@ const CartItem: FC<{ cart: Cart }> = ({ cart }) => {
       {cart
         ? cart.map((item: Cart, key: number) => {
             return (
-              <Flex alignItems={'center'} borderRadius={'2xl'} shadow="lg" h={'35%'} key={key} mb="7%" justifyContent={'space-evenly'} w={'100%'}>
-                <Image w="100px" h="100px" src={`${IMAGE_DOMAIN}product_image/${item.products[0].image}`} rounded={'30%'} alt="productImage"></Image>
+              <Flex p={'2%'} alignItems={'center'} borderRadius={'2xl'} shadow="lg" key={key} mb="7%" justifyContent={'space-evenly'} w={'100%'}>
+                <Image w="100px" h="100px" src={`${IMAGE_DOMAIN}${item.products[0].image}`} rounded={'30%'} alt="productImage"></Image>
                 <Flex w={'30%'} flexDirection={'column'}>
                   <Text>{item.products[0].name}</Text>
                   <Tag
@@ -39,7 +40,7 @@ const CartItem: FC<{ cart: Cart }> = ({ cart }) => {
                     </TagLabel>
                   </Tag>
                 </Flex>
-                <Flex w={'13%'} justifyContent={'center'} alignItems="center">
+                <Flex w={'14%'} justifyContent={'center'} alignItems="center">
                   {/* {item.quantity === 1 ? (
                     <Text fontWeight="bold">{item.quantity}点</Text>
                   ) : ( */}
@@ -54,7 +55,7 @@ const CartItem: FC<{ cart: Cart }> = ({ cart }) => {
                   <FaCoins color="#FFC300" />
                 </Flex>
                 <Flex ml={'3%'} justifyContent={'center'} alignItems="center">
-                  <CloseButton color={'red.300'} onClick={() => deleteCart(item.id)}></CloseButton>
+                  <CloseButton color={'red.300'} onClick={() => deleteCart(item.product_id)}></CloseButton>
                 </Flex>
               </Flex>
             );

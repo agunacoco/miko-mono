@@ -1,0 +1,63 @@
+.text {
+  stroke: black;
+  stroke-width: 1px;
+  //   stroke-dasharray: 0%;
+  font-weight: 400;
+  font-family: fantasy;
+  font-style: oblique;
+  fill: transparent;
+  animation: textAnimate 3s;
+  //   animation-direction:alternate-reverse;
+  // animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes textAnimate {
+  0% {
+    stroke-dasharray: 0 50%;
+  }
+  50% {
+    stroke-dasharray: 30 50%;
+  }
+  100% {
+    //   stroke-dasharray: 50% 0;
+    fill: black;
+    stroke-dasharray: 50 0%;
+  }
+  //   to {
+  //     fill: black;
+  //   }
+}
+
+.flex {
+  animation: flexAnimate 1s;
+  // animation-direction: reverse;
+  @keyframes flexAnimate {
+    from {
+      // margin-left: 100%;
+      width: 0;
+    }
+
+    to {
+      // margin-left: 0%;
+      width: 8%;
+    }
+  }
+}
+
+.flexReverse {
+  background-color: black;
+  animation: flexAnimate 2s;
+  animation-direction: reverse;
+  @-webkit-keyframes flexAnimate {
+    from {
+      // margin-left: 100%;
+      width: 0;
+    }
+
+    to {
+      // margin-left: 0%;
+      width: 8%;
+    }
+  }
+}

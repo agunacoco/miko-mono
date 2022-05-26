@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Flex, Select } from '@chakra-ui/react';
 import { enterTicketDataState } from '@src/state/recoil';
 import { usePageLaravel } from '@src/state/swr/useLaravel';
@@ -55,7 +56,6 @@ export default function Product({ size, setCartCount }: Type) {
       {products && size === 'md' ? (
         <Flex flexDir={'column'} alignItems="center" p={'4%'} justifyContent="space-between" overflow="auto">
           {sortedProduct
-            // eslint-disable-next-line array-callback-return
             ?.filter(product => {
               if (searchQuery === '') return product;
               if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
@@ -68,9 +68,16 @@ export default function Product({ size, setCartCount }: Type) {
         </Flex>
       ) : (
         <Flex flexWrap={'wrap'} alignItems="center" p={'4%'} justifyContent="space-between" overflow="auto">
-          {sortedProduct?.map((product, key) => {
-            return <ProductList setCartCount={setCartCount} key={key} product={product}></ProductList>;
-          })}
+          {sortedProduct
+            ?.filter(product => {
+              if (searchQuery === '') return product;
+              if (product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+                return product;
+              }
+            })
+            .map((product, key) => {
+              return <ProductList setCartCount={setCartCount} key={key} product={product}></ProductList>;
+            })}
         </Flex>
       )}
     </Flex>

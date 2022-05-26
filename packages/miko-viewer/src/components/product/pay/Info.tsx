@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight';
 import CommonDivider from '@src/components/common/divider/CommonDivider';
 import Address from './Address';
@@ -12,16 +12,23 @@ type InfoType = {
 };
 
 const Info = ({ address, setAddress, tabIndex, setTabIndex }: InfoType) => {
+  const toast = useToast();
   function goNext() {
     if (address === '   -') {
-      alert('ご住所を入力してください。');
+      toast({
+        title: 'error',
+        description: 'ご住所を入力してください。',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
     } else {
       setTabIndex(tabIndex + 1);
     }
   }
   return (
     <Flex w={'100%'} justifyContent="center">
-      <Flex flexDirection={'column'} w={'65%'} h="100%" p={'2%'}>
+      <Flex flexDirection={'column'} w={'100%'} h="100%" p={'2%'}>
         <Flex mt={'14%'} justifyContent={'space-between'} alignItems={'center'}>
           <Text w={'15%'}>
             お名前<span style={{ color: 'red', fontSize: '1px', marginLeft: '10%' }}>必要</span>
@@ -33,7 +40,7 @@ const Info = ({ address, setAddress, tabIndex, setTabIndex }: InfoType) => {
         </Flex>
         <CommonDivider></CommonDivider>
         <Flex justifyContent={'space-between'} alignItems={'center'}>
-          <Text w={'22%'}>
+          <Text w={'23%'}>
             お名前(ふりがな)<span style={{ color: 'red', fontSize: '1px', marginLeft: '10%' }}>必要</span>
           </Text>
           <Flex w={'70%'} justifyContent={'space-around'}>

@@ -3,8 +3,8 @@ import { ChangeEventHandler, useState } from 'react';
 import PopOver from './PopOver';
 
 type OptionProps = {
-  color: string;
-  size: string;
+  color: string[];
+  size: string[];
   stock: number;
   setCartCount: Function;
   cartCount: number;
@@ -51,13 +51,13 @@ const OptionSelect = ({ color, size, stock, setCartCount, cartCount }: OptionPro
       </Select>
       {/* {count !== 0 ? null : <Text align={"right"} color={"red"}>数量を選択してください。</Text>} */}
       <Select mb={'4%'} placeholder="カラー" value={colorValue} onChange={onColorChange}>
-        {JSON.parse(color).map((value, key) => {
+        {color.map((value, key) => {
           return <option key={key}>{value}</option>;
         })}
       </Select>
       {/* {color !== "" ? null : <Text align={"right"} color={"red"}>カラーを選択してください。</Text>} */}
       <Select mb={'4%'} placeholder="サイズ" value={sizeValue} onChange={onSizeChange}>
-        {JSON.parse(size).map((value, key) => {
+        {size.map((value, key) => {
           return <option key={key}>{value}</option>;
         })}
       </Select>
