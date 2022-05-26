@@ -33,6 +33,7 @@ export default function ProductCard({ product, onCreate, onDelete }) {
   const [colorValue, setColorValue] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [setOptions, setSetOptions] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const optionList = { product_id: product.id, size: sizeValue, quantity: quantityValue, color: colorValue };
   // options = [...option];
   // let flexStyle = styles.flex;
@@ -77,7 +78,7 @@ export default function ProductCard({ product, onCreate, onDelete }) {
       onCreate(optionList);
       // resetOptions();
     }
-  }, [setOptions]);
+  }, [onCreate, optionList, setOptions]);
   return (
     <Flex w={'47%'} rounded="2xl" mb={'5%'}>
       {/* <Flex w={'8%'} flexDir="column" fontSize={'2xl'} mt="3%">

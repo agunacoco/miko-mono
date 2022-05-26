@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Flex, Popover, PopoverBody, PopoverContent, PopoverFooter } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex, Popover, PopoverBody, PopoverContent, PopoverFooter, useToast } from '@chakra-ui/react';
 import { LARAVEL_URL } from '@src/const';
 import { useUser } from '@src/state/swr';
 import axios from 'axios';
@@ -25,12 +25,19 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
   const cartClose = () => setCartIsOpen(false);
   const router = useRouter();
   const { data: userData } = useUser();
+  const toast = useToast();
   console.log(color);
   // axios.defaults.withCredentials = true;
   function onCart() {
     console.log('onCart');
     if (count === 0 || color === '' || size === '') {
-      alert('オプションを全部選択して下さい。');
+      toast({
+        title: 'エラー',
+        description: 'オプションを全部選択して下さい。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (count !== 0 && color !== '' && size !== '') {
       setCartCount(cartCount + 1);
       axios
@@ -57,7 +64,13 @@ const PopOver = ({ count, color, size, setStock, setColor, setSize, cartCount, s
   function onBuy() {
     console.log('onBuy');
     if (count === 0 || color === '' || size === '') {
-      alert('オプションを全部選択して下さい。');
+      toast({
+        title: 'エラー',
+        description: 'オプションを全部選択して下さい。',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (count !== 0 && color !== '' && size !== '') {
       router.push(`/concerts/${router.query.id}/products/purchase`);
     }
