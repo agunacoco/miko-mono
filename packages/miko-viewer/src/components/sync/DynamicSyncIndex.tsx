@@ -7,24 +7,15 @@ import { QrReader } from 'react-qr-reader';
 import CleanUp from '../viewing/prepare/CleanUp';
 import PreparePeerConnectToServer from '../viewing/prepare/PreparePeerConnectToServer';
 import { ChatInput } from './chat/ChatInput';
-import SyncMotion from './motion/SyncMotion';
 
 const ConnectToMyPeer: FC<{ myAccountPeerId: string }> = ({ myAccountPeerId }) => {
-  const myPeer = useMyPeer();
+  const myPeer = useMyPeer(myAccountPeerId + 'sync');
   const [myDataConnection, setMyDataConnection] = useState<DataConnection>();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const dataConnection = myPeer.connect(myAccountPeerId, { metadata: { type: 'sync' } });
     setMyDataConnection(dataConnection);
-    // dataConnection.on('data', (event: DataConnectionEvent) => {
-    //   switch (event.type) {
-    //     case 'done':
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // });
     dataConnection.on('open', () => {
       console.info('open!!!');
       setIsOpen(true);
@@ -42,9 +33,11 @@ const ConnectToMyPeer: FC<{ myAccountPeerId: string }> = ({ myAccountPeerId }) =
 
   return (
     <Box width="full">
-      <SyncMotion />
-      <Tag colorScheme={isOpen ? 'green' : 'red'}>Sync</Tag>
-      <ChatInput sendData={sendDataToMe} />
+      {/* <SyncMotion /> */}
+      <Box position="fixed" top="0" padding="1">
+        <Tag colorScheme={isOpen ? 'green' : 'red'}>Sync</Tag>
+      </Box>
+      <ChatInput sendData={sendDataToMe} dataConnection={myDataConnection} />
     </Box>
   );
 };
@@ -56,8 +49,9 @@ const SyncToMyPeer: FC<{ peerId: string }> = ({ peerId }) => {
 
   return (
     <>
-      {isReadyPeer ? <ConnectToMyPeer myAccountPeerId={peerId} /> : <PreparePeerConnectToServer isExitedRef={isExitedRef} setReady={setIsReadyPeer} peerId={syncPeerId} />}
+      <PreparePeerConnectToServer isExitedRef={isExitedRef} setReady={setIsReadyPeer} peerId={syncPeerId} />
       <CleanUp isExitedRef={isExitedRef} peerId={syncPeerId} />
+      {isReadyPeer && <ConnectToMyPeer myAccountPeerId={peerId} />}
     </>
   );
 };
@@ -67,7 +61,7 @@ export default function SyncPage() {
   const { data: userData } = useUser();
   const [userPeerId, setUserPeerId] = useState<string>();
   useEffect(() => {
-    setUserPeerId(userData!.uuid);
+    setUserPeerId(userData?.uuid);
   }, [userData]);
 
   return (
