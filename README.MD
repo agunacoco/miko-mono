@@ -5,7 +5,7 @@
 ## Repository
 
 - 当レポジトリ：フロントエンド Mono Repository
-  - 視聴者側フロントエンド　（旧: https://github.com/aio39/Miko-FE-Viewer　）
+  - 視聴者側フロントエンド　（旧: https://github.com/aio39/Miko-FE-Viewer)
   - ストリーマー側フロントエンド (旧: https://github.com/aio39/Miko-FE-Streamer)
 - RestAPI Laravel バックエンド： https://github.com/aio39/Miko-Laravel
 - Socket Nest バックエンド： : https://github.com/aio39/Miko-Nest
