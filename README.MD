@@ -8,7 +8,7 @@
   - 視聴者側フロントエンド　（旧: https://github.com/aio39/Miko-FE-Viewer)
   - ストリーマー側フロントエンド (旧: https://github.com/aio39/Miko-FE-Streamer)
 - RestAPI Laravel バックエンド： https://github.com/aio39/Miko-Laravel
-- Socket Nest バックエンド： : https://github.com/aio39/Miko-Nest
+- Socket Nest バックエンド： : https://github.com/aio39/Miko-Nest-Server
 
 ## サービス機能
 
